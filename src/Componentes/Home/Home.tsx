@@ -12,8 +12,11 @@ const Home: React.FC = () => {
   return (
     <div>
       Home
+      <hr />
       <NavBar />
+      <hr />
       <Filtrado />
+      <hr />
       <CardsContainer />
     </div>
   );
