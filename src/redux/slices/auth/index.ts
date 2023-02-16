@@ -19,4 +19,6 @@ const authSlice = createSlice({
   }
 });
 
+export const { setAccesToken } = authSlice.actions;
+
 export default authSlice.reducer;

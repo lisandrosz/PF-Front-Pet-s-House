@@ -1,11 +1,10 @@
 import React from 'react';
-
-import { useSelector } from 'react-redux';
+import { useCustomSelector } from 'hooks/redux';
 
 const Home: React.FC = () => {
-  const { auth } = useSelector((state: any) => state);
+  const { auth } = useCustomSelector((state: any) => state);
 
-  console.log(auth);
+  console.log(auth.acessToken);
 
   return <div>Home</div>;
 };
