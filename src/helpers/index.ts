@@ -9,20 +9,36 @@ export const filtrado = ({ target }: ChangeEvent<HTMLSelectElement>): any => {
   store.dispatch(setFiltros({ nombre: name, valor: value }));
 
   const estado = store.getState().pets.allPets;
-  //   const { tamaño, provincia, especie, tiempo, edad } =
-  //     store.getState().pets.filtros;
+  const { tamaño, especie, provincia } = store.getState().pets.filtros;
   let filtrados: Pet[] = [];
 
   // Filtrado por tamaño
-  if (name === 'tamaño') {
-    if (value === 'todos') {
-      filtrados = [...estado];
-    } else {
-      filtrados = estado.filter((pet) => {
-        return pet.size === value;
-      });
-    }
+  if (tamaño === 'todos') {
+    filtrados = [...estado];
+  } else {
+    filtrados = estado.filter((pet) => {
+      return pet.size === tamaño;
+    });
   }
+
+  // Filtrado por especie
+  if (especie === 'todos') {
+    // nada
+  } else {
+    filtrados = filtrados.filter((pet) => {
+      return pet.animal === especie;
+    });
+  }
+
+  // Filtrado por provincia
+  if (provincia === 'todas') {
+    // nada
+  } else {
+    filtrados = filtrados.filter((pet) => {
+      return pet.provincia === provincia;
+    });
+  }
+
   console.log(filtrados);
 
   store.dispatch(setPets(filtrados));
