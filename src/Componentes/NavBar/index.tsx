@@ -1,12 +1,16 @@
 import React from 'react';
 import SearchBar from 'Componentes/SearchBar';
+import { Link } from 'react-router-dom';
 
 const NavBar: React.FC = () => {
   return (
-    <div>
-      NavBar
-      <SearchBar />
-    </div>
+    <>
+      <div>
+        NavBar
+        <Link to=""></Link>
+        <SearchBar />
+      </div>
+    </>
   );
 };
 
