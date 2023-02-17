@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-interface Pet {
+export interface Pet {
   id: number;
   name: string;
   image: string;
@@ -27,6 +27,7 @@ export interface Filtros {
   especie: string;
   edad: string;
   provincia: string;
+  tiempo: string;
 }
 
 interface PetsState {
@@ -43,7 +44,8 @@ const initialState: PetsState = {
     especie: 'defecto',
     edad: 'defecto',
     // zona: { provincia: 'todas', localidad: 'todas', zona: 'todas ' },
-    provincia: 'todas'
+    provincia: 'todas',
+    tiempo: 'defecto'
   }
 };
 
@@ -63,10 +65,13 @@ const PetsSlice = createSlice({
     setFiltros: (state, action: PayloadAction<tipoFiltro>) => {
       const { nombre, valor } = action.payload;
       state.filtros[nombre as keyof Filtros] = valor;
+    },
+    setPets: (state, action: PayloadAction<Pet[]>) => {
+      state.pets = action.payload;
     }
   }
 });
 
-export const { setAllPets, setFiltros } = PetsSlice.actions;
+export const { setAllPets, setFiltros, setPets } = PetsSlice.actions;
 
 export default PetsSlice.reducer;

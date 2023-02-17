@@ -21,7 +21,7 @@ const Filtrado: React.FC = () => {
         <option value="todos">Todas los tamaños</option>
         <option value="grande">Grande</option>
         <option value="mediano">Mediano</option>
-        <option value="pequeño">Pequeño</option>
+        <option value="chico">Pequeño</option>
       </select>
       <br />
       <br />
