@@ -2,6 +2,7 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
 import Card from 'Componentes/Card';
+import './styleContainer.css'
 
 const CardsContainer: React.FC = () => {
 
@@ -89,7 +90,7 @@ const CardsContainer: React.FC = () => {
 
 
   return (
-    <div>
+    <div className="cardsContainer">
       {pets.map((pet,index) => {
         return(
           <Card

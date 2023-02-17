@@ -1,4 +1,5 @@
 import React from 'react';
+import './styleCard.css';
 
 interface Props {
   image: string;
@@ -10,7 +11,7 @@ interface Props {
 
 const Card: React.FC<Props> = ({ image, name, age, size, animal }) => {
   return (
-    <div>
+    <div className="card">
       <img src={image} alt="img not found" />
       <p>Nombre: {name} </p>
       <p>Edad: {age} </p>
