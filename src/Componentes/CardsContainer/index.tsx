@@ -15,8 +15,8 @@ const CardsContainer: React.FC = () => {
     size: string;
     animal: string;
     healthBook: boolean;
-    active: boolean;
     provincia: string;
+    active: boolean;
     localidad: string;
     zona: string;
   }
