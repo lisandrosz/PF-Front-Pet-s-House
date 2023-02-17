@@ -15,6 +15,7 @@ const CardsContainer: React.FC = () => {
     size: string;
     animal: string;
     healthBook: boolean;
+    active: boolean;
     provincia: string;
     localidad: string;
     zona: string;
@@ -30,6 +31,7 @@ const CardsContainer: React.FC = () => {
       "size":"grande",
       "animal":"perro",
       "healthBook":true,
+      "active": true,
       "provincia":"Buenos Aires",
       "localidad":"San Fernando",
       "zona":""
@@ -43,6 +45,7 @@ const CardsContainer: React.FC = () => {
       "size":"chico",
       "animal":"conejo",
       "healthBook":false,
+      "active": true,
       "provincia":"Cordoba",
       "localidad":"Villa Warcalde",
       "zona":""
@@ -56,6 +59,7 @@ const CardsContainer: React.FC = () => {
       "size":"chico",
       "animal":"conejo",
       "healthBook":false,
+      "active": true,
       "provincia":"Mendoza",
       "localidad":"La Cieneguita",
       "zona":""
@@ -69,6 +73,7 @@ const CardsContainer: React.FC = () => {
       "size":"chico",
       "animal":"loro",
       "healthBook":false,
+      "active": true,
       "provincia":"San Luis",
       "localidad":"Cerro de la Cruz",
       "zona":""
@@ -82,6 +87,7 @@ const CardsContainer: React.FC = () => {
       "size":"mediano",
       "animal":"perro",
       "healthBook":true,
+      "active": true,
       "provincia":"Buenos Aires",
       "localidad":"Vicente Lopez",
       "zona":""
