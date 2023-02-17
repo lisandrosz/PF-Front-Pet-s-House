@@ -22,11 +22,11 @@ interface Pet {
 //   zona: string;
 // }
 
-interface Filtros {
+export interface Filtros {
   tamaño: string;
   especie: string;
   edad: string;
-  zona: string;
+  provincia: string;
 }
 
 interface PetsState {
@@ -43,7 +43,7 @@ const initialState: PetsState = {
     especie: 'defecto',
     edad: 'defecto',
     // zona: { provincia: 'todas', localidad: 'todas', zona: 'todas ' },
-    zona: 'todas'
+    provincia: 'todas'
   }
 };
 
@@ -61,9 +61,8 @@ const PetsSlice = createSlice({
       state.pets = action.payload;
     },
     setFiltros: (state, action: PayloadAction<tipoFiltro>) => {
-      // const { nombre, valor } = action.payload;
-      // state.filtros[nombre] = valor;
-      console.log('hola');
+      const { nombre, valor } = action.payload;
+      state.filtros[nombre as keyof Filtros] = valor;
     }
   }
 });
