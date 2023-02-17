@@ -16,17 +16,17 @@ interface Pet {
   zona: string;
 }
 
-interface Zona {
-  provincia: string;
-  localidad: string;
-  zona: string;
-}
+// interface Zona {
+//   provincia: string;
+//   localidad: string;
+//   zona: string;
+// }
 
 interface Filtros {
   tamaño: string;
   especie: string;
-  edad: number;
-  zona: Zona;
+  edad: string;
+  zona: string;
 }
 
 interface PetsState {
@@ -39,12 +39,18 @@ const initialState: PetsState = {
   allPets: [],
   pets: [],
   filtros: {
-    tamaño: 'todos',
-    especie: 'todas',
-    edad: 0,
-    zona: { provincia: 'todas', localidad: 'todas', zona: 'todas ' }
+    tamaño: 'defecto',
+    especie: 'defecto',
+    edad: 'defecto',
+    // zona: { provincia: 'todas', localidad: 'todas', zona: 'todas ' },
+    zona: 'todas'
   }
 };
+
+interface tipoFiltro {
+  nombre: string;
+  valor: string;
+}
 
 const PetsSlice = createSlice({
   name: 'pets',
@@ -53,10 +59,15 @@ const PetsSlice = createSlice({
     setAllPets: (state, action: PayloadAction<Pet[]>) => {
       state.allPets = action.payload;
       state.pets = action.payload;
+    },
+    setFiltros: (state, action: PayloadAction<tipoFiltro>) => {
+      // const { nombre, valor } = action.payload;
+      // state.filtros[nombre] = valor;
+      console.log('hola');
     }
   }
 });
 
-export const { setAllPets } = PetsSlice.actions;
+export const { setAllPets, setFiltros } = PetsSlice.actions;
 
 export default PetsSlice.reducer;

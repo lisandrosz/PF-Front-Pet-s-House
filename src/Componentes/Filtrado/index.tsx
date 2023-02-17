@@ -2,9 +2,8 @@ import React from 'react';
 import type { ChangeEvent } from 'react';
 
 const Filtrado: React.FC = () => {
-  const changeHandler = (ev: ChangeEvent<HTMLSelectElement>): any => {
-    const name: string = ev.target.name;
-    const value: string = ev.target.value;
+  const changeHandler = ({ target }: ChangeEvent<HTMLSelectElement>): any => {
+    const { name, value } = target;
     console.log(name, value);
   };
 
