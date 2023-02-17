@@ -24,8 +24,9 @@ const Filtrado: React.FC = () => {
       </select>
       <br />
       <br />
-      <p>Selecciones la ubicacion</p>
+      <label htmlFor="provincia">Selecciones la ubicacion</label>
       <select name="provincia" id="3">
+        <option value="todas">Todas las provincias</option>
         <option value="buenosaires">Buenos Aires</option>
         <option value="cordoba">Cordoba</option>
         <option value="mendoza">Mendoza</option>
@@ -33,6 +34,21 @@ const Filtrado: React.FC = () => {
       </select>
       <br />
       <br />
+      <p>Ordenado</p>
+      <label htmlFor="edad">Ordenar por edad</label>
+      <select name="edad" id="4">
+        <option value="defecto">Por defecto</option>
+        <option value="menor-mayor">De menor a mayor</option>
+        <option value="mayor-menor">De mayor a menor</option>
+      </select>
+      <br />
+      <br />
+      <label htmlFor="tiempo">Ordenar por tiempo publicado</label>
+      <select name="tiempo" id="5">
+        <option value="defecto">Por defecto</option>
+        <option value="nuevo">Mas nuevas primero</option>
+        <option value="antiguas">Mas antiguas primero</option>
+      </select>
     </>
   );
 };
