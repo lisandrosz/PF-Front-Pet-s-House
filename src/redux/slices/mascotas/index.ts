@@ -40,8 +40,8 @@ const initialState: PetsState = {
   allPets: [],
   pets: [],
   filtros: {
-    tamaño: 'defecto',
-    especie: 'defecto',
+    tamaño: 'todos',
+    especie: 'todos',
     edad: 'defecto',
     // zona: { provincia: 'todas', localidad: 'todas', zona: 'todas ' },
     provincia: 'todas',
