@@ -43,13 +43,13 @@ const Filtrado: React.FC = () => {
         <option value="mayor-menor">De mayor a menor</option>
       </select>
       <br />
-      <br />
+      {/* <br />
       <label htmlFor="tiempo">Ordenar por tiempo publicado</label>
       <select name="tiempo" id="5" onChange={filtrado}>
         <option value="defecto">Por defecto</option>
         <option value="nuevo">Mas nuevas primero</option>
         <option value="antiguas">Mas antiguas primero</option>
-      </select>
+      </select> */}
     </>
   );
 };
