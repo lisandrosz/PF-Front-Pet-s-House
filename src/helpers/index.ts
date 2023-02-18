@@ -3,7 +3,7 @@ import store from 'redux/store';
 import { setFiltros, setPets } from 'redux/slices/mascotas';
 import type { Pet } from 'redux/slices/mascotas';
 
-export const filtrado = ({ target }: ChangeEvent<HTMLSelectElement>): any => {
+export const filtrado = ({ target }: ChangeEvent<HTMLSelectElement>): void => {
   const { name, value } = target;
 
   store.dispatch(setFiltros({ nombre: name, valor: value }));
@@ -42,18 +42,11 @@ export const filtrado = ({ target }: ChangeEvent<HTMLSelectElement>): any => {
   // Ordenamiento por edad
   if (edad === 'defecto') {
     // nada
-    console.log('defecto');
   } else if (edad === 'menor-mayor') {
-    console.log('menor');
     filtrados = filtrados.sort((a, b) => a.age - b.age);
   } else if (edad === 'mayor-menor') {
-    console.log('mayor');
     filtrados = filtrados.sort((a, b) => b.age - a.age);
   }
-  console.log(edad);
-
-  console.log(filtrados);
 
   store.dispatch(setPets(filtrados));
 };
-export {};
