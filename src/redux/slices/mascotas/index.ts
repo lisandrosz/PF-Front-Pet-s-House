@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-interface Pet {
+export interface Pet {
   id: number;
   name: string;
   image: string;
@@ -16,17 +16,18 @@ interface Pet {
   zona: string;
 }
 
-interface Zona {
-  provincia: string;
-  localidad: string;
-  zona: string;
-}
+// interface Zona {
+//   provincia: string;
+//   localidad: string;
+//   zona: string;
+// }
 
-interface Filtros {
+export interface Filtros {
   tamaño: string;
   especie: string;
-  edad: number;
-  zona: Zona;
+  edad: string;
+  provincia: string;
+  tiempo: string;
 }
 
 interface PetsState {
@@ -40,11 +41,18 @@ const initialState: PetsState = {
   pets: [],
   filtros: {
     tamaño: 'todos',
-    especie: 'todas',
-    edad: 0,
-    zona: { provincia: 'todas', localidad: 'todas', zona: 'todas ' }
+    especie: 'todos',
+    edad: 'defecto',
+    // zona: { provincia: 'todas', localidad: 'todas', zona: 'todas ' },
+    provincia: 'todas',
+    tiempo: 'defecto'
   }
 };
+
+interface tipoFiltro {
+  nombre: string;
+  valor: string;
+}
 
 const PetsSlice = createSlice({
   name: 'pets',
@@ -53,10 +61,17 @@ const PetsSlice = createSlice({
     setAllPets: (state, action: PayloadAction<Pet[]>) => {
       state.allPets = action.payload;
       state.pets = action.payload;
+    },
+    setFiltros: (state, action: PayloadAction<tipoFiltro>) => {
+      const { nombre, valor } = action.payload;
+      state.filtros[nombre as keyof Filtros] = valor;
+    },
+    setPets: (state, action: PayloadAction<Pet[]>) => {
+      state.pets = action.payload;
     }
   }
 });
 
-export const { setAllPets } = PetsSlice.actions;
+export const { setAllPets, setFiltros, setPets } = PetsSlice.actions;
 
 export default PetsSlice.reducer;
