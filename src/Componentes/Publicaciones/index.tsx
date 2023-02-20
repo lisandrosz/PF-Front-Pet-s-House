@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Publicaciones: React.FC = () => {
-  return <div>Favoritos</div>;
+  return <div>Publicaciones</div>;
 };
 
 export default Publicaciones;
