@@ -1,6 +1,6 @@
 import { useCustomDispatch, useCustomSelector } from 'hooks/redux';
 import React, { useState } from 'react';
-import { setPets } from 'redux/slices/mascotas';
+import { setBuscado } from 'redux/slices/mascotas';
 
 const SearchBar: React.FC = () => {
   const [name, setName] = useState('');
@@ -14,9 +14,8 @@ const SearchBar: React.FC = () => {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void => {
     e.preventDefault();
-    // const resultado = Pets.filter((p) => p.name === name);
     const resultado = allPets.filter((p) => p.name === name);
-    dispatch(setPets(resultado));
+    dispatch(setBuscado(resultado));
     setName('');
   };
   return (

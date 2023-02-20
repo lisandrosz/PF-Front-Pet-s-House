@@ -4,11 +4,16 @@ import { setFiltros, setPets } from 'redux/slices/mascotas';
 import type { Pet } from 'redux/slices/mascotas';
 
 export const filtrado = ({ target }: ChangeEvent<HTMLSelectElement>): void => {
+  let estado = store.getState().pets.allPets;
+  const buscado = store.getState().pets.buscado.condicion;
+
+  // Para combinar la busqueda con el filtrado
+  if (buscado) {
+    estado = [...store.getState().pets.buscado.juegos];
+  }
+
   const { name, value } = target;
-
   store.dispatch(setFiltros({ nombre: name, valor: value }));
-
-  const estado = store.getState().pets.allPets;
   const { tamaño, especie, provincia, edad } = store.getState().pets.filtros;
   let filtrados: Pet[] = [...estado];
 
