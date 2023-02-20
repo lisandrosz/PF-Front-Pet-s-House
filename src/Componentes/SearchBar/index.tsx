@@ -1,42 +1,23 @@
-import Pets from '../../EJEMPLOBDD.json';
-// import { useCustomDispatch } from 'hooks/redux';
+import { useCustomDispatch, useCustomSelector } from 'hooks/redux';
 import React, { useState } from 'react';
+import { setPets } from 'redux/slices/mascotas';
 
 const SearchBar: React.FC = () => {
   const [name, setName] = useState('');
-  const [pets, setPets] = useState({
-    id: '',
-    name: '',
-    image: '',
-    age: '',
-    size: '',
-    animal: '',
-    provincia: ''
-  });
+  const dispatch = useCustomDispatch();
+  const allPets = useCustomSelector((state) => state.pets.allPets);
   function handleChange(e: React.ChangeEvent<HTMLInputElement>): void {
     setName(e.target.value);
-    console.log(name);
   }
 
   const handleSubmit = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): unknown => {
+  ): void => {
     e.preventDefault();
     // const resultado = Pets.filter((p) => p.name === name);
-    // useCustomDispatch(name);
-    const resultado = Pets.filter((p) => p.name === name);
-    setPets({
-      id: resultado[0].id,
-      name: resultado[0].name,
-      image: resultado[0].image,
-      age: resultado[0].age,
-      size: resultado[0].size,
-      animal: resultado[0].animal,
-      provincia: resultado[0].provincia
-    });
-    console.log(pets);
-    // setName('');
-    return pets;
+    const resultado = allPets.filter((p) => p.name === name);
+    dispatch(setPets(resultado));
+    setName('');
   };
   return (
     <div>
@@ -55,17 +36,6 @@ const SearchBar: React.FC = () => {
       >
         Buscar
       </button>
-      <span>
-        {pets.name +
-          ' ' +
-          pets.id +
-          ' ' +
-          pets.age +
-          ' ' +
-          pets.image +
-          ' ' +
-          pets.animal}
-      </span>
     </div>
   );
 };
