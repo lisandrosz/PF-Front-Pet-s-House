@@ -1,7 +1,7 @@
 import React from 'react';
 
 const PublicarMascota: React.FC = () => {
-  return <div>Favoritos</div>;
+  return <div>PublicarMascota</div>;
 };
 
 export default PublicarMascota;
