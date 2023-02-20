@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useCustomDispatch } from 'hooks/redux';
-import NavBar from 'Componentes/NavBar';
 import CardsContainer from 'Componentes/CardsContainer';
 import Filtrado from 'Componentes/Filtrado';
 import { setAllPets } from 'redux/slices/mascotas';
@@ -93,8 +92,6 @@ const Home: React.FC = () => {
   return (
     <div>
       Home
-      <hr />
-      <NavBar />
       <hr />
       <Filtrado />
       <hr />
