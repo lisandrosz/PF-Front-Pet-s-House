@@ -9,7 +9,7 @@ export const filtrado = ({ target }: ChangeEvent<HTMLSelectElement>): void => {
 
   // Para combinar la busqueda con el filtrado
   if (buscado) {
-    estado = [...store.getState().pets.buscado.juegos];
+    estado = [...store.getState().pets.buscado.petsBuscados];
   }
 
   const { name, value } = target;
