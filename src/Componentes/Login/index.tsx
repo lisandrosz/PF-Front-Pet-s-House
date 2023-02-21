@@ -42,10 +42,9 @@ const Login: React.FC = () => {
     const login = users.filter(
       (u) => u.email === email && u.password === password
     );
-    setEmail('');
     setPassword('');
     login.length > 0
-      ? navigate('/')
+      ? navigate('/home')
       : Swal.fire({
           title: '¡Error!',
           text: 'Datos incorrectos',
@@ -71,6 +70,7 @@ const Login: React.FC = () => {
             handleChangeEmail(e);
           }}
           required
+          value={email}
         />
         <br />
         <label htmlFor="password">Contraseña</label>
@@ -81,6 +81,7 @@ const Login: React.FC = () => {
             handleChangePassword(e);
           }}
           required
+          value={password}
         />
       </div>
       <div>
