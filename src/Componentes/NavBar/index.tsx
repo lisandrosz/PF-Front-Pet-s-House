@@ -1,43 +1,33 @@
 import React from 'react';
 import SearchBar from 'Componentes/SearchBar';
 import { Link } from 'react-router-dom';
-import './styleNavbar.css';
+import { setHome } from 'redux/slices/mascotas';
+import { useCustomDispatch } from 'hooks/redux';
 
 const NavBar: React.FC = () => {
+  const dispatch = useCustomDispatch();
+  const handleSubmit = (e: React.MouseEvent<HTMLAnchorElement>): void => {
+    dispatch(setHome());
+  };
+
   return (
-    <div className="navbar">
-      <Link to={'/'}>
+    <div>
+      <Link to={'/'} style={{ textDecoration: 'none' }} onClick={handleSubmit}>
         <p>Home</p>
       </Link>
-      <Link to={'/donacion'}>
+      <Link to={'/donacion'} style={{ textDecoration: 'none' }}>
         <p>Donacion</p>
       </Link>
-      <Link to={'/favoritos'}>
+      <Link to={'/favoritos'} style={{ textDecoration: 'none' }}>
         <p>Favoritos</p>
       </Link>
-      <Link to={'/publicar'}>
+      <Link to={'/publicar'} style={{ textDecoration: 'none' }}>
         <p>Publicar Mascota</p>
       </Link>
-      <Link to={'/misPublicaciones'}>
+      <Link to={'/misPublicaciones'} style={{ textDecoration: 'none' }}>
         <p>Mi Publicaciones</p>
       </Link>
-      {/* <ul>
-        <li>
-          <a href="/">Home</a>
-        </li>
-        <li>
-          <a href="/donacion">Donacion</a>
-        </li>
-        <li>
-          <a href="/favoritos">Favoritos</a>
-        </li>
-        <li>
-          <a href="/publicar">Publicar Mascota</a>
-        </li>
-        <li>
-          <a href="/misPublicaciones">Mis Publicaciones</a>
-        </li>
-      </ul> */}
+
       <SearchBar />
     </div>
   );

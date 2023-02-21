@@ -32,7 +32,7 @@ export interface Filtros {
 
 interface Buscado {
   condicion: boolean;
-  juegos: Pet[];
+  petsBuscados: Pet[];
 }
 
 interface PetsState {
@@ -55,7 +55,7 @@ const initialState: PetsState = {
   },
   buscado: {
     condicion: false,
-    juegos: []
+    petsBuscados: []
   }
 };
 
@@ -81,12 +81,18 @@ const PetsSlice = createSlice({
     },
     setBuscado: (state, action: PayloadAction<Pet[]>) => {
       state.buscado.condicion = true;
-      state.buscado.juegos = action.payload;
+      state.pets = action.payload;
+      state.buscado.petsBuscados = action.payload;
+    },
+    setHome: (state) => {
+      state.buscado.condicion = false;
+      state.buscado.petsBuscados = [];
+      state.pets = [...state.allPets];
     }
   }
 });
 
-export const { setAllPets, setFiltros, setPets, setBuscado } =
+export const { setAllPets, setFiltros, setPets, setBuscado, setHome } =
   PetsSlice.actions;
 
 export default PetsSlice.reducer;
