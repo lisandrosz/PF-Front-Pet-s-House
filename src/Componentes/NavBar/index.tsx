@@ -13,7 +13,11 @@ const NavBar: React.FC = () => {
 
   return (
     <div className="navbar">
-      <Link to={'/'} style={{ textDecoration: 'none' }} onClick={handleSubmit}>
+      <Link
+        to={'/home'}
+        style={{ textDecoration: 'none' }}
+        onClick={handleSubmit}
+      >
         <button>Home</button>
       </Link>
       <Link to={'/donacion'} style={{ textDecoration: 'none' }}>
