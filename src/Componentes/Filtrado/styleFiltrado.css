@@ -1,0 +1,11 @@
+.filtro {
+    display: flex;
+    gap: 2px;
+    flex-direction: column;
+
+}
+.conteniendo{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
