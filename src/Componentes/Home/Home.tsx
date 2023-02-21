@@ -92,10 +92,16 @@ const Home: React.FC = () => {
   return (
     <div>
       Home
-      <hr />
-      <Filtrado />
-      <hr />
-      <CardsContainer />
+      <div className="container">
+        <div className="filtros">
+          <hr />
+          <Filtrado />
+        </div>
+        <div className="cartas">
+          <hr />
+          <CardsContainer />
+        </div>
+      </div>
     </div>
   );
 };

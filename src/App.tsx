@@ -9,19 +9,22 @@ import Favoritos from 'Componentes/Favoritos';
 import Publicaciones from 'Componentes/Publicaciones';
 import PublicarMascota from 'Componentes/PublicarMascota';
 import NavBar from 'Componentes/NavBar';
+import MuiThemeProvider from './theme/index';
 
 const App: React.FC = () => {
   return (
     <Provider store={store}>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        {/* <Route path="/" element={<Landing />} /> */}
-        <Route path="/donacion" element={<Donacion />} />
-        <Route path="/favoritos" element={<Favoritos />} />
-        <Route path="/misPublicaciones" element={<Publicaciones />} />
-        <Route path="/publicar" element={<PublicarMascota />} />
-      </Routes>
+      <MuiThemeProvider>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* <Route path="/" element={<Landing />} /> */}
+          <Route path="/donacion" element={<Donacion />} />
+          <Route path="/favoritos" element={<Favoritos />} />
+          <Route path="/misPublicaciones" element={<Publicaciones />} />
+          <Route path="/publicar" element={<PublicarMascota />} />
+        </Routes>
+      </MuiThemeProvider>
     </Provider>
   );
 };

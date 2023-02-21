@@ -1,9 +1,11 @@
 import React from 'react';
 import SearchBar from 'Componentes/SearchBar';
 import { Link } from 'react-router-dom';
+import './styleNavbar.css';
+
 const NavBar: React.FC = () => {
   return (
-    <div>
+    <div className="navbar">
       <Link to={'/'}>
         <p>Home</p>
       </Link>
