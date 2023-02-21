@@ -22,6 +22,7 @@ const SearchBar: React.FC = () => {
     <div>
       <input
         type="text"
+        value={name}
         placeholder="Buscar..."
         onChange={(e) => {
           handleChange(e);
