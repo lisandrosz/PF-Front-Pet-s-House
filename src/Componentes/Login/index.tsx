@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Login: React.FC = () => {
   const users = [
@@ -45,7 +46,12 @@ const Login: React.FC = () => {
     setPassword('');
     login.length > 0
       ? navigate('/')
-      : alert('Informacion erronea. Por favor, intente de nuevo');
+      : Swal.fire({
+          title: '¡Error!',
+          text: 'Datos incorrectos',
+          icon: 'error',
+          confirmButtonText: 'Intentar de nuevo'
+        });
   }
 
   return (
