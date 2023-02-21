@@ -3,6 +3,7 @@ import { useCustomDispatch } from 'hooks/redux';
 import CardsContainer from 'Componentes/CardsContainer';
 import Filtrado from 'Componentes/Filtrado';
 import { setAllPets } from 'redux/slices/mascotas';
+import './Home.css';
 
 const petsArray = [
   {
@@ -92,10 +93,16 @@ const Home: React.FC = () => {
   return (
     <div>
       Home
-      <hr />
-      <Filtrado />
-      <hr />
-      <CardsContainer />
+      <div className="container">
+        <div className="filtros">
+          <hr />
+          <Filtrado />
+        </div>
+        <div className="cartas">
+          <hr />
+          <CardsContainer />
+        </div>
+      </div>
     </div>
   );
 };
