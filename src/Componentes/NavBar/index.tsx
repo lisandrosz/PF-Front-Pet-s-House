@@ -32,7 +32,6 @@ const NavBar: React.FC = () => {
       <Link to={'/misPublicaciones'} style={{ textDecoration: 'none' }}>
         <button>Mis Publicaciones</button>
       </Link>
-
       <SearchBar />
     </div>
   );
