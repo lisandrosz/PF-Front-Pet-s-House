@@ -14,15 +14,15 @@ import Login from 'Componentes/Login';
 const App: React.FC = () => {
   return (
     <Provider store={store}>
-      {useLocation().pathname !== '/login' && <NavBar />}
+      {useLocation().pathname !== '/' && <NavBar />}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         {/* <Route path="/" element={<Landing />} /> */}
         <Route path="/donacion" element={<Donacion />} />
         <Route path="/favoritos" element={<Favoritos />} />
         <Route path="/misPublicaciones" element={<Publicaciones />} />
         <Route path="/publicar" element={<PublicarMascota />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
       </Routes>
     </Provider>
   );
