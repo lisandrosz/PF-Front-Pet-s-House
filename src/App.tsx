@@ -9,6 +9,7 @@ import Favoritos from 'Componentes/Favoritos';
 import Publicaciones from 'Componentes/Publicaciones';
 import PublicarMascota from 'Componentes/PublicarMascota';
 import NavBar from 'Componentes/NavBar';
+import Login from 'Componentes/Login';
 
 const App: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const App: React.FC = () => {
         <Route path="/favoritos" element={<Favoritos />} />
         <Route path="/misPublicaciones" element={<Publicaciones />} />
         <Route path="/publicar" element={<PublicarMascota />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Provider>
   );
