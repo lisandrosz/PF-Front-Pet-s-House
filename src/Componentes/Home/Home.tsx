@@ -3,6 +3,7 @@ import { useCustomDispatch } from 'hooks/redux';
 import CardsContainer from 'Componentes/CardsContainer';
 import Filtrado from 'Componentes/Filtrado';
 import { setAllPets } from 'redux/slices/mascotas';
+import './Home.css';
 
 const petsArray = [
   {
