@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const Login: React.FC = () => {
@@ -54,40 +54,46 @@ const Login: React.FC = () => {
   }
 
   return (
-    <form
-      onSubmit={(e) => {
-        handleSubmit(e);
-      }}
-    >
-      <div>
-        <label htmlFor="email">Correo electronico</label>
-        <input
-          type="text"
-          name="email"
-          placeholder="yourmail@email.com"
-          autoComplete="off"
-          onChange={(e) => {
-            handleChangeEmail(e);
-          }}
-          required
-          value={email}
-        />
-        <br />
-        <label htmlFor="password">Contraseña</label>
-        <input
-          type="password"
-          name="password"
-          onChange={(e) => {
-            handleChangePassword(e);
-          }}
-          required
-          value={password}
-        />
-      </div>
-      <div>
-        <button type="submit">Ingresar</button>
-      </div>
-    </form>
+    <div>
+      <form
+        onSubmit={(e) => {
+          handleSubmit(e);
+        }}
+      >
+        <h1>Iniciar sesion</h1>
+        <div>
+          <label htmlFor="email">Correo electronico</label>
+          <input
+            type="text"
+            name="email"
+            placeholder="yourmail@email.com"
+            autoComplete="off"
+            onChange={(e) => {
+              handleChangeEmail(e);
+            }}
+            required
+            value={email}
+          />
+          <br />
+          <label htmlFor="password">Contraseña</label>
+          <input
+            type="password"
+            name="password"
+            onChange={(e) => {
+              handleChangePassword(e);
+            }}
+            required
+            value={password}
+          />
+        </div>
+        <div>
+          <button type="submit">Ingresar</button>
+        </div>
+      </form>
+      <p>
+        ¿No tienes una cuenta? <Link to="/registrar">Registrate</Link>
+      </p>
+    </div>
   );
 };
 
