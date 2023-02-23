@@ -6,6 +6,10 @@ const Detalle: React.FC = () => {
 
   return (
     <div>
+      <img
+        src="https://i.pinimg.com/originals/37/2c/db/372cdbb7af08ad27524ef53c53e1ba8d.jpg"
+        alt="pet"
+      />
       <h1>{pet.name}</h1>
       <p>{pet.size}</p>
       <p>tiempo de publicacion</p>
