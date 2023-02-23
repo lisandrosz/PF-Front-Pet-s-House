@@ -1,40 +1,54 @@
 import React, { useState } from 'react';
 
 const Registrar: React.FC = () => {
-    const interface User = {
-kkk,
-    }
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [image, setImage] = useState('');
-
-  const [errors, setErrors] = useState({
-    empty: true
+  const [user, setUser] = useState({
+    name: '',
+    image: '',
+    email: '',
+    password: ''
   });
+  //   const [name, setName] = useState('');
+  //   const [email, setEmail] = useState('');
+  //   const [password, setPassword] = useState('');
+  //   const [image, setImage] = useState('');
+
+  //   const [errors, setErrors] = useState({
+  //     empty: true
+  //   });
   function handleChangeName(e: React.ChangeEvent<HTMLInputElement>): void {
-    setName(e.target.value);
-    console.log(name);
+    setUser({
+      ...user,
+      name: e.target.value
+    });
+    console.log(user);
   }
   function handleChangeEmail(e: React.ChangeEvent<HTMLInputElement>): void {
-    setEmail(e.target.value);
-    console.log(email);
+    setUser({
+      ...user,
+      email: e.target.value
+    });
+    console.log(user);
   }
   function handleChangePassword(e: React.ChangeEvent<HTMLInputElement>): void {
-    setPassword(e.target.value);
-    console.log(password);
+    setUser({
+      ...user,
+      password: e.target.value
+    });
+    console.log(user);
   }
   function handleChangeImage(e: React.ChangeEvent<HTMLInputElement>): void {
-    setImage(e.target.value);
-    console.log(image);
+    setUser({
+      ...user,
+      image: e.target.value
+    });
+    console.log(user);
   }
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
-    setRegistro(registro);
   }
   return (
     <div>
-      <h1>Registrarse</h1>
+      <h1>Crea tu usuario</h1>
       <h3>Por favor, completa tus datos</h3>
       <form
         onSubmit={(e) => {
@@ -42,10 +56,11 @@ kkk,
         }}
       >
         <div>
-          <label htmlFor="fullname">Nombre completo</label>
+          <label htmlFor="name">Nombre completo</label>
           <input
-            name="fullname"
+            name="name"
             placeholder="Nombre y Apellido"
+            value={user.name}
             onChange={(e) => {
               handleChangeName(e);
             }}
@@ -53,11 +68,26 @@ kkk,
         </div>
         <div>
           <label htmlFor="email">Correo electronico</label>
-          <input name="email" placeholder="tucorreo@mail.com" />
+          <input
+            name="email"
+            placeholder="tucorreo@mail.com"
+            value={user.email}
+            onChange={(e) => {
+              handleChangeEmail(e);
+            }}
+          />
         </div>
         <div>
           <label htmlFor="password">Contraseña</label>
-          <input type="password" name="password" placeholder="**********" />
+          <input
+            type="password"
+            name="password"
+            placeholder="**********"
+            value={user.password}
+            onChange={(e) => {
+              handleChangePassword(e);
+            }}
+          />
         </div>
         <div>
           <label htmlFor="passwordRepit">
@@ -71,8 +101,16 @@ kkk,
         </div>
         <div>
           <label htmlFor="image">Imagen</label>
-          <input type="image" name="image" alt="imagen de usuario" />
+          <input
+            type="text"
+            name="image"
+            value={user.image}
+            onChange={(e) => {
+              handleChangeImage(e);
+            }}
+          />
         </div>
+        <button type="submit">Registrarse</button>
       </form>
     </div>
   );

@@ -10,6 +10,7 @@ import Publicaciones from 'Componentes/Publicaciones';
 import PublicarMascota from 'Componentes/PublicarMascota';
 import NavBar from 'Componentes/NavBar';
 import Login from 'Componentes/Login';
+import Registrar from 'Componentes/Registrar';
 
 const App: React.FC = () => {
   return (
@@ -23,6 +24,7 @@ const App: React.FC = () => {
         <Route path="/misPublicaciones" element={<Publicaciones />} />
         <Route path="/publicar" element={<PublicarMascota />} />
         <Route path="/" element={<Login />} />
+        <Route path="/registrar" element={<Registrar />} />
       </Routes>
     </Provider>
   );

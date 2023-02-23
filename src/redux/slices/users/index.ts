@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction, Draft } from '@reduxjs/toolkit';
 
 export interface User {
   id: number;
@@ -31,10 +31,13 @@ const UsersSlice = createSlice({
     },
     setUsers: (state, action: PayloadAction<User[]>) => {
       state.users = action.payload;
+    },
+    createUser: (state, action: PayloadAction<Draft<User>>) => {
+      state.users = [...state.users, action.payload];
     }
   }
 });
 
-export const { setAllUsers, setUsers } = UsersSlice.actions;
+export const { setAllUsers, setUsers, createUser } = UsersSlice.actions;
 
 export default UsersSlice.reducer;
