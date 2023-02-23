@@ -2,8 +2,8 @@ import type { ChangeEvent } from 'react';
 import store from 'redux/store';
 import { setFiltros, setPets } from 'redux/slices/mascotas';
 import type { Pet } from 'redux/slices/mascotas';
-import { createUser } from 'redux/slices/users';
-// import type { User } from 'redux/slices/users';
+// import { createUser } from 'redux/slices/users';
+import type { User } from 'redux/slices/users';
 
 export const filtrado = ({ target }: ChangeEvent<HTMLSelectElement>): void => {
   let estado = store.getState().pets.allPets;
@@ -58,6 +58,13 @@ export const filtrado = ({ target }: ChangeEvent<HTMLSelectElement>): void => {
   store.dispatch(setPets(filtrados));
 };
 
-export const crearUser = () => () => {
-  store.dispatch(createUser);
+export const crearUser = (payload: User) => () => {
+  try {
+    const response = payload;
+    // axios.post('http://localhost:3001/users/create/', payload);
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
 };
