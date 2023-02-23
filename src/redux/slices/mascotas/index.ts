@@ -40,6 +40,7 @@ interface PetsState {
   pets: Pet[];
   filtros: Filtros;
   buscado: Buscado;
+  petDetalle: Pet;
 }
 
 const initialState: PetsState = {
@@ -56,6 +57,20 @@ const initialState: PetsState = {
   buscado: {
     condicion: false,
     petsBuscados: []
+  },
+  petDetalle: {
+    id: -1,
+    name: '',
+    image: '',
+    age: 0,
+    description: '',
+    size: '',
+    healthBook: false,
+    animal: '',
+    active: false,
+    provincia: '',
+    localidad: '',
+    zona: ''
   }
 };
 
@@ -88,11 +103,20 @@ const PetsSlice = createSlice({
       state.buscado.condicion = false;
       state.buscado.petsBuscados = [];
       state.pets = [...state.allPets];
+    },
+    setPetDetalle: (state, action: PayloadAction<Pet>) => {
+      state.petDetalle = action.payload;
     }
   }
 });
 
-export const { setAllPets, setFiltros, setPets, setBuscado, setHome } =
-  PetsSlice.actions;
+export const {
+  setAllPets,
+  setFiltros,
+  setPets,
+  setBuscado,
+  setHome,
+  setPetDetalle
+} = PetsSlice.actions;
 
 export default PetsSlice.reducer;
