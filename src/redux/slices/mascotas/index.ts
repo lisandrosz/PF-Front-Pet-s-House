@@ -11,30 +11,25 @@ export interface Pet {
   healthBook: boolean;
   animal: string;
   active: boolean;
-  provincia: string;
-  localidad: string;
-  zona: string;
+  province: string;
+  location: string;
+  sex: string;
+  createdAt: string;
+  UserId: number;
 }
-
-// interface Zona {
-//   provincia: string;
-//   localidad: string;
-//   zona: string;
-// }
-
 export interface Filtros {
   tamaño: string;
   especie: string;
   edad: string;
   provincia: string;
-  tiempo: string;
+  localidad: string;
+  date: string;
+  sexo: string;
 }
-
 interface Buscado {
   condicion: boolean;
   petsBuscados: Pet[];
 }
-
 interface PetsState {
   allPets: Pet[];
   pets: Pet[];
@@ -42,7 +37,6 @@ interface PetsState {
   buscado: Buscado;
   petDetalle: Pet;
 }
-
 const initialState: PetsState = {
   allPets: [],
   pets: [],
@@ -50,9 +44,10 @@ const initialState: PetsState = {
     tamaño: 'todos',
     especie: 'todos',
     edad: 'defecto',
-    // zona: { provincia: 'todas', localidad: 'todas', zona: 'todas ' },
-    provincia: 'todas',
-    tiempo: 'defecto'
+    provincia: 'Provincias',
+    localidad: 'Localidades',
+    date: 'defecto',
+    sexo: 'todos'
   },
   buscado: {
     condicion: false,
@@ -68,12 +63,13 @@ const initialState: PetsState = {
     healthBook: false,
     animal: '',
     active: false,
-    provincia: '',
-    localidad: '',
-    zona: ''
+    province: '',
+    location: '',
+    sex: '',
+    createdAt: '',
+    UserId: 0
   }
 };
-
 interface tipoFiltro {
   nombre: string;
   valor: string;
@@ -106,6 +102,9 @@ const PetsSlice = createSlice({
     },
     setPetDetalle: (state, action: PayloadAction<Pet>) => {
       state.petDetalle = action.payload;
+    },
+    setReset: (state) => {
+      state.filtros = initialState.filtros;
     }
   }
 });
@@ -116,7 +115,8 @@ export const {
   setPets,
   setBuscado,
   setHome,
-  setPetDetalle
+  setPetDetalle,
+  setReset
 } = PetsSlice.actions;
 
 export default PetsSlice.reducer;

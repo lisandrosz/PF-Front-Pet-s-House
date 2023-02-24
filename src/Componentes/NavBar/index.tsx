@@ -5,7 +5,6 @@ import { setHome } from 'redux/slices/mascotas';
 import { useCustomDispatch } from 'hooks/redux';
 import Button from '@mui/material/Button';
 import './styleNavbar.css';
-import Button from '@mui/material/Button';
 // import { Home } from '@mui/icons-material';
 
 const NavBar: React.FC = () => {
@@ -16,7 +15,6 @@ const NavBar: React.FC = () => {
 
   return (
     <div className="navbar">
-
       <Link
         to={'/home'}
         style={{ textDecoration: 'none' }}

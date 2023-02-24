@@ -16,10 +16,12 @@ const petsArray = [
     size: 'grande',
     animal: 'perro',
     healthBook: true,
-    provincia: 'Buenos Aires',
-    localidad: 'San Fernando',
-    zona: '',
-    active: true
+    province: 'Buenos Aires',
+    location: 'San Fernando',
+    active: true,
+    sex: 'female',
+    createdAt: '"2023-02-23T12:58:56.604Z"',
+    UserId: 1
   },
   {
     id: 2,
@@ -31,9 +33,11 @@ const petsArray = [
     size: 'chico',
     animal: 'conejo',
     healthBook: false,
-    provincia: 'Cordoba',
-    localidad: 'Villa Warcalde',
-    zona: '',
+    province: 'Cordoba',
+    location: 'Villa Warcalde',
+    sex: 'male',
+    createdAt: '"2022-02-23T12:58:56.604Z"',
+    UserId: 1,
     active: true
   },
   {
@@ -46,9 +50,11 @@ const petsArray = [
     size: 'chico',
     animal: 'conejo',
     healthBook: false,
-    provincia: 'Mendoza',
-    localidad: 'La Cieneguita',
-    zona: '',
+    province: 'Mendoza',
+    location: 'La Cieneguita',
+    sex: 'male',
+    createdAt: '"2023-01-23T12:58:56.604Z"',
+    UserId: 1,
     active: true
   },
   {
@@ -61,9 +67,11 @@ const petsArray = [
     size: 'chico',
     animal: 'loro',
     healthBook: false,
-    provincia: 'San Luis',
-    localidad: 'Cerro de la Cruz',
-    zona: '',
+    province: 'San Luis',
+    location: 'Cerro de la Cruz',
+    sex: 'male',
+    createdAt: '"2023-02-02T12:58:56.604Z"',
+    UserId: 1,
     active: true
   },
   {
@@ -76,10 +84,12 @@ const petsArray = [
     size: 'mediano',
     animal: 'perro',
     healthBook: true,
-    provincia: 'Buenos Aires',
-    localidad: 'Vicente Lopez',
-    zona: '',
-    active: true
+    province: 'Buenos Aires',
+    location: 'Vicente Lopez',
+    active: true,
+    sex: 'male',
+    createdAt: '"2020-02-23T12:58:56.604Z"',
+    UserId: 1
   }
 ];
 

@@ -28,9 +28,11 @@ const Card: React.FC<Props> = ({ id, image, name, age, size, animal }) => {
         healthBook: false,
         animal,
         active: false,
-        provincia: '',
-        localidad: '',
-        zona: ''
+        province: '',
+        location: '',
+        sex: '',
+        createdAt: '',
+        UserId: 0
       })
     );
   }
