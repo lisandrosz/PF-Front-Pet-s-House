@@ -111,10 +111,9 @@ const PetsSlice = createSlice({
     },
     deleteFavorite: (state, action: PayloadAction<number>) => {
       state.favPets = state.favPets.filter((pet) => pet.id !== action.payload);
-},
+    },
     setReset: (state) => {
       state.filtros = initialState.filtros;
-
     }
   }
 });

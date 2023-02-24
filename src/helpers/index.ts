@@ -1,6 +1,13 @@
 import store from 'redux/store';
-import { setFiltros, setPets, setReset } from 'redux/slices/mascotas';
+import {
+  setFiltros,
+  setPets,
+  setReset,
+  setAllPets,
+  setBuscado
+} from 'redux/slices/mascotas';
 import type { Pet } from 'redux/slices/mascotas';
+import axios from 'axios';
 
 export const filtrado = (name: string, value: string): void => {
   let estado = store.getState().pets.allPets;
@@ -93,4 +100,24 @@ export const resetFiltros = (): void => {
   const estado = store.getState().pets.allPets;
   store.dispatch(setReset());
   store.dispatch(setPets(estado));
+};
+
+export const traerPets = async (): Promise<any> => {
+  try {
+    await axios.get<Pet[]>('/pets').then((res) => {
+      store.dispatch(setAllPets(res.data));
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const searchPet = async (name: string): Promise<any> => {
+  try {
+    await axios.get<Pet[]>(`/pets?name=${name}`).then((res) => {
+      store.dispatch(setBuscado(res.data));
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
