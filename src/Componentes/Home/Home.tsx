@@ -19,7 +19,7 @@ const petsArray = [
     province: 'Buenos Aires',
     location: 'San Fernando',
     active: true,
-    sex: 'male',
+    sex: 'female',
     createdAt: '2023',
     UserId: 1
   },

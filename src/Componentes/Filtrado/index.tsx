@@ -11,7 +11,7 @@ const changeHandler = ({ target }: ChangeEvent<HTMLSelectElement>): void => {
 };
 
 const Filtrado: React.FC = () => {
-  const { edad, especie, tamaño } = useCustomSelector(
+  const { edad, especie, tamaño, sexo } = useCustomSelector(
     (state) => state.pets.filtros
   );
 
@@ -41,6 +41,14 @@ const Filtrado: React.FC = () => {
             <option value="grande">Grande</option>
             <option value="mediano">Mediano</option>
             <option value="chico">Pequeño</option>
+          </select>
+        </div>
+        <div className="filtro">
+          <label htmlFor="sexo">Selecciones el sexo</label>
+          <select name="sexo" id="6" onChange={changeHandler} value={sexo}>
+            <option value="todos">Todos los sexos</option>
+            <option value="male">Masculino</option>
+            <option value="female">Femenino</option>
           </select>
         </div>
         <div className="filtro">

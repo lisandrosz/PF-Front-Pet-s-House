@@ -11,7 +11,7 @@ export const filtrado = (name: string, value: string): void => {
     estado = [...store.getState().pets.buscado.petsBuscados];
   }
   store.dispatch(setFiltros({ nombre: name, valor: value }));
-  const { tamaño, especie, provincia, edad, localidad } =
+  const { tamaño, especie, provincia, edad, localidad, sexo } =
     store.getState().pets.filtros;
   let filtrados: Pet[] = [...estado];
 
@@ -21,6 +21,15 @@ export const filtrado = (name: string, value: string): void => {
   } else {
     filtrados = estado.filter((pet) => {
       return pet.size === tamaño;
+    });
+  }
+
+  // Filtro por sexo
+  if (sexo === 'todos') {
+    // nada
+  } else {
+    filtrados = filtrados.filter((pet) => {
+      return pet.sex === sexo;
     });
   }
 

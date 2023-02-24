@@ -24,6 +24,7 @@ export interface Filtros {
   provincia: string;
   localidad: string;
   tiempo: string;
+  sexo: string;
 }
 interface Buscado {
   condicion: boolean;
@@ -44,7 +45,8 @@ const initialState: PetsState = {
     edad: 'defecto',
     provincia: 'todas',
     localidad: 'todas',
-    tiempo: 'defecto'
+    tiempo: 'defecto',
+    sexo: 'todos'
   },
   buscado: {
     condicion: false,

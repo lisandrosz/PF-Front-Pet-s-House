@@ -7900,11 +7900,7 @@ const SelectComponent: React.FC = () => {
 
   return (
     <>
-      <ReactSelect
-        options={provOption}
-        onChange={provHandler}
-        name="provincias"
-      />
+      <ReactSelect options={provOption} onChange={provHandler} />
       <ReactSelect
         options={provincias[elegido.prov as keyof Provincias]}
         onChange={depHandler}
