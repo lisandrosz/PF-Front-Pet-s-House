@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/key-spacing */
-/* eslint-disable prettier/prettier */
 import React from 'react';
 import Card from 'Componentes/Card';
 import './styleContainer.css';
@@ -13,6 +11,7 @@ const CardsContainer: React.FC = () => {
       {pets.map((pet, index) => {
         return (
           <Card
+            id={pet.id}
             key={index}
             image={pet.image}
             name={pet.name}
