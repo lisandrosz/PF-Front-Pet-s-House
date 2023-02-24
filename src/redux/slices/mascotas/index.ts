@@ -43,8 +43,8 @@ const initialState: PetsState = {
     tamaño: 'todos',
     especie: 'todos',
     edad: 'defecto',
-    provincia: 'todas',
-    localidad: 'todas',
+    provincia: 'Provincias',
+    localidad: 'Localidades',
     date: 'defecto',
     sexo: 'todos'
   },

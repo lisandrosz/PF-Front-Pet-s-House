@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import ReactSelect from 'react-select';
+import type { SingleValue } from 'react-select';
 import { filtrado } from 'helpers';
+import { useCustomSelector } from 'hooks/redux';
 
 interface Option {
   value: string;
   label: string;
 }
 const provOption: Option[] = [
-  { value: 'todas', label: 'Todas las provincias' },
+  { value: 'Provincias', label: 'Todas las provincias' },
   { value: 'Misiones', label: 'Misiones' },
   { value: 'San Luis', label: 'San Luis' },
   { value: 'San Juan', label: 'San Juan' },
@@ -69,13 +71,13 @@ interface Provincias {
 const provincias: Provincias = {
   Todas: [
     {
-      value: 'todas',
+      value: 'Provincias',
       label: 'Todas las provincias'
     }
   ],
   Misiones: [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -381,7 +383,7 @@ const provincias: Provincias = {
   ],
   'San Luis': [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -655,7 +657,7 @@ const provincias: Provincias = {
   ],
   'San Juan': [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -737,7 +739,7 @@ const provincias: Provincias = {
   ],
   'Entre Ríos': [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -811,7 +813,7 @@ const provincias: Provincias = {
   ],
   'Santa Cruz': [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -845,7 +847,7 @@ const provincias: Provincias = {
   ],
   'Río Negro': [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -1131,7 +1133,7 @@ const provincias: Provincias = {
   ],
   Chubut: [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -1321,7 +1323,7 @@ const provincias: Provincias = {
   ],
   Córdoba: [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -3031,7 +3033,7 @@ const provincias: Provincias = {
   ],
   Mendoza: [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -3109,7 +3111,7 @@ const provincias: Provincias = {
   ],
   'La Rioja': [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -3187,7 +3189,7 @@ const provincias: Provincias = {
   ],
   Catamarca: [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -3337,7 +3339,7 @@ const provincias: Provincias = {
   ],
   'La Pampa': [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -3663,7 +3665,7 @@ const provincias: Provincias = {
   ],
   'Santiago del Estero': [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -3777,7 +3779,7 @@ const provincias: Provincias = {
   ],
   Corrientes: [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -4059,7 +4061,7 @@ const provincias: Provincias = {
   ],
   'Santa Fe': [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -5501,7 +5503,7 @@ const provincias: Provincias = {
   ],
   Tucumán: [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -5955,7 +5957,7 @@ const provincias: Provincias = {
   ],
   Neuquén: [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -6189,7 +6191,7 @@ const provincias: Provincias = {
   ],
   Salta: [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -6431,7 +6433,7 @@ const provincias: Provincias = {
   ],
   Chaco: [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -6709,7 +6711,7 @@ const provincias: Provincias = {
   ],
   Formosa: [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -6863,7 +6865,7 @@ const provincias: Provincias = {
   ],
   Jujuy: [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -7109,7 +7111,7 @@ const provincias: Provincias = {
   ],
   'Ciudad Autónoma de Buenos Aires': [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -7311,7 +7313,7 @@ const provincias: Provincias = {
   ],
   'Buenos Aires': [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -7857,7 +7859,7 @@ const provincias: Provincias = {
   ],
   'Tierra del Fuego': [
     {
-      value: 'todas',
+      value: 'Localidades',
       label: 'Todas las localidades'
     },
     {
@@ -7875,16 +7877,24 @@ const provincias: Provincias = {
   ]
 };
 
-const SelectComponent: React.FC = () => {
+interface props {
+  value: SingleValue<Option>;
+}
+
+const SelectComponent: React.FC<props> = () => {
   const [elegido, setElegido] = useState({
     bool: false,
-    prov: 'todas'
+    prov: 'Provincias'
   });
+
+  const { provincia, localidad } = useCustomSelector(
+    (state) => state.pets.filtros
+  );
 
   const provHandler = (option: Option | null): void => {
     if (option !== null) {
       filtrado('provincia', option.value);
-      filtrado('localidad', 'todas');
+      filtrado('localidad', 'Localidades');
       setElegido({
         bool: true,
         prov: option.value
@@ -7900,10 +7910,21 @@ const SelectComponent: React.FC = () => {
 
   return (
     <>
-      <ReactSelect options={provOption} onChange={provHandler} />
+      <ReactSelect
+        options={provOption}
+        onChange={provHandler}
+        value={{
+          value: provincia,
+          label: provincia
+        }}
+      />
       <ReactSelect
         options={provincias[elegido.prov as keyof Provincias]}
         onChange={depHandler}
+        value={{
+          value: localidad,
+          label: localidad
+        }}
       />
     </>
   );

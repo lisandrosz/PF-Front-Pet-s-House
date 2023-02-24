@@ -43,7 +43,7 @@ export const filtrado = (name: string, value: string): void => {
   }
 
   // Filtrado por provincia
-  if (provincia === 'todas') {
+  if (provincia === 'Provincias') {
     // nada
   } else {
     filtrados = filtrados.filter((pet) => {
@@ -52,7 +52,7 @@ export const filtrado = (name: string, value: string): void => {
   }
 
   // Filtrado por localidad
-  if (localidad === 'todas') {
+  if (localidad === 'Localidades') {
     // nada
   } else {
     filtrados = filtrados.filter((pet) => {
