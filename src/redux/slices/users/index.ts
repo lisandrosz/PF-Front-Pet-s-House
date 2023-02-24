@@ -33,7 +33,9 @@ const UsersSlice = createSlice({
       state.users = action.payload;
     },
     createUser: (state, action: PayloadAction<Draft<User>>) => {
-      state.users = [...state.users, action.payload];
+      // state.users = [...state.users, action.payload];
+      state.users.push(action.payload);
+      state.allUsers.push(action.payload);
     }
   }
 });
