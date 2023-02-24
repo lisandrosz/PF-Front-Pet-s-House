@@ -63,9 +63,11 @@ const initialState: PetsState = {
     healthBook: false,
     animal: '',
     active: false,
-    provincia: '',
-    localidad: '',
-    zona: ''
+    province: '',
+    location: '',
+    sex: '',
+    createdAt: '',
+    UserId: 0
   }
 };
 interface tipoFiltro {
@@ -103,7 +105,7 @@ const PetsSlice = createSlice({
     },
     setReset: (state) => {
       state.filtros = initialState.filtros;
-    },
+    }
   }
 });
 
