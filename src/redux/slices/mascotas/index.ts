@@ -1,26 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-export interface Pet {
-  id: number;
-  name: string;
-  image: string;
-  age: number;
-  description: string;
-  size: string;
-  healthBook: boolean;
-  animal: string;
-  active: boolean;
-  provincia: string;
-  localidad: string;
-  zona: string;
-}
-
-// interface Zona {
-//   provincia: string;
-//   localidad: string;
-//   zona: string;
-// }
 
 export interface Filtros {
   tamaño: string;
@@ -64,6 +44,26 @@ interface tipoFiltro {
   valor: string;
 }
 
+
+
+
+
+
+export interface Pet {
+  id: number;
+  name: string;
+  image: string;
+  age: number;
+  description: string;
+  size: string;
+  healthBook: boolean;
+  animal: string;
+  active: boolean;
+  provincia: string;
+  localidad: string;
+  sex: string,
+  userId: number | null
+}
 const PetsSlice = createSlice({
   name: 'pets',
   initialState,
