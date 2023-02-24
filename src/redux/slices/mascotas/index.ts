@@ -41,6 +41,7 @@ interface PetsState {
   filtros: Filtros;
   buscado: Buscado;
   petDetalle: Pet;
+  favPets: Pet[];
 }
 
 const initialState: PetsState = {
@@ -71,7 +72,8 @@ const initialState: PetsState = {
     provincia: '',
     localidad: '',
     zona: ''
-  }
+  },
+  favPets: []
 };
 
 interface tipoFiltro {
@@ -106,6 +108,12 @@ const PetsSlice = createSlice({
     },
     setPetDetalle: (state, action: PayloadAction<Pet>) => {
       state.petDetalle = action.payload;
+    },
+    setFavortie: (state, action: PayloadAction<Pet>) => {
+      state.favPets.push(action.payload);
+    },
+    deleteFavorite: (state, action: PayloadAction<number>) => {
+      state.favPets = state.favPets.filter((pet) => pet.id !== action.payload);
     }
   }
 });
@@ -116,7 +124,9 @@ export const {
   setPets,
   setBuscado,
   setHome,
-  setPetDetalle
+  setPetDetalle,
+  setFavortie,
+  deleteFavorite
 } = PetsSlice.actions;
 
 export default PetsSlice.reducer;

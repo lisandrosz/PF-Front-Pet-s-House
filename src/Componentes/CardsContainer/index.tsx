@@ -18,6 +18,7 @@ const CardsContainer: React.FC = () => {
             age={pet.age}
             size={pet.size}
             animal={pet.animal}
+            isFav={false}
           />
         );
       })}
