@@ -80,11 +80,20 @@ const PetsSlice = createSlice({
       state.buscado.condicion = false;
       state.buscado.petsBuscados = [];
       state.pets = [...state.allPets];
+    },
+    setReset: (state) => {
+      state.filtros = initialState.filtros;
     }
   }
 });
 
-export const { setAllPets, setFiltros, setPets, setBuscado, setHome } =
-  PetsSlice.actions;
+export const {
+  setAllPets,
+  setFiltros,
+  setPets,
+  setBuscado,
+  setHome,
+  setReset
+} = PetsSlice.actions;
 
 export default PetsSlice.reducer;

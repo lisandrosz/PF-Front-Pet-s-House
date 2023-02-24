@@ -1,5 +1,5 @@
 import store from 'redux/store';
-import { setFiltros, setPets } from 'redux/slices/mascotas';
+import { setFiltros, setPets, setReset } from 'redux/slices/mascotas';
 import type { Pet } from 'redux/slices/mascotas';
 
 export const filtrado = (name: string, value: string): void => {
@@ -61,4 +61,10 @@ export const filtrado = (name: string, value: string): void => {
   }
 
   store.dispatch(setPets(filtrados));
+};
+
+export const resetFiltros = (): void => {
+  const estado = store.getState().pets.allPets;
+  store.dispatch(setReset());
+  store.dispatch(setPets(estado));
 };
