@@ -31,11 +31,9 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   function handleChangeEmail(e: React.ChangeEvent<HTMLInputElement>): void {
     setEmail(e.target.value);
-    console.log(email);
   }
   function handleChangePassword(e: React.ChangeEvent<HTMLInputElement>): void {
     setPassword(e.target.value);
-    console.log(password);
   }
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();

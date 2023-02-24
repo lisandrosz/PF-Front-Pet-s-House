@@ -11,37 +11,30 @@ export interface Pet {
   healthBook: boolean;
   animal: string;
   active: boolean;
-  provincia: string;
-  localidad: string;
-  zona: string;
+  province: string;
+  location: string;
+  sex: string;
+  createdAt: string;
+  UserId: number;
 }
-
-// interface Zona {
-//   provincia: string;
-//   localidad: string;
-//   zona: string;
-// }
-
 export interface Filtros {
   tamaño: string;
   especie: string;
   edad: string;
   provincia: string;
+  localidad: string;
   tiempo: string;
 }
-
 interface Buscado {
   condicion: boolean;
   petsBuscados: Pet[];
 }
-
 interface PetsState {
   allPets: Pet[];
   pets: Pet[];
   filtros: Filtros;
   buscado: Buscado;
 }
-
 const initialState: PetsState = {
   allPets: [],
   pets: [],
@@ -49,8 +42,8 @@ const initialState: PetsState = {
     tamaño: 'todos',
     especie: 'todos',
     edad: 'defecto',
-    // zona: { provincia: 'todas', localidad: 'todas', zona: 'todas ' },
     provincia: 'todas',
+    localidad: 'todas',
     tiempo: 'defecto'
   },
   buscado: {
@@ -58,7 +51,6 @@ const initialState: PetsState = {
     petsBuscados: []
   }
 };
-
 interface tipoFiltro {
   nombre: string;
   valor: string;

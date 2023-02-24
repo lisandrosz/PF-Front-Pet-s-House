@@ -40,7 +40,7 @@ export const filtrado = ({ target }: ChangeEvent<HTMLSelectElement>): void => {
     // nada
   } else {
     filtrados = filtrados.filter((pet) => {
-      return pet.provincia === provincia;
+      return pet.province === provincia;
     });
   }
 
@@ -51,6 +51,34 @@ export const filtrado = ({ target }: ChangeEvent<HTMLSelectElement>): void => {
     filtrados = filtrados.sort((a, b) => a.age - b.age);
   } else if (edad === 'mayor-menor') {
     filtrados = filtrados.sort((a, b) => b.age - a.age);
+  }
+
+  store.dispatch(setPets(filtrados));
+};
+
+export const filtroSelect = (name: string, value: string): void => {
+  const estado = store.getState().pets.allPets;
+
+  store.dispatch(setFiltros({ nombre: name, valor: value }));
+  const { provincia, localidad } = store.getState().pets.filtros;
+  let filtrados: Pet[] = [...estado];
+
+  // Filtrado por provincia
+  if (provincia === 'todas') {
+    // nada
+  } else {
+    filtrados = filtrados.filter((pet) => {
+      return pet.province === provincia;
+    });
+  }
+
+  // Filtrado por localidad
+  if (localidad === 'todas') {
+    // nada
+  } else {
+    filtrados = filtrados.filter((pet) => {
+      return pet.location === localidad;
+    });
   }
 
   store.dispatch(setPets(filtrados));

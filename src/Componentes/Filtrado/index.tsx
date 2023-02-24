@@ -1,6 +1,7 @@
 import React from 'react';
 import { filtrado } from 'helpers';
 import './styleFiltrado.css';
+import SelectComponent from 'Componentes/Select';
 
 const Filtrado: React.FC = () => {
   return (
@@ -28,13 +29,14 @@ const Filtrado: React.FC = () => {
         </div>
         <div className="filtro">
           <label htmlFor="provincia">Selecciones la ubicacion</label>
-          <select name="provincia" id="3" onChange={filtrado}>
+          <SelectComponent />
+          {/* <select name="provincia" id="3" onChange={filtrado}>
             <option value="todas">Todas las provincias</option>
             <option value="Buenos Aires">Buenos Aires</option>
             <option value="Cordoba">Cordoba</option>
             <option value="Mendoza">Mendoza</option>
             <option value="San Luis">San Luis</option>
-          </select>
+          </select> */}
         </div>
         <div className="filtro">
           <p>Ordenado</p>
