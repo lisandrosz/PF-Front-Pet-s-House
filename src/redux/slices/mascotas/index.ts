@@ -35,6 +35,7 @@ interface PetsState {
   pets: Pet[];
   filtros: Filtros;
   buscado: Buscado;
+  petDetalle: Pet;
 }
 const initialState: PetsState = {
   allPets: [],
@@ -51,6 +52,20 @@ const initialState: PetsState = {
   buscado: {
     condicion: false,
     petsBuscados: []
+  },
+  petDetalle: {
+    id: -1,
+    name: '',
+    image: '',
+    age: 0,
+    description: '',
+    size: '',
+    healthBook: false,
+    animal: '',
+    active: false,
+    provincia: '',
+    localidad: '',
+    zona: ''
   }
 };
 interface tipoFiltro {
@@ -83,9 +98,12 @@ const PetsSlice = createSlice({
       state.buscado.petsBuscados = [];
       state.pets = [...state.allPets];
     },
+    setPetDetalle: (state, action: PayloadAction<Pet>) => {
+      state.petDetalle = action.payload;
+    },
     setReset: (state) => {
       state.filtros = initialState.filtros;
-    }
+    },
   }
 });
 
@@ -95,6 +113,7 @@ export const {
   setPets,
   setBuscado,
   setHome,
+  setPetDetalle,
   setReset
 } = PetsSlice.actions;
 
