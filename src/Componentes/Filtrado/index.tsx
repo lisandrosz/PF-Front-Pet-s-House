@@ -11,7 +11,7 @@ const changeHandler = ({ target }: ChangeEvent<HTMLSelectElement>): void => {
 };
 
 const Filtrado: React.FC = () => {
-  const { edad, especie, tamaño, sexo } = useCustomSelector(
+  const { edad, especie, tamaño, sexo, date } = useCustomSelector(
     (state) => state.pets.filtros
   );
 
@@ -66,15 +66,17 @@ const Filtrado: React.FC = () => {
         </div>
       </div>
       <div className="filtro">
+        <label htmlFor="date">Ordenar por tiempo publicado</label>
+        <select name="date" id="5" onChange={changeHandler} value={date}>
+          <option value="defecto">Por defecto</option>
+          <option value="nuevo">Mas nuevas primero</option>
+          <option value="antiguo">Mas antiguas primero</option>
+        </select>
+      </div>
+      <br />
+      <div className="filtro">
         <button onClick={resetFiltros}>Reestablecer filtros</button>
       </div>
-      {/* <br />
-      <label htmlFor="tiempo">Ordenar por tiempo publicado</label>
-      <select name="tiempo" id="5" onChange={filtrado}>
-        <option value="defecto">Por defecto</option>
-        <option value="nuevo">Mas nuevas primero</option>
-        <option value="antiguas">Mas antiguas primero</option>
-      </select> */}
     </>
   );
 };

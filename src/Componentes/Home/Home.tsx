@@ -20,7 +20,7 @@ const petsArray = [
     location: 'San Fernando',
     active: true,
     sex: 'female',
-    createdAt: '2023',
+    createdAt: '"2023-02-23T12:58:56.604Z"',
     UserId: 1
   },
   {
@@ -36,7 +36,7 @@ const petsArray = [
     province: 'Cordoba',
     location: 'Villa Warcalde',
     sex: 'male',
-    createdAt: '2023',
+    createdAt: '"2022-02-23T12:58:56.604Z"',
     UserId: 1,
     active: true
   },
@@ -53,7 +53,7 @@ const petsArray = [
     province: 'Mendoza',
     location: 'La Cieneguita',
     sex: 'male',
-    createdAt: '2023',
+    createdAt: '"2023-01-23T12:58:56.604Z"',
     UserId: 1,
     active: true
   },
@@ -70,7 +70,7 @@ const petsArray = [
     province: 'San Luis',
     location: 'Cerro de la Cruz',
     sex: 'male',
-    createdAt: '2023',
+    createdAt: '"2023-02-02T12:58:56.604Z"',
     UserId: 1,
     active: true
   },
@@ -88,7 +88,7 @@ const petsArray = [
     location: 'Vicente Lopez',
     active: true,
     sex: 'male',
-    createdAt: '2023',
+    createdAt: '"2020-02-23T12:58:56.604Z"',
     UserId: 1
   }
 ];

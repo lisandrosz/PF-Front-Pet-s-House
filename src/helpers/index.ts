@@ -11,7 +11,7 @@ export const filtrado = (name: string, value: string): void => {
     estado = [...store.getState().pets.buscado.petsBuscados];
   }
   store.dispatch(setFiltros({ nombre: name, valor: value }));
-  const { tamaño, especie, provincia, edad, localidad, sexo } =
+  const { tamaño, especie, provincia, edad, localidad, sexo, date } =
     store.getState().pets.filtros;
   let filtrados: Pet[] = [...estado];
 
@@ -67,6 +67,23 @@ export const filtrado = (name: string, value: string): void => {
     filtrados = filtrados.sort((a, b) => a.age - b.age);
   } else if (edad === 'mayor-menor') {
     filtrados = filtrados.sort((a, b) => b.age - a.age);
+  }
+
+  // Ordenamiento por fecha
+  if (date === 'defecto') {
+    // nada
+  } else if (date === 'nuevo') {
+    filtrados = filtrados.sort(
+      (a, b): number =>
+        Number(new Date(b.createdAt.split('T')[0])) -
+        Number(new Date(a.createdAt.split('T')[0]))
+    );
+  } else if (date === 'antiguo') {
+    filtrados = filtrados.sort(
+      (a, b): number =>
+        Number(new Date(a.createdAt.split('T')[0])) -
+        Number(new Date(b.createdAt.split('T')[0]))
+    );
   }
 
   store.dispatch(setPets(filtrados));

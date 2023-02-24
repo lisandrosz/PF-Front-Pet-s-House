@@ -23,7 +23,7 @@ export interface Filtros {
   edad: string;
   provincia: string;
   localidad: string;
-  tiempo: string;
+  date: string;
   sexo: string;
 }
 interface Buscado {
@@ -45,7 +45,7 @@ const initialState: PetsState = {
     edad: 'defecto',
     provincia: 'todas',
     localidad: 'todas',
-    tiempo: 'defecto',
+    date: 'defecto',
     sexo: 'todos'
   },
   buscado: {
