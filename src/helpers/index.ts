@@ -1,9 +1,8 @@
-import type { ChangeEvent } from 'react';
 import store from 'redux/store';
 import { setFiltros, setPets } from 'redux/slices/mascotas';
 import type { Pet } from 'redux/slices/mascotas';
 
-export const filtrado = ({ target }: ChangeEvent<HTMLSelectElement>): void => {
+export const filtrado = (name: string, value: string): void => {
   let estado = store.getState().pets.allPets;
   const buscado = store.getState().pets.buscado.condicion;
 
@@ -11,10 +10,9 @@ export const filtrado = ({ target }: ChangeEvent<HTMLSelectElement>): void => {
   if (buscado) {
     estado = [...store.getState().pets.buscado.petsBuscados];
   }
-
-  const { name, value } = target;
   store.dispatch(setFiltros({ nombre: name, valor: value }));
-  const { tamaño, especie, provincia, edad } = store.getState().pets.filtros;
+  const { tamaño, especie, provincia, edad, localidad } =
+    store.getState().pets.filtros;
   let filtrados: Pet[] = [...estado];
 
   // Filtrado por tamaño
@@ -44,34 +42,6 @@ export const filtrado = ({ target }: ChangeEvent<HTMLSelectElement>): void => {
     });
   }
 
-  // Ordenamiento por edad
-  if (edad === 'defecto') {
-    // nada
-  } else if (edad === 'menor-mayor') {
-    filtrados = filtrados.sort((a, b) => a.age - b.age);
-  } else if (edad === 'mayor-menor') {
-    filtrados = filtrados.sort((a, b) => b.age - a.age);
-  }
-
-  store.dispatch(setPets(filtrados));
-};
-
-export const filtroSelect = (name: string, value: string): void => {
-  const estado = store.getState().pets.allPets;
-
-  store.dispatch(setFiltros({ nombre: name, valor: value }));
-  const { provincia, localidad } = store.getState().pets.filtros;
-  let filtrados: Pet[] = [...estado];
-
-  // Filtrado por provincia
-  if (provincia === 'todas') {
-    // nada
-  } else {
-    filtrados = filtrados.filter((pet) => {
-      return pet.province === provincia;
-    });
-  }
-
   // Filtrado por localidad
   if (localidad === 'todas') {
     // nada
@@ -79,6 +49,15 @@ export const filtroSelect = (name: string, value: string): void => {
     filtrados = filtrados.filter((pet) => {
       return pet.location === localidad;
     });
+  }
+
+  // Ordenamiento por edad
+  if (edad === 'defecto') {
+    // nada
+  } else if (edad === 'menor-mayor') {
+    filtrados = filtrados.sort((a, b) => a.age - b.age);
+  } else if (edad === 'mayor-menor') {
+    filtrados = filtrados.sort((a, b) => b.age - a.age);
   }
 
   store.dispatch(setPets(filtrados));

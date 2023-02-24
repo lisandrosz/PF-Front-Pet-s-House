@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import ReactSelect from 'react-select';
-import { filtroSelect } from 'helpers';
+import { filtrado } from 'helpers';
 
 interface Option {
   value: string;
   label: string;
 }
-
 const provOption: Option[] = [
   { value: 'todas', label: 'Todas las provincias' },
   { value: 'Misiones', label: 'Misiones' },
@@ -40,7 +39,6 @@ const provOption: Option[] = [
     label: 'Tierra del Fuego'
   }
 ];
-
 interface Provincias {
   Todas: Option[];
   Misiones: Option[];
@@ -68,7 +66,6 @@ interface Provincias {
   'Buenos Aires': Option[];
   'Tierra del Fuego': Option[];
 }
-
 const provincias: Provincias = {
   Todas: [
     {
@@ -7886,8 +7883,8 @@ const SelectComponent: React.FC = () => {
 
   const provHandler = (option: Option | null): void => {
     if (option !== null) {
-      filtroSelect('provincia', option.value);
-      filtroSelect('localidad', 'todas');
+      filtrado('provincia', option.value);
+      filtrado('localidad', 'todas');
       setElegido({
         bool: true,
         prov: option.value
@@ -7897,7 +7894,7 @@ const SelectComponent: React.FC = () => {
 
   const depHandler = (option: Option | null): void => {
     if (option !== null) {
-      filtroSelect('localidad', option.value);
+      filtrado('localidad', option.value);
     }
   };
 
