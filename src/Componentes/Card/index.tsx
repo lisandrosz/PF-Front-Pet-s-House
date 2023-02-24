@@ -45,6 +45,7 @@ const Card: React.FC<Props> = ({
   };
 
   function goToDetail(): void {
+
     dispatch(setPetDetalle(currentPet));
   }
 
@@ -54,6 +55,25 @@ const Card: React.FC<Props> = ({
 
   function deleteFromFavorite(): void {
     dispatch(deleteFavorite(id));
+
+    dispatch(
+      setPetDetalle({
+        id: -1,
+        name,
+        image,
+        age,
+        description: 'descripcion de prueba',
+        size,
+        healthBook: false,
+        animal,
+        active: false,
+        province: '',
+        location: '',
+        sex: '',
+        createdAt: '',
+        UserId: 0
+      })
+    );
   }
 
   return (

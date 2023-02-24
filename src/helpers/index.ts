@@ -1,9 +1,8 @@
-import type { ChangeEvent } from 'react';
 import store from 'redux/store';
-import { setFiltros, setPets } from 'redux/slices/mascotas';
+import { setFiltros, setPets, setReset } from 'redux/slices/mascotas';
 import type { Pet } from 'redux/slices/mascotas';
 
-export const filtrado = ({ target }: ChangeEvent<HTMLSelectElement>): void => {
+export const filtrado = (name: string, value: string): void => {
   let estado = store.getState().pets.allPets;
   const buscado = store.getState().pets.buscado.condicion;
 
@@ -11,10 +10,9 @@ export const filtrado = ({ target }: ChangeEvent<HTMLSelectElement>): void => {
   if (buscado) {
     estado = [...store.getState().pets.buscado.petsBuscados];
   }
-
-  const { name, value } = target;
   store.dispatch(setFiltros({ nombre: name, valor: value }));
-  const { tamaño, especie, provincia, edad } = store.getState().pets.filtros;
+  const { tamaño, especie, provincia, edad, localidad, sexo, date } =
+    store.getState().pets.filtros;
   let filtrados: Pet[] = [...estado];
 
   // Filtrado por tamaño
@@ -23,6 +21,15 @@ export const filtrado = ({ target }: ChangeEvent<HTMLSelectElement>): void => {
   } else {
     filtrados = estado.filter((pet) => {
       return pet.size === tamaño;
+    });
+  }
+
+  // Filtro por sexo
+  if (sexo === 'todos') {
+    // nada
+  } else {
+    filtrados = filtrados.filter((pet) => {
+      return pet.sex === sexo;
     });
   }
 
@@ -36,11 +43,20 @@ export const filtrado = ({ target }: ChangeEvent<HTMLSelectElement>): void => {
   }
 
   // Filtrado por provincia
-  if (provincia === 'todas') {
+  if (provincia === 'Provincias') {
     // nada
   } else {
     filtrados = filtrados.filter((pet) => {
-      return pet.provincia === provincia;
+      return pet.province === provincia;
+    });
+  }
+
+  // Filtrado por localidad
+  if (localidad === 'Localidades') {
+    // nada
+  } else {
+    filtrados = filtrados.filter((pet) => {
+      return pet.location === localidad;
     });
   }
 
@@ -53,5 +69,28 @@ export const filtrado = ({ target }: ChangeEvent<HTMLSelectElement>): void => {
     filtrados = filtrados.sort((a, b) => b.age - a.age);
   }
 
+  // Ordenamiento por fecha
+  if (date === 'defecto') {
+    // nada
+  } else if (date === 'nuevo') {
+    filtrados = filtrados.sort(
+      (a, b): number =>
+        Number(new Date(b.createdAt.split('T')[0])) -
+        Number(new Date(a.createdAt.split('T')[0]))
+    );
+  } else if (date === 'antiguo') {
+    filtrados = filtrados.sort(
+      (a, b): number =>
+        Number(new Date(a.createdAt.split('T')[0])) -
+        Number(new Date(b.createdAt.split('T')[0]))
+    );
+  }
+
   store.dispatch(setPets(filtrados));
+};
+
+export const resetFiltros = (): void => {
+  const estado = store.getState().pets.allPets;
+  store.dispatch(setReset());
+  store.dispatch(setPets(estado));
 };
