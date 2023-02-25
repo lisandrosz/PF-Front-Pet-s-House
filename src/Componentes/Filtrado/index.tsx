@@ -28,10 +28,11 @@ const Filtrado: React.FC = () => {
             value={especie}
           >
             <option value="todos">Todas las mascotas</option>
-            <option value="perro">Perros</option>
+            <option value="perros">Perros</option>
             <option value="gatos">Gatos</option>
-            <option value="conejo">Roedores</option>
-            <option value="loro">Otros</option>
+            <option value="roedores">Roedores</option>
+            <option value="aves">Aves</option>
+            <option value="otros">Otros</option>
           </select>
         </div>
         <div className="filtro">
@@ -40,15 +41,15 @@ const Filtrado: React.FC = () => {
             <option value="todos">Todas los tamaños</option>
             <option value="grande">Grande</option>
             <option value="mediano">Mediano</option>
-            <option value="chico">Pequeño</option>
+            <option value="pequeño">Pequeño</option>
           </select>
         </div>
         <div className="filtro">
           <label htmlFor="sexo">Selecciones el sexo</label>
           <select name="sexo" id="6" onChange={changeHandler} value={sexo}>
             <option value="todos">Todos los sexos</option>
-            <option value="male">Masculino</option>
-            <option value="female">Femenino</option>
+            <option value="masculino">Masculino</option>
+            <option value="femenino">Femenino</option>
           </select>
         </div>
         <div className="filtro">
