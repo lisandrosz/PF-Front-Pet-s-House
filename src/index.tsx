@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://back-end-pet-s-house.up.railway.app';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
