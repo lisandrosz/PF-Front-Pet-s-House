@@ -3,7 +3,9 @@ import store from 'redux/store';
 import { setFiltros, setPets } from 'redux/slices/mascotas';
 import type { Pet } from 'redux/slices/mascotas';
 // import { createUser } from 'redux/slices/users';
-import type { User } from 'redux/slices/users';
+import type { formUser } from 'Componentes/Registrar';
+import type { formPet } from 'Componentes/PublicarMascota';
+import axios from 'axios';
 
 export const filtrado = ({ target }: ChangeEvent<HTMLSelectElement>): void => {
   let estado = store.getState().pets.allPets;
@@ -58,10 +60,19 @@ export const filtrado = ({ target }: ChangeEvent<HTMLSelectElement>): void => {
   store.dispatch(setPets(filtrados));
 };
 
-export const crearUser = (payload: User) => () => {
+export const createPet = (payload: formPet) => async () => {
   try {
-    const response = payload;
-    // axios.post('http://localhost:3001/users/create/', payload);
+    const response = await axios.post('http://localhost:3001/pets', payload);
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const crearUser = (payload: formUser) => async () => {
+  try {
+    const response = await axios.post('http://localhost:3001/users', payload);
     console.log(response);
     return response;
   } catch (error) {

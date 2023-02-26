@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import type { User } from 'redux/slices/users';
-import { createUser } from 'redux/slices/users';
 import { useCustomDispatch } from 'hooks/redux';
 import { useNavigate } from 'react-router-dom';
+import { crearUser } from 'helpers';
 import Swal from 'sweetalert2';
 
 const Registrar: React.FC = () => {
@@ -13,10 +12,7 @@ const Registrar: React.FC = () => {
     name: '',
     email: '',
     password: '',
-    image: '',
-    id: 0,
-    loggedIn: false,
-    rol: ''
+    image: ''
   });
 
   const [errors, setErrors] = useState({
@@ -53,7 +49,7 @@ const Registrar: React.FC = () => {
       user.password !== '' &&
       user.image !== ''
     ) {
-      dispatch(createUser(user));
+      dispatch(crearUser(user));
       Swal.fire({
         title: '¡Usuario creado con exito!',
         icon: 'success',
@@ -63,10 +59,7 @@ const Registrar: React.FC = () => {
         name: '',
         email: '',
         password: '',
-        image: '',
-        id: 0,
-        loggedIn: false,
-        rol: ''
+        image: ''
       });
       navigate('/home');
     } else {
@@ -79,7 +72,7 @@ const Registrar: React.FC = () => {
     }
   }
 
-  function validate(user: User): void {
+  function validate(user: formUser): void {
     if (user.name !== '') {
       if (/^([\w]{2,})+\s+([\w\s]{2,})+$/i.test(user.name)) {
         setErrors({ ...errors, name: '' });
@@ -220,3 +213,10 @@ const Registrar: React.FC = () => {
 };
 
 export default Registrar;
+
+export interface formUser {
+  name: string;
+  image: string;
+  email: string;
+  password: string;
+}

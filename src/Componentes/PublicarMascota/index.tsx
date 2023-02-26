@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import type { Pet } from 'redux/slices/mascotas';
-import { createPet } from 'redux/slices/mascotas';
 import { useCustomDispatch } from 'hooks/redux';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { createPet } from 'helpers';
+// import axios from 'axios';
 
 const PublicarMascota: React.FC = () => {
   const dispatch = useCustomDispatch();
   const navigate = useNavigate();
 
   const [pet, setPet] = useState({
-    id: 0,
+    userId: 1,
     name: '',
     image: '',
     age: 0,
@@ -18,7 +18,7 @@ const PublicarMascota: React.FC = () => {
     size: '',
     healthBook: false,
     animal: '',
-    active: false,
+    active: true,
     provincia: '',
     localidad: '',
     zona: ''
@@ -34,6 +34,9 @@ const PublicarMascota: React.FC = () => {
     animal: '',
     provincia: ''
   });
+
+  // const cloudName = 'dhragsmmq';
+  // const cloudKey = 278336359546981;
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>): void {
     const property = e.target.name;
@@ -111,6 +114,14 @@ const PublicarMascota: React.FC = () => {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
+    // const response = axios.post(
+    //   `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+    //   {
+    //     file: pet.image,
+    //     api_key: cloudKey
+    //   }
+    // );
+    // console.log(response);
     if (
       pet.name !== '' &&
       pet.size !== '' &&
@@ -123,10 +134,10 @@ const PublicarMascota: React.FC = () => {
       Swal.fire({
         title: '¡Tu mascota fue publicada con exito!',
         icon: 'success',
-        confirmButtonText: 'Ir a pagina principal'
+        confirmButtonText: 'Continuar'
       });
       setPet({
-        id: 0,
+        userId: 0,
         name: '',
         image: '',
         age: 0,
@@ -150,7 +161,7 @@ const PublicarMascota: React.FC = () => {
     }
   }
 
-  function validate(pet: Pet): void {
+  function validate(pet: formPet): void {
     if (pet.name !== '') {
       if (/^[a-zA-Z-]+$/.test(pet.name)) {
         setErrors({ ...errors, name: '' });
@@ -158,23 +169,6 @@ const PublicarMascota: React.FC = () => {
         setErrors({
           ...errors,
           name: 'El nombre debe contener letras unicamente'
-        });
-      }
-    }
-    if (!isNaN(pet.age)) {
-      if (pet.age >= 0 && pet.age < 100) {
-        setErrors({ ...errors, age: '' });
-      } else {
-        setErrors({ ...errors, age: 'La edad debe ser entre 0 y 100 años' });
-      }
-    }
-    if (pet.description !== '') {
-      if (pet.description.length > 25) {
-        setErrors({ ...errors, description: '' });
-      } else {
-        setErrors({
-          ...errors,
-          description: 'La descripcion debe contener 25 caracteres como minimo'
         });
       }
     }
@@ -188,8 +182,33 @@ const PublicarMascota: React.FC = () => {
         });
       }
     }
+    if (pet.age !== undefined) {
+      if (!Number.isNaN(pet.age)) {
+        if (pet.age >= 0 && pet.age < 100) {
+          setErrors({ ...errors, age: '' });
+        } else {
+          setErrors({ ...errors, age: 'La edad debe ser entre 0 y 100 años' });
+        }
+      } else {
+        setErrors({ ...errors, age: 'Por favor, ingrese valores numericos' });
+      }
+    }
+    if (pet.description !== '') {
+      if (pet.description.length > 25) {
+        setErrors({ ...errors, description: '' });
+      } else {
+        setErrors({
+          ...errors,
+          description: 'La descripcion debe contener 25 caracteres como minimo'
+        });
+      }
+    }
     console.log(errors);
   }
+
+  // useEffect({
+
+  // })
 
   return (
     <div>
@@ -214,9 +233,22 @@ const PublicarMascota: React.FC = () => {
         {errors.name !== '' && <p>{errors.name}</p>}
 
         <div>
+          <label htmlFor="age">Edad</label>
+          <input
+            name="age"
+            type="number"
+            value={pet.age}
+            onChange={(e) => {
+              handleChangeNumber(e);
+            }}
+          />
+        </div>
+        {errors.age !== '' && <p>{errors.age}</p>}
+
+        <div>
           <label htmlFor="image">Imagen</label>
           <input
-            type="text"
+            type="file"
             name="image"
             value={pet.image}
             onChange={(e) => {
@@ -226,18 +258,6 @@ const PublicarMascota: React.FC = () => {
         </div>
 
         {errors.image !== '' ? <p>{errors.image}</p> : null}
-        <div>
-          <label htmlFor="age">Edad</label>
-          <input
-            name="age"
-            type="text"
-            value={pet.age}
-            onChange={(e) => {
-              handleChangeNumber(e);
-            }}
-          />
-        </div>
-        {errors.age !== '' && <p>{errors.age}</p>}
 
         <div>
           <label htmlFor="description">Descripcion</label>
@@ -287,10 +307,11 @@ const PublicarMascota: React.FC = () => {
             }}
           >
             <option value="">Selecciona...</option>
-            <option value="perro">Perro</option>
-            <option value="gato">Gato</option>
-            <option value="conejo">Roedor</option>
-            <option value="loro">Otro</option>
+            <option value="perros">Perro</option>
+            <option value="gatos">Gato</option>
+            <option value="roedores">Roedor</option>
+            <option value="aves">Ave</option>
+            <option value="otros">Otro</option>
           </select>
         </div>
 
@@ -354,3 +375,17 @@ const PublicarMascota: React.FC = () => {
 };
 
 export default PublicarMascota;
+export interface formPet {
+  userId: number;
+  name: string;
+  image: string;
+  age: number;
+  description: string;
+  size: string;
+  healthBook: boolean;
+  animal: string;
+  active: boolean;
+  provincia: string;
+  localidad: string;
+  zona: string;
+}

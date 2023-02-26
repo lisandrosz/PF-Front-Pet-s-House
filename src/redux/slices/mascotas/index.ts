@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction, Draft } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface Pet {
   id: number;
@@ -88,21 +88,11 @@ const PetsSlice = createSlice({
       state.buscado.condicion = false;
       state.buscado.petsBuscados = [];
       state.pets = [...state.allPets];
-    },
-    createPet: (state, action: PayloadAction<Draft<Pet>>) => {
-      state.pets.push(action.payload);
-      state.allPets.push(action.payload);
     }
   }
 });
 
-export const {
-  setAllPets,
-  setFiltros,
-  setPets,
-  setBuscado,
-  setHome,
-  createPet
-} = PetsSlice.actions;
+export const { setAllPets, setFiltros, setPets, setBuscado, setHome } =
+  PetsSlice.actions;
 
 export default PetsSlice.reducer;
