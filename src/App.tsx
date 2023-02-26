@@ -13,9 +13,10 @@ import Login from 'Componentes/Login';
 import Registrar from 'Componentes/Registrar';
 
 const App: React.FC = () => {
+  const location = useLocation().pathname;
   return (
     <Provider store={store}>
-      {useLocation().pathname !== '/' && <NavBar />}
+      {location !== '/' && location !== '/registrar' ? <NavBar /> : null}
       <Routes>
         <Route path="/home" element={<Home />} />
         {/* <Route path="/" element={<Landing />} /> */}
