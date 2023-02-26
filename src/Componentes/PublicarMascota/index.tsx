@@ -10,7 +10,6 @@ const PublicarMascota: React.FC = () => {
   const navigate = useNavigate();
 
   const [pet, setPet] = useState({
-    userId: 1,
     name: '',
     image: '',
     age: 0,
@@ -18,21 +17,17 @@ const PublicarMascota: React.FC = () => {
     size: '',
     healthBook: false,
     animal: '',
-    active: true,
-    provincia: '',
-    localidad: '',
-    zona: ''
+    province: '',
+    location: '',
+    sex: '',
+    idUser: 1
   });
 
   const [errors, setErrors] = useState({
-    empty: true,
     name: '',
     image: '',
     age: '',
-    description: '',
-    size: '',
-    animal: '',
-    provincia: ''
+    description: ''
   });
 
   // const cloudName = 'dhragsmmq';
@@ -76,10 +71,13 @@ const PublicarMascota: React.FC = () => {
   }
 
   function handleSelectBook(e: React.ChangeEvent<HTMLSelectElement>): void {
-    const property = e.target.name;
     const value = e.target.value;
-    validate({ ...pet, [property]: value });
-    setPet({ ...pet, healthBook: e.target.value === '' ? false : true });
+    if (value === '') {
+      setPet({ ...pet, healthBook: false });
+    } else {
+      setPet({ ...pet, healthBook: true });
+    }
+
     console.log(pet);
   }
 
@@ -96,11 +94,12 @@ const PublicarMascota: React.FC = () => {
     const property = e.target.name;
     const value = e.target.value;
     validate({ ...pet, [property]: value });
-    setPet({ ...pet, provincia: value });
+    setPet({ ...pet, province: value });
   }
 
   function handleSelectSex(e: React.ChangeEvent<HTMLSelectElement>): void {
-    // setPet({ ...pet, sex: e.target.value });
+    setPet({ ...pet, sex: e.target.value });
+    console.log(pet);
   }
 
   function handleSelectLocalidad(
@@ -109,7 +108,8 @@ const PublicarMascota: React.FC = () => {
     const property = e.target.name;
     const value = e.target.value;
     validate({ ...pet, [property]: value });
-    setPet({ ...pet, localidad: value });
+    setPet({ ...pet, location: value });
+    console.log(pet);
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
@@ -128,7 +128,9 @@ const PublicarMascota: React.FC = () => {
       pet.description !== '' &&
       pet.image !== '' &&
       pet.animal !== '' &&
-      pet.provincia !== ''
+      pet.province !== '' &&
+      pet.sex !== '' &&
+      pet.location !== ''
     ) {
       dispatch(createPet(pet));
       Swal.fire({
@@ -137,7 +139,6 @@ const PublicarMascota: React.FC = () => {
         confirmButtonText: 'Continuar'
       });
       setPet({
-        userId: 0,
         name: '',
         image: '',
         age: 0,
@@ -145,10 +146,10 @@ const PublicarMascota: React.FC = () => {
         size: '',
         healthBook: false,
         animal: '',
-        active: false,
-        provincia: '',
-        localidad: '',
-        zona: ''
+        sex: '',
+        province: '',
+        location: '',
+        idUser: 0
       });
       navigate('/home');
     } else {
@@ -282,7 +283,7 @@ const PublicarMascota: React.FC = () => {
             <option value="">Selecciona...</option>
             <option value="grande">Grande </option>
             <option value="mediano">Mediano </option>
-            <option value="chico">Pequeño </option>
+            <option value="pequeño">Pequeño </option>
           </select>
         </div>
 
@@ -312,6 +313,19 @@ const PublicarMascota: React.FC = () => {
             <option value="roedores">Roedor</option>
             <option value="aves">Ave</option>
             <option value="otros">Otro</option>
+          </select>
+        </div>
+
+        <h4>Sexo:</h4>
+        <div>
+          <select
+            onChange={(e) => {
+              handleSelectSex(e);
+            }}
+          >
+            <option value="">Selecciona...</option>
+            <option value="masculino">Masculino</option>
+            <option value="femenino">Femenino</option>
           </select>
         </div>
 
@@ -345,26 +359,10 @@ const PublicarMascota: React.FC = () => {
           </select>
         </div>
 
-        <h4>Sexo:</h4>
-        <div>
-          <select
-            onChange={(e) => {
-              handleSelectSex(e);
-            }}
-          >
-            <option value="">Selecciona...</option>
-            <option value="masculine">Masculino</option>
-            <option value="femenine">Femenino</option>
-          </select>
-        </div>
-
         {errors.name !== '' ||
         errors.description !== '' ||
         errors.age !== '' ||
-        errors.image !== '' ||
-        errors.size !== '' ||
-        errors.animal !== '' ||
-        errors.provincia !== '' ? (
+        errors.image !== '' ? (
           <h3>Completa todos los campos</h3>
         ) : (
           <button type="submit">Publicar</button>
@@ -376,7 +374,6 @@ const PublicarMascota: React.FC = () => {
 
 export default PublicarMascota;
 export interface formPet {
-  userId: number;
   name: string;
   image: string;
   age: number;
@@ -384,8 +381,8 @@ export interface formPet {
   size: string;
   healthBook: boolean;
   animal: string;
-  active: boolean;
-  provincia: string;
-  localidad: string;
-  zona: string;
+  province: string;
+  location: string;
+  sex: string;
+  idUser: number;
 }
