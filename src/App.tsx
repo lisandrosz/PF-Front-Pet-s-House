@@ -12,6 +12,7 @@ import NavBar from 'Componentes/NavBar';
 import Login from 'Componentes/Login';
 import Dashboard from 'Componentes/Dashboard';
 import Detalle from 'Componentes/Detalle';
+import Success from 'Componentes/Success';
 
 const App: React.FC = () => {
   return (
@@ -27,6 +28,7 @@ const App: React.FC = () => {
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/detalle" element={<Detalle />} />
+        <Route path="/success" element={<Success />} />
       </Routes>
     </Provider>
   );
