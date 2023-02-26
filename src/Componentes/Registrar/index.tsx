@@ -188,7 +188,7 @@ const Registrar: React.FC = () => {
         <div>
           <label htmlFor="image">Imagen</label>
           <input
-            type="text"
+            type="file"
             name="image"
             value={user.image}
             onChange={(e) => {
