@@ -8,7 +8,7 @@ import Donacion from 'Componentes/Donacion';
 import Favoritos from 'Componentes/Favoritos';
 import Publicaciones from 'Componentes/Publicaciones';
 import PublicarMascota from 'Componentes/PublicarMascota';
-import NavBar from 'Componentes/NavBar';
+import NavBar from 'Componentes/NavBar/copy';
 import Login from 'Componentes/Login';
 import Dashboard from 'Componentes/Dashboard';
 import Detalle from 'Componentes/Detalle';
