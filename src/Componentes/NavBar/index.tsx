@@ -3,7 +3,9 @@ import SearchBar from 'Componentes/SearchBar';
 import { Link } from 'react-router-dom';
 import { setHome } from 'redux/slices/mascotas';
 import { useCustomDispatch } from 'hooks/redux';
+import Button from '@mui/material/Button';
 import './styleNavbar.css';
+// import { Home } from '@mui/icons-material';
 
 const NavBar: React.FC = () => {
   const dispatch = useCustomDispatch();
@@ -18,19 +20,19 @@ const NavBar: React.FC = () => {
         style={{ textDecoration: 'none' }}
         onClick={handleSubmit}
       >
-        <button>Home</button>
+        <Button>Home</Button>
       </Link>
       <Link to={'/donacion'} style={{ textDecoration: 'none' }}>
-        <button>Donacion</button>
+        <Button>Donacion</Button>
       </Link>
       <Link to={'/favoritos'} style={{ textDecoration: 'none' }}>
-        <button>Favoritos</button>
+        <Button>Favoritos</Button>
       </Link>
       <Link to={'/publicar'} style={{ textDecoration: 'none' }}>
-        <button>Publicar Mascota</button>
+        <Button>Publicar Mascota</Button>
       </Link>
       <Link to={'/misPublicaciones'} style={{ textDecoration: 'none' }}>
-        <button>Mis Publicaciones</button>
+        <Button>Mis Publicaciones</Button>
       </Link>
       <SearchBar />
     </div>

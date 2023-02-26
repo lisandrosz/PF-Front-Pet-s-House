@@ -1,66 +1,50 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { type Pet } from 'redux/slices/mascotas';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 const Login: React.FC = () => {
-  const users = [
-    {
-      email: 'juan@mail.com',
-      password: 'juan1234'
-    },
-    { email: 'camila@mail.com', password: 'camila1234' },
-    {
-      email: 'jose@mail.com',
-      password: 'jose1234'
-    },
-    {
-      email: 'mara@mail.com',
-      password: 'mara1234'
-    },
-    {
-      email: 'pepe@mail.com',
-      password: 'pepe1234'
-    },
-    {
-      email: 'luz@mail.com',
-      password: 'luz1234'
-    }
-  ];
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  function handleChangeEmail(e: React.ChangeEvent<HTMLInputElement>): void {
-    setEmail(e.target.value);
-    console.log(email);
-  }
-  function handleChangePassword(e: React.ChangeEvent<HTMLInputElement>): void {
-    setPassword(e.target.value);
-    console.log(password);
-  }
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+
+  async function handleSubmit(
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> {
     e.preventDefault();
-    const login = users.filter(
-      (u) => u.email === email && u.password === password
-    );
-    setPassword('');
-    login.length > 0
-      ? navigate('/home')
-      : Swal.fire({
-          title: '¡Error!',
-          text: 'Datos incorrectos',
-          icon: 'error',
-          confirmButtonText: 'Intentar de nuevo'
+    try {
+      await axios
+        .get<Pet[]>(`http://localhost:3001/users/login/${email}/${password}`)
+        .then((res: { data: any }) => {
+          if (typeof res.data === 'string') {
+            Swal.fire({
+              title: '¡Error!',
+              text: res.data,
+              icon: 'error',
+              confirmButtonText: 'Intentar de nuevo'
+            });
+          } else {
+            const { id, name, image, rol } = res.data;
+            localStorage.setItem('id', id);
+            localStorage.setItem('name', name);
+            localStorage.setItem('image', image);
+            localStorage.setItem('rol', rol);
+            navigate('/home');
+          }
         });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
-    <div>
+    <>
       <form
         onSubmit={(e) => {
           handleSubmit(e);
         }}
       >
-        <h1>Iniciar sesion</h1>
         <div>
           <label htmlFor="email">Correo electronico</label>
           <input
@@ -68,8 +52,8 @@ const Login: React.FC = () => {
             name="email"
             placeholder="yourmail@email.com"
             autoComplete="off"
-            onChange={(e) => {
-              handleChangeEmail(e);
+            onChange={({ target }) => {
+              setEmail(target.value);
             }}
             required
             value={email}
@@ -79,8 +63,8 @@ const Login: React.FC = () => {
           <input
             type="password"
             name="password"
-            onChange={(e) => {
-              handleChangePassword(e);
+            onChange={({ target }) => {
+              setPassword(target.value);
             }}
             required
             value={password}
@@ -93,7 +77,14 @@ const Login: React.FC = () => {
       <p>
         ¿No tienes una cuenta? <Link to="/registrar">Registrate</Link>
       </p>
-    </div>
+      <button
+        onClick={() => {
+          navigate('/home');
+        }}
+      >
+        Home
+      </button>
+    </>
   );
 };
 

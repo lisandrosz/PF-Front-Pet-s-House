@@ -8,9 +8,11 @@ import Donacion from 'Componentes/Donacion';
 import Favoritos from 'Componentes/Favoritos';
 import Publicaciones from 'Componentes/Publicaciones';
 import PublicarMascota from 'Componentes/PublicarMascota';
-import NavBar from 'Componentes/NavBar';
+import NavBar from 'Componentes/NavBar/copy';
 import Login from 'Componentes/Login';
 import Registrar from 'Componentes/Registrar';
+import Dashboard from 'Componentes/Dashboard';
+import Detalle from 'Componentes/Detalle';
 
 const App: React.FC = () => {
   const location = useLocation().pathname;
@@ -26,6 +28,8 @@ const App: React.FC = () => {
         <Route path="/publicar" element={<PublicarMascota />} />
         <Route path="/" element={<Login />} />
         <Route path="/registrar" element={<Registrar />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/detalle" element={<Detalle />} />
       </Routes>
     </Provider>
   );

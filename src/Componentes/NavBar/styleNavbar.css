@@ -9,5 +9,13 @@
   flex-direction: row;
   flex-wrap: wrap;
   flex: 2;
-  background-color: #FEFBE7;
+
+}
+
+.loguito{
+  padding-left:10px;
+  padding-right:10px;
+  max-height: 20px;
+  max-width: 20px;
+
 }

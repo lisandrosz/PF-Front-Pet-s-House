@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCustomDispatch } from 'hooks/redux';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -6,9 +6,14 @@ import { createPet } from 'helpers';
 // import axios from 'axios';
 
 const PublicarMascota: React.FC = () => {
-  const dispatch = useCustomDispatch();
   const navigate = useNavigate();
+  useEffect((): void => {
+    const id = localStorage.getItem('id');
+    if (id === null) navigate('/');
+  }, [navigate]);
+  const id = Number(localStorage.getItem('id'));
 
+  const dispatch = useCustomDispatch();
   const [pet, setPet] = useState({
     name: '',
     image: '',
@@ -20,7 +25,7 @@ const PublicarMascota: React.FC = () => {
     province: '',
     location: '',
     sex: '',
-    idUser: 1
+    idUser: id
   });
 
   const [errors, setErrors] = useState({
@@ -371,7 +376,6 @@ const PublicarMascota: React.FC = () => {
     </div>
   );
 };
-
 export default PublicarMascota;
 export interface formPet {
   name: string;
