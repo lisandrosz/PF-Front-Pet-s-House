@@ -100,7 +100,7 @@ export const filtrado = (name: string, value: string): void => {
 
 export const createPet = (payload: formPet) => async () => {
   try {
-    const response = await axios.post('http://localhost:3001/pets', payload);
+    const response = await axios.post('/pets', payload);
     console.log(response);
     return response;
   } catch (error) {
@@ -125,7 +125,7 @@ export const traerPets = async (): Promise<any> => {
 
 export const crearUser = (payload: formUser) => async () => {
   try {
-    const response = await axios.post('http://localhost:3001/users', payload);
+    const response = await axios.post('/users', payload);
     console.log(response);
     return response;
   } catch (error) {
