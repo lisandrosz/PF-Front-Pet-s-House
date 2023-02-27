@@ -1,12 +1,7 @@
 import React from 'react';
 import './styleCard.css';
 import { Link } from 'react-router-dom';
-import { useCustomDispatch } from 'hooks/redux';
-import {
-  setPetDetalle,
-  setFavortie,
-  deleteFavorite
-} from 'redux/slices/mascotas';
+import { setPetDetail, addPetFavorite, deletePetFavorite } from 'helpers';
 
 interface Props {
   id: number;
@@ -15,7 +10,7 @@ interface Props {
   age: number;
   size: string;
   animal: string;
-  isFav: boolean;
+  type: string;
 }
 
 const Card: React.FC<Props> = ({
@@ -25,37 +20,18 @@ const Card: React.FC<Props> = ({
   age,
   size,
   animal,
-  isFav
+  type
 }) => {
-  const dispatch = useCustomDispatch();
-
-  const currentPet = {
-    id,
-    name,
-    image,
-    age,
-    description: 'descripcion de prueba',
-    size,
-    healthBook: false,
-    animal,
-    active: false,
-    province: '',
-    location: '',
-    sex: '',
-    createdAt: '',
-    UserId: 0
-  };
-
   function goToDetail(): void {
-    dispatch(setPetDetalle(currentPet));
+    setPetDetail(id);
   }
 
   function addToFavorite(): void {
-    dispatch(setFavortie(currentPet));
+    addPetFavorite(id, 1);
   }
 
   function deleteFromFavorite(): void {
-    dispatch(deleteFavorite(id));
+    deletePetFavorite(id, 1);
   }
 
   return (
@@ -63,18 +39,40 @@ const Card: React.FC<Props> = ({
       <Link
         onClick={goToDetail}
         to={'/detalle'}
-        style={{ textDecoration: 'none' }}
+        // style={{ textDecoration: 'none' }}
       >
+        {/* Imagen */}
         <img src={image} alt="img not found" />
       </Link>
-      <p>Nombre: {name} </p>
-      <p>Edad: {age} </p>
-      <p>Tamaño: {size} </p>
-      <p>Especie: {animal} </p>
-      {isFav && (
-        <button onClick={deleteFromFavorite}>Quitar de Favoritos</button>
+      {/* Boton de favoritos */}
+      {type === 'fav' && (
+        <button className="favorite-btn" onClick={deleteFromFavorite}>
+          ♥️
+        </button>
       )}
-      {!isFav && <button onClick={addToFavorite}>Añadir a Favoritos</button>}
+      {type === 'nofav' && (
+        <button className="favorite-btn" onClick={addToFavorite}>
+          ♡
+        </button>
+      )}
+      <div className="card-text">
+        <h4>{name}</h4>
+        <ul>
+          <li>
+            <b>Edad: </b>
+            <p>{age}</p>
+          </li>
+          <li>
+            <b>Tamaño: </b>
+            <p>{size}</p>
+          </li>
+          <li>
+            <b>Especie:</b>
+            <p>{animal}</p>
+          </li>
+        </ul>
+        <button className="btn">ADOPTAR</button>
+      </div>
     </div>
   );
 };

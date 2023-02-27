@@ -6,16 +6,12 @@ const Detalle: React.FC = () => {
 
   return (
     <div>
-      <img
-        src="https://i.pinimg.com/originals/37/2c/db/372cdbb7af08ad27524ef53c53e1ba8d.jpg"
-        alt="pet"
-      />
-      <h1>{pet.name}</h1>
-      <p>{pet.size}</p>
-      <p>tiempo de publicacion</p>
-      <p>{pet.animal}</p>
-      <p>{pet.age}</p>
-      <p>{pet.description}</p>
+      <h1>{pet.Pet.name}</h1>
+      <img src={pet.Pet.image} alt="pet" />
+      <p>{pet.Pet.size}</p>
+      <p>{pet.Pet.animal}</p>
+      <p>{pet.Pet.age}</p>
+      {pet.User !== null && <p>Publicante : {pet.User.name}</p>}
     </div>
   );
 };

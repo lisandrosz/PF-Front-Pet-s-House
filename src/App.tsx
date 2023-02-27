@@ -14,6 +14,7 @@ import Registrar from 'Componentes/Registrar';
 import Dashboard from 'Componentes/Dashboard';
 import Detalle from 'Componentes/Detalle';
 import Success from 'Componentes/Success';
+import './App.css';
 
 const App: React.FC = () => {
   const location = useLocation().pathname;

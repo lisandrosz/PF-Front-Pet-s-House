@@ -1,10 +1,56 @@
+.filtro-title{
+    width: 100%;
+    padding: 5px 20px;
+    border-radius: 0 30px 30px 0;
+    letter-spacing: 2px;
+    text-align: center;
+    margin: 20px 0;
+    background-color: var(--pink-dark-1);
+    color: var(--white);
+}
 .filtro {
     display: flex;
+    padding: 0 30px;
     gap: 2px;
     flex-direction: column;
-
+    margin-bottom: 22px;
 }
+.filtro label{
+    color: var(--blue-dark-1);
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+.filtro select{
+    /* display: flex; */
+	border-radius: 5px;
+	/* margin: 50px 50px ; */
+	justify-content: center;
+	padding: 10px;
+	border: none;
+    border: #ccc 1px solid;
+	font-size: 15px;
+	/* box-shadow: 0 5px 10px #1112; */
+	-webkit-appearance: button;
+	outline: none;
+	cursor: pointer;
+}
+.filtro button{
+    background-color: transparent;
+    color: var(--pink-dark-1);
+    border: var(--pink-dark-1) 2px solid;
+    cursor: pointer;
+    border-radius: 30px;
+    padding: 12px;
+    font-size: 1em;
+    transition: .3s;
+}
+.filtro button:hover{
+    background-color: var(--pink-dark-1);
+    color: var(--white);
+}
+
 .conteniendo{
+    width: 300px;
     display: flex;
     flex-direction: column;
     gap: 6px;
