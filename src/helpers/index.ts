@@ -10,6 +10,7 @@ import type { Pet } from 'redux/slices/mascotas';
 import type { formUser } from 'Componentes/Registrar';
 import type { formPet } from 'Componentes/PublicarMascota';
 import axios from 'axios';
+import { setDonation } from 'redux/slices/users';
 
 export const filtrado = (name: string, value: string): void => {
   let estado = store.getState().pets.allPets;
@@ -97,7 +98,6 @@ export const filtrado = (name: string, value: string): void => {
 
   store.dispatch(setPets(filtrados));
 };
-
 export const createPet = (payload: formPet) => async () => {
   try {
     const response = await axios.post('/pets', payload);
@@ -112,7 +112,6 @@ export const resetFiltros = (): void => {
   store.dispatch(setReset());
   store.dispatch(setPets(estado));
 };
-
 export const traerPets = async (): Promise<any> => {
   try {
     await axios.get<Pet[]>('/pets').then((res) => {
@@ -122,7 +121,6 @@ export const traerPets = async (): Promise<any> => {
     console.log(error);
   }
 };
-
 export const crearUser = (payload: formUser) => async () => {
   try {
     const response = await axios.post('/users', payload);
@@ -141,5 +139,24 @@ export const searchPet = async (name: string): Promise<any> => {
     console.log(error);
   }
 };
-
-export const generarLink = async (name: string): Promise<any> => {};
+export const generarLink = async (
+  email: string,
+  precio: string,
+  id: number
+): Promise<undefined> => {
+  try {
+    const respuesta: undefined = await axios
+      .post('/donaciones', {
+        userID: id,
+        emailUser: email,
+        precio
+      })
+      .then((res) => {
+        setDonation({ monto: precio, date: res.data.date_created });
+        return res.data.init_point;
+      });
+    return respuesta;
+  } catch (error) {
+    console.log(error);
+  }
+};

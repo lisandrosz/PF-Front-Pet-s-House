@@ -11,14 +11,24 @@ export interface User {
   rol: string;
 }
 
+interface Donations {
+  monto: string;
+  date: string;
+}
+
 interface UsersState {
   allUsers: User[];
   users: User[];
+  donations: Donations;
 }
 
 const initialState: UsersState = {
   allUsers: [],
-  users: []
+  users: [],
+  donations: {
+    monto: '',
+    date: ''
+  }
 };
 
 const UsersSlice = createSlice({
@@ -31,10 +41,13 @@ const UsersSlice = createSlice({
     },
     setUsers: (state, action: PayloadAction<User[]>) => {
       state.users = action.payload;
+    },
+    setDonation: (state, action: PayloadAction<Donations>) => {
+      state.donations = action.payload;
     }
   }
 });
 
-export const { setAllUsers, setUsers } = UsersSlice.actions;
+export const { setAllUsers, setUsers, setDonation } = UsersSlice.actions;
 
 export default UsersSlice.reducer;

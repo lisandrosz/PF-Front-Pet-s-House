@@ -1,17 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { ChangeEvent } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { generarLink } from 'helpers';
 
 const Donacion: React.FC = () => {
-  const [otro, setOtro] = useState('');
+  const [precio, setPrecio] = useState('');
+  let linkPago: any;
+
+  const navigate = useNavigate();
+
+  useEffect((): void => {
+    const id = localStorage.getItem('id');
+    if (id === null) navigate('/');
+  }, [navigate]);
 
   const changeHandler = ({ target }: ChangeEvent<HTMLInputElement>): void => {
     const { value } = target;
-    setOtro(value);
+    setPrecio(value);
   };
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    console.log(otro);
+    const email = localStorage.getItem('email');
+    const id = localStorage.getItem('id');
+    if (email !== null && id !== null) {
+      linkPago = generarLink(email, precio, Number(id));
+    }
   };
 
   return (
@@ -97,6 +111,9 @@ const Donacion: React.FC = () => {
         <label htmlFor="otro">Otro: </label>
         <input type="text" name="donation" id="otro" onChange={changeHandler} />
         <br />
+        <Link to={linkPago}>
+          <button type="submit">Pagar</button>
+        </Link>
       </form>
     </>
   );
