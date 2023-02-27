@@ -1,9 +1,7 @@
 import React from 'react';
 import './styleCard.css';
 import { Link } from 'react-router-dom';
-import { useCustomDispatch } from 'hooks/redux';
-import { deleteFavorite } from 'redux/slices/mascotas';
-import { setPetDetail, addPetFavorite } from 'helpers';
+import { setPetDetail, addPetFavorite, deletePetFavorite } from 'helpers';
 
 interface Props {
   id: number;
@@ -24,8 +22,6 @@ const Card: React.FC<Props> = ({
   animal,
   type
 }) => {
-  const dispatch = useCustomDispatch();
-
   function goToDetail(): void {
     setPetDetail(id);
   }
@@ -35,7 +31,7 @@ const Card: React.FC<Props> = ({
   }
 
   function deleteFromFavorite(): void {
-    dispatch(deleteFavorite(id));
+    deletePetFavorite(id, 1);
   }
 
   return (

@@ -11,7 +11,7 @@ const Detalle: React.FC = () => {
       <p>{pet.Pet.size}</p>
       <p>{pet.Pet.animal}</p>
       <p>{pet.Pet.age}</p>
-      <p>Publicante : {pet.User.name}</p>
+      {pet.User !== null && <p>Publicante : {pet.User.name}</p>}
     </div>
   );
 };

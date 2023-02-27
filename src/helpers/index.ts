@@ -176,3 +176,18 @@ export const getUserPublications = async (id: number): Promise<any> => {
     console.log(error);
   }
 };
+
+export const deletePetFavorite = async (
+  idPets: number,
+  idUser: number
+): Promise<any> => {
+  try {
+    await axios
+      .delete(`/favorites/`, { data: { idPets, idUser } })
+      .then((res) => {
+        console.log(res.data);
+      });
+  } catch (error) {
+    console.log(error);
+  }
+};

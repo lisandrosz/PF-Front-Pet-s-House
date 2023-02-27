@@ -21,7 +21,7 @@ const Favoritos: React.FC = () => {
               id={pet.id}
               key={index}
               image={pet.image}
-              name={`${pet.id}`}
+              name={pet.name}
               age={pet.age}
               size={pet.size}
               animal={pet.animal}
