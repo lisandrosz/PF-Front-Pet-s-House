@@ -121,3 +121,5 @@ export const searchPet = async (name: string): Promise<any> => {
     console.log(error);
   }
 };
+
+export const generarLink = async (name: string): Promise<any> => {};

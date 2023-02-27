@@ -7,6 +7,10 @@ const Donacion: React.FC = () => {
   const changeHandler = ({ target }: ChangeEvent<HTMLInputElement>): void => {
     const { value } = target;
     setOtro(value);
+  };
+
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
     console.log(otro);
   };
 
@@ -25,7 +29,7 @@ const Donacion: React.FC = () => {
         para comprar alimentos para los albergues temporales que los necesiten
       </p>
       <h3>Elige el monto de tu donacion (ARS):</h3>
-      <form>
+      <form onSubmit={submitHandler}>
         <input
           type="radio"
           name="donation"
