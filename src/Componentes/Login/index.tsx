@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { type Pet } from 'redux/slices/mascotas';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 
 const Login: React.FC = () => {
+  const navigate = useNavigate();
+  useEffect((): void => {
+    const id = localStorage.getItem('id');
+    if (id === null) navigate('/');
+  }, []);
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
 
   async function handleSubmit(
     e: React.FormEvent<HTMLFormElement>
