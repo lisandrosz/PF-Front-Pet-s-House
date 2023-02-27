@@ -45,12 +45,12 @@ const Card: React.FC<Props> = ({
         <img src={image} alt="img not found" />
       </Link>
       {/* Boton de favoritos */}
-      {isFav && (
+      {type === 'fav' && (
         <button className="favorite-btn" onClick={deleteFromFavorite}>
           ♥️
         </button>
       )}
-      {!isFav && (
+      {type === 'nofav' && (
         <button className="favorite-btn" onClick={addToFavorite}>
           ♡
         </button>
