@@ -7,6 +7,8 @@ import {
   setBuscado
 } from 'redux/slices/mascotas';
 import type { Pet } from 'redux/slices/mascotas';
+import type { formUser } from 'Componentes/Registrar';
+import type { formPet } from 'Componentes/PublicarMascota';
 import axios from 'axios';
 
 export const filtrado = (name: string, value: string): void => {
@@ -96,6 +98,15 @@ export const filtrado = (name: string, value: string): void => {
   store.dispatch(setPets(filtrados));
 };
 
+export const createPet = (payload: formPet) => async () => {
+  try {
+    const response = await axios.post('/pets', payload);
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const resetFiltros = (): void => {
   const estado = store.getState().pets.allPets;
   store.dispatch(setReset());
@@ -112,6 +123,15 @@ export const traerPets = async (): Promise<any> => {
   }
 };
 
+export const crearUser = (payload: formUser) => async () => {
+  try {
+    const response = await axios.post('/users', payload);
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const searchPet = async (name: string): Promise<any> => {
   try {
     await axios.get<Pet[]>(`/pets?name=${name}`).then((res) => {

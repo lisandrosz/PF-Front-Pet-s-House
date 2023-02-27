@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { type Pet } from 'redux/slices/mascotas';
 import Swal from 'sweetalert2';
 import axios from 'axios';
@@ -74,6 +74,9 @@ const Login: React.FC = () => {
           <button type="submit">Ingresar</button>
         </div>
       </form>
+      <p>
+        ¿No tienes una cuenta? <Link to="/registrar">Registrate</Link>
+      </p>
       <button
         onClick={() => {
           navigate('/home');

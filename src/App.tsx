@@ -10,13 +10,15 @@ import Publicaciones from 'Componentes/Publicaciones';
 import PublicarMascota from 'Componentes/PublicarMascota';
 import NavBar from 'Componentes/NavBar/copy';
 import Login from 'Componentes/Login';
+import Registrar from 'Componentes/Registrar';
 import Dashboard from 'Componentes/Dashboard';
 import Detalle from 'Componentes/Detalle';
 
 const App: React.FC = () => {
+  const location = useLocation().pathname;
   return (
     <Provider store={store}>
-      {useLocation().pathname !== '/' && <NavBar />}
+      {location !== '/' && location !== '/registrar' ? <NavBar /> : null}
       <Routes>
         <Route path="/home" element={<Home />} />
         {/* <Route path="/" element={<Landing />} /> */}
@@ -25,6 +27,7 @@ const App: React.FC = () => {
         <Route path="/misPublicaciones" element={<Publicaciones />} />
         <Route path="/publicar" element={<PublicarMascota />} />
         <Route path="/" element={<Login />} />
+        <Route path="/registrar" element={<Registrar />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/detalle" element={<Detalle />} />
       </Routes>
