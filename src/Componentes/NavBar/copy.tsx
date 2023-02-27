@@ -8,7 +8,7 @@ import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
+// import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
@@ -163,7 +163,7 @@ export default function NavBar(): any {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar sx={{ backgroundColor: '#a6b2ed' }} position="static">
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -171,7 +171,7 @@ export default function NavBar(): any {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Box sx={{ padding: '10px 0px' }}>
             <img className="loguito" src={Logo} alt="logo" />
           </Box>
