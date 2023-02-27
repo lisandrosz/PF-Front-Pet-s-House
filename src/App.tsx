@@ -12,6 +12,7 @@ import NavBar from 'Componentes/NavBar/copy';
 import Login from 'Componentes/Login';
 import Dashboard from 'Componentes/Dashboard';
 import Detalle from 'Componentes/Detalle';
+import './App.css';
 
 const App: React.FC = () => {
   return (

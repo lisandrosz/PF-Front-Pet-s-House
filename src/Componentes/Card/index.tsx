@@ -63,18 +63,40 @@ const Card: React.FC<Props> = ({
       <Link
         onClick={goToDetail}
         to={'/detalle'}
-        style={{ textDecoration: 'none' }}
+        // style={{ textDecoration: 'none' }}
       >
+        {/* Imagen */}
         <img src={image} alt="img not found" />
       </Link>
-      <p>Nombre: {name} </p>
-      <p>Edad: {age} </p>
-      <p>Tamaño: {size} </p>
-      <p>Especie: {animal} </p>
+      {/* Boton de favoritos */}
       {isFav && (
-        <button onClick={deleteFromFavorite}>Quitar de Favoritos</button>
+        <button className="favorite-btn" onClick={deleteFromFavorite}>
+          ♥️
+        </button>
       )}
-      {!isFav && <button onClick={addToFavorite}>Añadir a Favoritos</button>}
+      {!isFav && (
+        <button className="favorite-btn" onClick={addToFavorite}>
+          ♡
+        </button>
+      )}
+      <div className="card-text">
+        <h4>{name}</h4>
+        <ul>
+          <li>
+            <b>Edad: </b>
+            <p>{age}</p>
+          </li>
+          <li>
+            <b>Tamaño: </b>
+            <p>{size}</p>
+          </li>
+          <li>
+            <b>Especie:</b>
+            <p>{animal}</p>
+          </li>
+        </ul>
+        <button className="btn">ADOPTAR</button>
+      </div>
     </div>
   );
 };
