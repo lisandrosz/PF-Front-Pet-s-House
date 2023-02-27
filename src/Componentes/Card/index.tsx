@@ -2,11 +2,8 @@ import React from 'react';
 import './styleCard.css';
 import { Link } from 'react-router-dom';
 import { useCustomDispatch } from 'hooks/redux';
-import {
-  setPetDetalle,
-  setFavortie,
-  deleteFavorite
-} from 'redux/slices/mascotas';
+import { deleteFavorite } from 'redux/slices/mascotas';
+import { setPetDetail, addPetFavorite } from 'helpers';
 
 interface Props {
   id: number;
@@ -15,7 +12,7 @@ interface Props {
   age: number;
   size: string;
   animal: string;
-  isFav: boolean;
+  type: string;
 }
 
 const Card: React.FC<Props> = ({
@@ -25,33 +22,16 @@ const Card: React.FC<Props> = ({
   age,
   size,
   animal,
-  isFav
+  type
 }) => {
   const dispatch = useCustomDispatch();
 
-  const currentPet = {
-    id,
-    name,
-    image,
-    age,
-    description: 'descripcion de prueba',
-    size,
-    healthBook: false,
-    animal,
-    active: false,
-    province: '',
-    location: '',
-    sex: '',
-    createdAt: '',
-    UserId: 0
-  };
-
   function goToDetail(): void {
-    dispatch(setPetDetalle(currentPet));
+    setPetDetail(id);
   }
 
   function addToFavorite(): void {
-    dispatch(setFavortie(currentPet));
+    addPetFavorite(id, 1);
   }
 
   function deleteFromFavorite(): void {
@@ -71,10 +51,12 @@ const Card: React.FC<Props> = ({
       <p>Edad: {age} </p>
       <p>Tamaño: {size} </p>
       <p>Especie: {animal} </p>
-      {isFav && (
+      {type === 'fav' && (
         <button onClick={deleteFromFavorite}>Quitar de Favoritos</button>
       )}
-      {!isFav && <button onClick={addToFavorite}>Añadir a Favoritos</button>}
+      {type === 'nofav' && (
+        <button onClick={addToFavorite}>Añadir a Favoritos</button>
+      )}
     </div>
   );
 };

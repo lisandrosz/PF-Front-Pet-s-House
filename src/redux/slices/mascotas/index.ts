@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import type { User } from '../users';
 
 export interface Pet {
   id: number;
@@ -35,8 +36,12 @@ interface PetsState {
   pets: Pet[];
   filtros: Filtros;
   buscado: Buscado;
-  petDetalle: Pet;
+  petDetalle: {
+    User: User;
+    Pet: Pet;
+  };
   favPets: Pet[];
+  publications: Pet[];
 }
 const initialState: PetsState = {
   allPets: [],
@@ -55,22 +60,34 @@ const initialState: PetsState = {
     petsBuscados: []
   },
   petDetalle: {
-    id: -1,
-    name: '',
-    image: '',
-    age: 0,
-    description: '',
-    size: '',
-    healthBook: false,
-    animal: '',
-    active: false,
-    province: '',
-    location: '',
-    sex: '',
-    createdAt: '',
-    UserId: 0
+    User: {
+      id: -2,
+      name: '',
+      image: '',
+      email: '',
+      loggedIn: false,
+      password: '',
+      rol: ''
+    },
+    Pet: {
+      id: -1,
+      name: '',
+      image: '',
+      age: 0,
+      description: '',
+      size: '',
+      healthBook: false,
+      animal: '',
+      active: false,
+      province: '',
+      location: '',
+      sex: '',
+      createdAt: '',
+      UserId: 0
+    }
   },
-  favPets: []
+  favPets: [],
+  publications: []
 };
 interface tipoFiltro {
   nombre: string;
@@ -102,18 +119,21 @@ const PetsSlice = createSlice({
       state.buscado.petsBuscados = [];
       state.pets = [...state.allPets];
     },
-    setPetDetalle: (state, action: PayloadAction<Pet>) => {
+    setPetDetalle: (state, action: PayloadAction<{ User: User; Pet: Pet }>) => {
       state.petDetalle = action.payload;
     },
 
-    setFavortie: (state, action: PayloadAction<Pet>) => {
-      state.favPets.push(action.payload);
+    setAllFavorties: (state, action: PayloadAction<Pet[]>) => {
+      state.favPets = action.payload;
     },
     deleteFavorite: (state, action: PayloadAction<number>) => {
       state.favPets = state.favPets.filter((pet) => pet.id !== action.payload);
     },
     setReset: (state) => {
       state.filtros = initialState.filtros;
+    },
+    setPublications: (state, action: PayloadAction<Pet[]>) => {
+      state.publications = action.payload;
     }
   }
 });
@@ -125,9 +145,10 @@ export const {
   setBuscado,
   setHome,
   setPetDetalle,
-  setFavortie,
+  setAllFavorties,
   deleteFavorite,
-  setReset
+  setReset,
+  setPublications
 } = PetsSlice.actions;
 
 export default PetsSlice.reducer;
