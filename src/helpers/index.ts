@@ -14,7 +14,6 @@ import type { formUser } from 'Componentes/Registrar';
 import type { formPet } from 'Componentes/PublicarMascota';
 import axios from 'axios';
 import type { User } from 'redux/slices/users';
-import { setDonation } from 'redux/slices/users';
 
 export const filtrado = (name: string, value: string): void => {
   let estado = store.getState().pets.allPets;
@@ -143,6 +142,8 @@ export const searchPet = async (name: string): Promise<any> => {
     console.log(error);
   }
 };
+
+// DONACIONES
 export const generarLink = async (
   email: string,
   precio: string,
@@ -159,13 +160,29 @@ export const generarLink = async (
       .then((res) => {
         return res.data;
       });
-    store.dispatch(
-      setDonation({
-        monto: precio,
-        date: date_created
-      })
-    );
+    localStorage.setItem('monto', precio);
+    localStorage.setItem('date', date_created);
     return init_point;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const saveDonation = async (
+  userID: number,
+  date: string,
+  precio: string
+): Promise<any> => {
+  try {
+    await axios
+      .post('http://localhost:3001/donaciones/guardar', {
+        userID,
+        date,
+        precio
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
   } catch (error) {
     console.log(error);
   }
