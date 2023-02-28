@@ -53,8 +53,9 @@ const Filtrado: React.FC = () => {
             <option value="femenino">Femenino</option>
           </select>
         </div>
-        <div className="filtro">
+        <div className="filtro" id="selectUbicacion">
           <label htmlFor="provincia">Selecciones la ubicacion</label>
+
           <SelectComponent
             value={{
               value: '',

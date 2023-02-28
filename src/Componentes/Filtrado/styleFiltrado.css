@@ -55,3 +55,7 @@
     flex-direction: column;
     gap: 6px;
 }
+
+#selectUbicacion{
+    z-index:400;
+}
