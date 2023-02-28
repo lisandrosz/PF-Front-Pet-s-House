@@ -22,16 +22,18 @@ const Card: React.FC<Props> = ({
   animal,
   type
 }) => {
+  const idUser = Number(localStorage.getItem('id'));
+
   function goToDetail(): void {
     setPetDetail(id);
   }
 
   function addToFavorite(): void {
-    addPetFavorite(id, 1);
+    addPetFavorite(id, idUser);
   }
 
   function deleteFromFavorite(): void {
-    deletePetFavorite(id, 1);
+    deletePetFavorite(id, idUser);
   }
 
   return (

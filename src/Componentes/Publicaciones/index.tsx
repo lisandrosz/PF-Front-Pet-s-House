@@ -4,8 +4,8 @@ import { useCustomSelector } from 'hooks/redux';
 import React, { useEffect } from 'react';
 
 const Publicaciones: React.FC = () => {
-  // const idUser = Number(localStorage.getItem('id'));
-  const idUser = 1;
+  const idUser = Number(localStorage.getItem('id'));
+
   useEffect((): void => {
     getUserPublications(idUser);
   });
