@@ -43,7 +43,9 @@ const UsersSlice = createSlice({
       state.users = action.payload;
     },
     setDonation: (state, action: PayloadAction<Donations>) => {
-      state.donations = action.payload;
+      console.log(action.payload);
+      state.donations.date = action.payload.date;
+      state.donations.monto = action.payload.monto;
     }
   }
 });
