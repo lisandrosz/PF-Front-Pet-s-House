@@ -159,10 +159,12 @@ export const generarLink = async (
       .then((res) => {
         return res.data;
       });
-    setDonation({
-      monto: precio,
-      date: date_created
-    });
+    store.dispatch(
+      setDonation({
+        monto: precio,
+        date: date_created
+      })
+    );
     return init_point;
   } catch (error) {
     console.log(error);
