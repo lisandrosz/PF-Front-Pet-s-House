@@ -30,6 +30,7 @@ const Login: React.FC = () => {
             localStorage.setItem('name', name);
             localStorage.setItem('image', image);
             localStorage.setItem('rol', rol);
+            localStorage.setItem('email', email);
             navigate('/home');
           }
         });
