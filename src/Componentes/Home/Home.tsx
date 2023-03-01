@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import CardsContainer from 'Componentes/CardsContainer';
 import Filtrado from 'Componentes/Filtrado';
+import Paginado from 'Componentes/Paginado';
 import './Home.css';
 import { traerPets } from 'helpers';
 import { useNavigate } from 'react-router-dom';
@@ -20,7 +20,7 @@ const Home: React.FC = () => {
         </div>
         <div className="cartas">
           <hr />
-          <CardsContainer />
+          <Paginado />
         </div>
       </div>
       <button
