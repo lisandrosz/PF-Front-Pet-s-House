@@ -152,7 +152,7 @@ export const generarLink = async (
   try {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     const { init_point, date_created }: any = await axios
-      .post('http://localhost:3001/donaciones', {
+      .post('/donaciones', {
         userID: id,
         emailUser: email,
         precio
@@ -175,7 +175,7 @@ export const saveDonation = async (
 ): Promise<any> => {
   try {
     await axios
-      .post('http://localhost:3001/donaciones/guardar', {
+      .post('/donaciones/guardar', {
         userID,
         date,
         precio
