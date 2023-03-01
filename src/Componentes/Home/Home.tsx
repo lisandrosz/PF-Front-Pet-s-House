@@ -3,10 +3,13 @@ import CardsContainer from 'Componentes/CardsContainer';
 import Filtrado from 'Componentes/Filtrado';
 import './Home.css';
 import { traerPets } from 'helpers';
-import { useNavigate } from 'react-router-dom';
+import Login from 'Componentes/Login/Login';
+import Logout from 'Componentes/Login/Logout';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Home: React.FC = () => {
-  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth0();
+  console.log(isAuthenticated);
   useEffect((): void => {
     traerPets();
   });
@@ -24,14 +27,8 @@ const Home: React.FC = () => {
           <CardsContainer />
         </div>
       </div>
-      <button
-        onClick={() => {
-          localStorage.clear();
-          navigate('/home');
-        }}
-      >
-        Log out
-      </button>
+      <Login />
+      <Logout />
     </div>
   );
 };
