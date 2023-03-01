@@ -8,14 +8,17 @@ import Donacion from 'Componentes/Donacion';
 import Favoritos from 'Componentes/Favoritos';
 import Publicaciones from 'Componentes/Publicaciones';
 import PublicarMascota from 'Componentes/PublicarMascota';
-import NavBar from 'Componentes/NavBar';
+import NavBar from 'Componentes/NavBar/copy';
+import Registrar from 'Componentes/Registrar';
 import Dashboard from 'Componentes/Dashboard';
 import Detalle from 'Componentes/Detalle';
+import './App.css';
 
 const App: React.FC = () => {
+  const location = useLocation().pathname;
   return (
     <Provider store={store}>
-      {useLocation().pathname !== '/' && <NavBar />}
+      {location !== '/' && location !== '/registrar' ? <NavBar /> : null}
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/" element={<Landing />} /> */}
@@ -23,6 +26,7 @@ const App: React.FC = () => {
         <Route path="/favoritos" element={<Favoritos />} />
         <Route path="/misPublicaciones" element={<Publicaciones />} />
         <Route path="/publicar" element={<PublicarMascota />} />
+        <Route path="/registrar" element={<Registrar />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/detalle" element={<Detalle />} />
       </Routes>

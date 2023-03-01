@@ -17,7 +17,7 @@ const Filtrado: React.FC = () => {
 
   return (
     <>
-      Filtrado
+      <h3 className="filtro-title">Filtrado</h3>
       <div className="conteniendo">
         <div className="filtro">
           <label htmlFor="especie">Selecciones una especie</label>
@@ -26,6 +26,7 @@ const Filtrado: React.FC = () => {
             id="1"
             onChange={changeHandler}
             value={especie}
+            className="select"
           >
             <option value="todos">Todas las mascotas</option>
             <option value="perros">Perros</option>
@@ -52,8 +53,9 @@ const Filtrado: React.FC = () => {
             <option value="femenino">Femenino</option>
           </select>
         </div>
-        <div className="filtro">
+        <div className="filtro" id="selectUbicacion">
           <label htmlFor="provincia">Selecciones la ubicacion</label>
+
           <SelectComponent
             value={{
               value: '',
@@ -61,8 +63,9 @@ const Filtrado: React.FC = () => {
             }}
           />
         </div>
+        {/* Ordenado */}
+        <h3 className="filtro-title">Ordenado</h3>
         <div className="filtro">
-          <p>Ordenado</p>
           <label htmlFor="edad">Ordenar por edad</label>
           <select name="edad" id="4" onChange={changeHandler} value={edad}>
             <option value="defecto">Por defecto</option>
