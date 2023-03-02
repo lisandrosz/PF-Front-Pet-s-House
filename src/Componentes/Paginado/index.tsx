@@ -1,21 +1,28 @@
-import React, { type ChangeEvent, useState } from 'react';
+import React, { type ChangeEvent } from 'react';
 import { Pagination } from '@mui/material';
 import usePagination from 'hooks/Paginacion';
-import { useCustomSelector } from 'hooks/redux';
 import CardsContainer from 'Componentes/CardsContainer';
+import { useCustomSelector, useCustomDispatch } from 'hooks/redux';
+import { setPage } from 'redux/slices/mascotas';
 
 const Paginado: React.FC = () => {
   const data = useCustomSelector((state) => state.pets.pets);
-  const [page, setPage] = useState(1);
+  const page = useCustomSelector((state) => state.pets.page);
+  const dispatch = useCustomDispatch();
+
   const porPagina = 3;
 
   const count = Math.ceil(data.length / porPagina);
   const pets = usePagination(data, porPagina);
 
-  const handleChange = (event: ChangeEvent<unknown>, page: number): void => {
-    setPage(page);
-    pets.jump(page);
+  const handleChange = (event: ChangeEvent<unknown>, pages: number): void => {
+    dispatch(setPage(pages));
+    pets.jump(pages);
   };
+
+  if (page !== pets.currentPage) {
+    pets.jump(page);
+  }
 
   return (
     <div>

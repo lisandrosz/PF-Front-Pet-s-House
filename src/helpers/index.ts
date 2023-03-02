@@ -7,7 +7,8 @@ import {
   setBuscado,
   setPetDetalle,
   setAllFavorties,
-  setPublications
+  setPublications,
+  setPage
 } from 'redux/slices/mascotas';
 import type { Pet } from 'redux/slices/mascotas';
 import type { formUser } from 'Componentes/Registrar';
@@ -98,7 +99,6 @@ export const filtrado = (name: string, value: string): void => {
         Number(new Date(b.createdAt.split('T')[0]))
     );
   }
-
   store.dispatch(setPets(filtrados));
 };
 export const createPet = (payload: formPet) => async () => {
@@ -114,6 +114,7 @@ export const resetFiltros = (): void => {
   const estado = store.getState().pets.allPets;
   store.dispatch(setReset());
   store.dispatch(setPets(estado));
+  store.dispatch(setPage(1));
 };
 export const traerPets = async (): Promise<any> => {
   try {

@@ -42,6 +42,7 @@ interface PetsState {
   };
   favPets: Pet[];
   publications: Pet[];
+  page: number;
 }
 const initialState: PetsState = {
   allPets: [],
@@ -87,7 +88,8 @@ const initialState: PetsState = {
     }
   },
   favPets: [],
-  publications: []
+  publications: [],
+  page: 1
 };
 interface tipoFiltro {
   nombre: string;
@@ -134,6 +136,9 @@ const PetsSlice = createSlice({
     },
     setPublications: (state, action: PayloadAction<Pet[]>) => {
       state.publications = action.payload;
+    },
+    setPage: (state, action: PayloadAction<number>) => {
+      state.page = action.payload;
     }
   }
 });
@@ -148,7 +153,8 @@ export const {
   setAllFavorties,
   deleteFavorite,
   setReset,
-  setPublications
+  setPublications,
+  setPage
 } = PetsSlice.actions;
 
 export default PetsSlice.reducer;
