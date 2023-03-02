@@ -4,12 +4,16 @@ import {
   setPets,
   setReset,
   setAllPets,
-  setBuscado
+  setBuscado,
+  setPetDetalle,
+  setAllFavorties,
+  setPublications
 } from 'redux/slices/mascotas';
 import type { Pet } from 'redux/slices/mascotas';
 import type { formUser } from 'Componentes/Registrar';
 import type { formPet } from 'Componentes/PublicarMascota';
 import axios from 'axios';
+import type { User } from 'redux/slices/users';
 
 export const filtrado = (name: string, value: string): void => {
   let estado = store.getState().pets.allPets;
@@ -97,7 +101,6 @@ export const filtrado = (name: string, value: string): void => {
 
   store.dispatch(setPets(filtrados));
 };
-
 export const createPet = (payload: formPet) => async () => {
   try {
     const response = await axios.post('/pets', payload);
@@ -112,7 +115,6 @@ export const resetFiltros = (): void => {
   store.dispatch(setReset());
   store.dispatch(setPets(estado));
 };
-
 export const traerPets = async (): Promise<any> => {
   try {
     await axios.get<Pet[]>('/pets').then((res) => {
@@ -122,7 +124,6 @@ export const traerPets = async (): Promise<any> => {
     console.log(error);
   }
 };
-
 export const crearUser = (payload: formUser) => async () => {
   try {
     const response = await axios.post('/users', payload);
@@ -137,6 +138,117 @@ export const searchPet = async (name: string): Promise<any> => {
     await axios.get<Pet[]>(`/pets?name=${name}`).then((res) => {
       store.dispatch(setBuscado(res.data));
     });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// DONACIONES
+export const generarLink = async (
+  email: string,
+  precio: string,
+  id: number
+): Promise<undefined> => {
+  try {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const { init_point, date_created }: any = await axios
+      .post('/donaciones', {
+        userID: id,
+        emailUser: email,
+        precio
+      })
+      .then((res) => {
+        return res.data;
+      });
+    localStorage.setItem('monto', precio);
+    localStorage.setItem('date', date_created);
+    return init_point;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const saveDonation = async (
+  userID: number,
+  date: string,
+  precio: string
+): Promise<any> => {
+  try {
+    await axios
+      .post('/donaciones/guardar', {
+        userID,
+        date,
+        precio
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// ========================
+// =====Detalle de Pet=====
+// ========================
+export const setPetDetail = async (id: number): Promise<any> => {
+  try {
+    await axios.get<{ User: User; Pet: Pet }>(`/pets/${id}`).then((res) => {
+      store.dispatch(setPetDetalle(res.data));
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addPetFavorite = async (
+  idPet: number,
+  idUser: number
+): Promise<any> => {
+  try {
+    await axios
+      .post(`/favorites/`, {
+        idPets: idPet,
+        idUser
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllFavorites = async (id: number): Promise<any> => {
+  try {
+    await axios.get<Pet[]>(`/favorites/${id}`).then((res) => {
+      store.dispatch(setAllFavorties(res.data));
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserPublications = async (id: number): Promise<any> => {
+  try {
+    await axios.get<Pet[]>(`/publications/${id}`).then((res) => {
+      store.dispatch(setPublications(res.data));
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deletePetFavorite = async (
+  idPets: number,
+  idUser: number
+): Promise<any> => {
+  try {
+    await axios
+      .delete(`/favorites/`, { data: { idPets, idUser } })
+      .then((res) => {
+        console.log(res.data);
+      });
   } catch (error) {
     console.log(error);
   }

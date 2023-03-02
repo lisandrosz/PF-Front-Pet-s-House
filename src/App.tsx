@@ -13,6 +13,9 @@ import Login from 'Componentes/Login';
 import Registrar from 'Componentes/Registrar';
 import Dashboard from 'Componentes/Dashboard';
 import Detalle from 'Componentes/Detalle';
+import Success from 'Componentes/Success';
+import Failure from 'Componentes/Failure';
+import './App.css';
 
 const App: React.FC = () => {
   const location = useLocation().pathname;
@@ -30,6 +33,8 @@ const App: React.FC = () => {
         <Route path="/registrar" element={<Registrar />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/detalle" element={<Detalle />} />
+        <Route path="/success" element={<Success />} />
+        <Route path="/failure" element={<Failure />} />
       </Routes>
     </Provider>
   );

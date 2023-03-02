@@ -1,24 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useCustomSelector } from 'hooks/redux';
 import Card from 'Componentes/Card';
+import { getAllFavorites } from 'helpers';
 
 const Favoritos: React.FC = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const idUser = Number(localStorage.getItem('id'));
+
+  useEffect((): void => {
+    getAllFavorites(idUser);
+  });
 
   const favorites = useCustomSelector((state) => state.pets.favPets);
 
-  function logIn(): void {
-    setIsLogin(true);
-  }
-
-  function logOut(): void {
-    setIsLogin(false);
-  }
-
-  if (isLogin) {
+  if (idUser > 0) {
     return (
       <div>
-        Estas Logueado
         {favorites.map((pet, index) => {
           return (
             <Card
@@ -29,19 +25,16 @@ const Favoritos: React.FC = () => {
               age={pet.age}
               size={pet.size}
               animal={pet.animal}
-              isFav={true}
+              type={'fav'}
             />
           );
         })}
-        <button onClick={logOut}> Desloguearse </button>
       </div>
     );
   } else {
     return (
       <div>
-        Para acceder a favortios tienes que loguearte primero!
-        <hr />
-        <button onClick={logIn}> Loguearse </button>
+        <p>Para acceder a favortios tienes que loguearte primero!</p>
       </div>
     );
   }
