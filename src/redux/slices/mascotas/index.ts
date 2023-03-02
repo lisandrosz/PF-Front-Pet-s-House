@@ -51,8 +51,8 @@ const initialState: PetsState = {
     tamaño: 'todos',
     especie: 'todos',
     edad: 'defecto',
-    provincia: 'Provincias',
-    localidad: 'Localidades',
+    provincia: 'Todas las provincias',
+    localidad: 'Todas las localidades',
     date: 'defecto',
     sexo: 'todos'
   },
@@ -107,6 +107,13 @@ const PetsSlice = createSlice({
     setFiltros: (state, action: PayloadAction<tipoFiltro>) => {
       const { nombre, valor } = action.payload;
       state.filtros[nombre as keyof Filtros] = valor;
+
+      if (nombre === 'provincia') {
+        state.filtros.localidad = 'Todas las localidades';
+      }
+      if (state.page !== 1) {
+        state.page = 1;
+      }
     },
     setPets: (state, action: PayloadAction<Pet[]>) => {
       state.pets = action.payload;
@@ -133,6 +140,9 @@ const PetsSlice = createSlice({
     },
     setReset: (state) => {
       state.filtros = initialState.filtros;
+      if (state.page !== 1) {
+        state.page = 1;
+      }
     },
     setPublications: (state, action: PayloadAction<Pet[]>) => {
       state.publications = action.payload;

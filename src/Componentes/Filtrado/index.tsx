@@ -3,20 +3,16 @@ import { filtrado, resetFiltros } from 'helpers';
 import './styleFiltrado.css';
 import SelectComponent from 'Componentes/Select';
 import type { ChangeEvent } from 'react';
-import { useCustomSelector, useCustomDispatch } from 'hooks/redux';
-import { setPage } from 'redux/slices/mascotas';
+import { useCustomSelector } from 'hooks/redux';
 
 const Filtrado: React.FC = () => {
   const { edad, especie, tamaño, sexo, date } = useCustomSelector(
     (state) => state.pets.filtros
   );
 
-  const dispatch = useCustomDispatch();
-
   const changeHandler = ({ target }: ChangeEvent<HTMLSelectElement>): void => {
     const { name, value } = target;
     filtrado(name, value);
-    dispatch(setPage(1));
   };
 
   return (
