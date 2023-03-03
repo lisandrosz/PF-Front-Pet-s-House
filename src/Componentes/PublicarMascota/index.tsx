@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useCustomDispatch } from 'hooks/redux';
+import { useCustomDispatch, useCustomSelector } from 'hooks/redux';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { createPet } from 'helpers';
-// import axios from 'axios';
+import SelectImage from './Cloudinary/selectImage';
 
 const PublicarMascota: React.FC = () => {
   const navigate = useNavigate();
@@ -12,6 +12,7 @@ const PublicarMascota: React.FC = () => {
     if (id === null) navigate('/');
   }, [navigate]);
   const id = Number(localStorage.getItem('id'));
+  const imagen = useCustomSelector((s) => s.pets.petsImage);
 
   const dispatch = useCustomDispatch();
   const [pet, setPet] = useState({
@@ -72,7 +73,8 @@ const PublicarMascota: React.FC = () => {
     const property = e.target.name;
     const value = e.target.value;
     validate({ ...pet, [property]: value });
-    setPet({ ...pet, size: value });
+    setPet({ ...pet, size: value, image: imagen });
+    console.log(pet);
   }
 
   function handleSelectBook(e: React.ChangeEvent<HTMLSelectElement>): void {
@@ -178,16 +180,16 @@ const PublicarMascota: React.FC = () => {
         });
       }
     }
-    if (pet.image !== '') {
-      if (/([a-z\-_0-9/:.]*\.(jpg|jpeg|png))/i.test(pet.image)) {
-        setErrors({ ...errors, image: '' });
-      } else {
-        setErrors({
-          ...errors,
-          image: 'La imagen debe tener formato .jpg o .png'
-        });
-      }
-    }
+    // if (pet.image !== '') {
+    //   if (/([a-z\-_0-9/:.]*\.(jpg|jpeg|png))/i.test(pet.image)) {
+    //     setErrors({ ...errors, image: '' });
+    //   } else {
+    //     setErrors({
+    //       ...errors,
+    //       image: 'La imagen debe tener formato .jpg o .png'
+    //     });
+    //   }
+    // }
     if (pet.age !== undefined) {
       if (!Number.isNaN(pet.age)) {
         if (pet.age >= 0 && pet.age < 100) {
@@ -251,19 +253,7 @@ const PublicarMascota: React.FC = () => {
         </div>
         {errors.age !== '' && <p>{errors.age}</p>}
 
-        <div>
-          <label htmlFor="image">Imagen</label>
-          <input
-            type="file"
-            name="image"
-            value={pet.image}
-            onChange={(e) => {
-              handleChange(e);
-            }}
-          />
-        </div>
-
-        {errors.image !== '' ? <p>{errors.image}</p> : null}
+        <SelectImage />
 
         <div>
           <label htmlFor="description">Descripcion</label>
