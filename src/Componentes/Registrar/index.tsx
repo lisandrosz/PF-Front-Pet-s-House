@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useCustomDispatch } from 'hooks/redux';
+import { useCustomDispatch, useCustomSelector } from 'hooks/redux';
 import { useNavigate } from 'react-router-dom';
 import { crearUser } from 'helpers';
 import Swal from 'sweetalert2';
+import SelectImage from './Cloudinary/selectImageUser';
 
 const Registrar: React.FC = () => {
   const dispatch = useCustomDispatch();
@@ -24,6 +25,7 @@ const Registrar: React.FC = () => {
     repeatPswrd: ''
   });
 
+  const imagen = useCustomSelector((s) => s.users.userImage);
   // const [sndPassword, setSndPassword] = useState('');
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>): void {
@@ -33,7 +35,8 @@ const Registrar: React.FC = () => {
     console.log(user);
     setUser({
       ...user,
-      [property]: value
+      [property]: value,
+      image: imagen
     });
   }
   // function handleChangeSndPassword(
@@ -143,7 +146,9 @@ const Registrar: React.FC = () => {
           />
         </div>
         {errors.name !== '' && <p>{errors.name}</p>}
-
+        <div>
+          <SelectImage />
+        </div>
         <div>
           <label htmlFor="email">Correo electronico</label>
           <input
@@ -185,17 +190,7 @@ const Registrar: React.FC = () => {
           />
         </div>
         {errors.repeatPswrd !== '' && <p>{errors.repeatPswrd}</p>} */}
-        <div>
-          <label htmlFor="image">Imagen</label>
-          <input
-            type="file"
-            name="image"
-            value={user.image}
-            onChange={(e) => {
-              handleChange(e);
-            }}
-          />
-        </div>
+
         {errors.image !== '' ? <p>{errors.image}</p> : null}
 
         {errors.name !== '' ||

@@ -22,28 +22,24 @@ const Card: React.FC<Props> = ({
   animal,
   type
 }) => {
+  const idUser = Number(localStorage.getItem('id'));
+
   function goToDetail(): void {
     setPetDetail(id);
   }
 
   function addToFavorite(): void {
-    addPetFavorite(id, 1);
+    addPetFavorite(id, idUser);
   }
 
   function deleteFromFavorite(): void {
-    deletePetFavorite(id, 1);
+    deletePetFavorite(id, idUser);
   }
 
   return (
     <div className="card">
-      <Link
-        onClick={goToDetail}
-        to={'/detalle'}
-        // style={{ textDecoration: 'none' }}
-      >
-        {/* Imagen */}
-        <img src={image} alt="img not found" />
-      </Link>
+      {/* Imagen */}
+      <img src={image} alt="img not found" />
       {/* Boton de favoritos */}
       {type === 'fav' && (
         <button className="favorite-btn" onClick={deleteFromFavorite}>
@@ -71,7 +67,9 @@ const Card: React.FC<Props> = ({
             <p>{animal}</p>
           </li>
         </ul>
-        <button className="btn">ADOPTAR</button>
+        <Link onClick={goToDetail} to={'/detalle'}>
+          <button className="btn">ADOPTAR</button>
+        </Link>
       </div>
     </div>
   );

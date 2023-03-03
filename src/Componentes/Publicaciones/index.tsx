@@ -2,19 +2,17 @@ import Card from 'Componentes/Card';
 import { getUserPublications } from 'helpers';
 import { useCustomSelector } from 'hooks/redux';
 import React, { useEffect } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
 
 const Publicaciones: React.FC = () => {
-  const { isAuthenticated } = useAuth0();
-  // const idUser = Number(localStorage.getItem('id'));
-  const idUser = 1;
+  const idUser = Number(localStorage.getItem('id'));
+
   useEffect((): void => {
     getUserPublications(idUser);
-  });
+  }, [idUser]);
 
   const publications = useCustomSelector((state) => state.pets.publications);
 
-  if (isAuthenticated) {
+  if (idUser > 0) {
     return (
       <div>
         {publications.map((pet, index) => {

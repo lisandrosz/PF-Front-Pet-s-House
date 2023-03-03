@@ -65,7 +65,6 @@ const Home: React.FC = () => {
 
   return (
     <div>
-      Home
       <div className="container">
         <div className="filtros">
           <hr />

@@ -25,11 +25,12 @@ const Login: React.FC = () => {
               confirmButtonText: 'Intentar de nuevo'
             });
           } else {
-            const { id, name, image, rol } = res.data;
+            const { id, name, image, rol, email } = res.data;
             localStorage.setItem('id', id);
             localStorage.setItem('name', name);
             localStorage.setItem('image', image);
             localStorage.setItem('rol', rol);
+            localStorage.setItem('email', email);
             navigate('/');
           }
         });

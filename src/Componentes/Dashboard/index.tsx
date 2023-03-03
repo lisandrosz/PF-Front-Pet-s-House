@@ -1,32 +1,29 @@
 import React, { useState } from 'react';
+import PetDash from './petDash';
+import UserDash from './userDash';
 
 const Dashboard: React.FC = () => {
-  const [isLogin, setIsLogin] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const rol = localStorage.getItem('rol');
+  const [toShow, setToShow] = useState('pets');
 
-  function logIn(): void {
-    setIsLogin(true);
+  function changeHandler(e: React.ChangeEvent<HTMLSelectElement>): void {
+    const value = e.target.value;
+    setToShow(value);
   }
 
-  function getAdminPermissions(): void {
-    setIsAdmin(true);
-  }
-
-  function logOut(): void {
-    setIsLogin(false);
-  }
-
-  function removeAdminPermissions(): void {
-    setIsAdmin(false);
-  }
-
-  if (isLogin && isAdmin) {
+  if (rol === 'administrador') {
     return (
       <div>
-        Estas Logueado y eres Admin
-        <hr />
-        <button onClick={logOut}> Desloguearse </button>
-        <button onClick={removeAdminPermissions}> Dejar de ser Admin </button>
+        <select
+          onChange={(e) => {
+            changeHandler(e);
+          }}
+        >
+          <option value="pets">Mascotas</option>
+          <option value="users">Usuarios</option>
+        </select>
+        {toShow === 'pets' && <PetDash></PetDash>}
+        {toShow === 'users' && <UserDash></UserDash>}
       </div>
     );
   } else {
@@ -34,8 +31,6 @@ const Dashboard: React.FC = () => {
       <div>
         Esta funcion solo esta disponible para el admin
         <hr />
-        <button onClick={logIn}> Loguearse </button>
-        <button onClick={getAdminPermissions}> Volverse Admin </button>
       </div>
     );
   }

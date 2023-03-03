@@ -14,6 +14,8 @@ import Dashboard from 'Componentes/Dashboard';
 import Detalle from 'Componentes/Detalle';
 import LoginAuth0 from 'Componentes/Login/LoginAuth0';
 import Login from 'Componentes/Login/Login';
+import Success from 'Componentes/Success';
+import Failure from 'Componentes/Failure';
 import './App.css';
 
 const App: React.FC = () => {
@@ -33,6 +35,8 @@ const App: React.FC = () => {
         <Route path="/detalle" element={<Detalle />} />
         <Route path="/loginAPI" element={<Login />} />
         <Route path="/loginAuth0" element={<LoginAuth0 />} />
+        <Route path="/success" element={<Success />} />
+        <Route path="/failure" element={<Failure />} />
       </Routes>
     </Provider>
   );
