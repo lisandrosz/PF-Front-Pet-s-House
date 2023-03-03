@@ -61,7 +61,7 @@ const Registrar: React.FC = () => {
         password: '',
         image: ''
       });
-      navigate('/home');
+      navigate('/');
     } else {
       Swal.fire({
         title: '¡Error!',
@@ -203,7 +203,7 @@ const Registrar: React.FC = () => {
         errors.password !== '' ||
         // errors.repeatPswrd !== '' ||
         errors.image !== '' ? (
-          <h3>Completa todos los campos</h3>
+          <button disabled>Registrarse</button>
         ) : (
           <button type="submit">Registrarse</button>
         )}

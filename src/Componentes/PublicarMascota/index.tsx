@@ -9,7 +9,13 @@ const PublicarMascota: React.FC = () => {
   const navigate = useNavigate();
   useEffect((): void => {
     const id = localStorage.getItem('id');
-    if (id === null) navigate('/');
+    if (id === null)
+      Swal.fire({
+        title: '¡Error!',
+        text: 'Debes iniciar sesion para realizar publicaciones!',
+        icon: 'error',
+        confirmButtonText: 'Entendido'
+      });
   }, [navigate]);
   const id = Number(localStorage.getItem('id'));
 
@@ -156,7 +162,7 @@ const PublicarMascota: React.FC = () => {
         location: '',
         idUser: 0
       });
-      navigate('/home');
+      navigate('/');
     } else {
       Swal.fire({
         title: '¡Error!',
@@ -368,7 +374,7 @@ const PublicarMascota: React.FC = () => {
         errors.description !== '' ||
         errors.age !== '' ||
         errors.image !== '' ? (
-          <h3>Completa todos los campos</h3>
+          <button disabled>Publicar</button>
         ) : (
           <button type="submit">Publicar</button>
         )}
