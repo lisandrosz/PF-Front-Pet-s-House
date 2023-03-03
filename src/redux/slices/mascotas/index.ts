@@ -136,7 +136,7 @@ const PetsSlice = createSlice({
     },
     setImagePet: (state, action: PayloadAction<string>) => {
       state.petsImage = action.payload;
-    },  
+    },
     setPublications: (state, action: PayloadAction<Pet[]>) => {
       state.publications = action.payload;
     }
