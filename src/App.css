@@ -1,0 +1,26 @@
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+    /* font-family: "Poppins", sans-serif; */
+    font-family: 'Nunito', sans-serif;
+	list-style: none;
+	text-decoration: none;
+	z-index: 1;
+}
+
+:root{
+    --pink-light-1:#efb6bc;
+    --pink-light-2:#efb6bc;
+    --pink-dark-1:#e05f64;
+    --pink-dark-2:#b03537;
+    
+    --blue-light-1:#d6dbf1;
+    --blue-light-2: #d6dbf1;
+    --blue-dark-1:#7d8bcc;
+    --blue-dark-2:#142353;
+
+    --yellow: #efa02a;
+    --white: #ffffff;
+    --black: #000000;
+}

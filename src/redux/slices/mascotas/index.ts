@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import type { User } from '../users';
 
 export interface Pet {
   id: number;
@@ -11,37 +12,38 @@ export interface Pet {
   healthBook: boolean;
   animal: string;
   active: boolean;
-  provincia: string;
-  localidad: string;
-  zona: string;
+  province: string;
+  location: string;
+  sex: string;
+  createdAt: string;
+  UserId: number;
 }
-
-// interface Zona {
-//   provincia: string;
-//   localidad: string;
-//   zona: string;
-// }
-
 export interface Filtros {
   tamaño: string;
   especie: string;
   edad: string;
   provincia: string;
-  tiempo: string;
+  localidad: string;
+  date: string;
+  sexo: string;
 }
-
 interface Buscado {
   condicion: boolean;
   petsBuscados: Pet[];
 }
-
 interface PetsState {
   allPets: Pet[];
   pets: Pet[];
   filtros: Filtros;
   buscado: Buscado;
+  petDetalle: {
+    User: User;
+    Pet: Pet;
+  };
+  favPets: Pet[];
+  petsImage: string;
+  publications: Pet[];
 }
-
 const initialState: PetsState = {
   allPets: [],
   pets: [],
@@ -49,16 +51,46 @@ const initialState: PetsState = {
     tamaño: 'todos',
     especie: 'todos',
     edad: 'defecto',
-    // zona: { provincia: 'todas', localidad: 'todas', zona: 'todas ' },
-    provincia: 'todas',
-    tiempo: 'defecto'
+    provincia: 'Provincias',
+    localidad: 'Localidades',
+    date: 'defecto',
+    sexo: 'todos'
   },
   buscado: {
     condicion: false,
     petsBuscados: []
-  }
+  },
+  petDetalle: {
+    User: {
+      id: -2,
+      name: '',
+      image: '',
+      email: '',
+      loggedIn: false,
+      password: '',
+      rol: ''
+    },
+    Pet: {
+      id: -1,
+      name: '',
+      image: '',
+      age: 0,
+      description: '',
+      size: '',
+      healthBook: false,
+      animal: '',
+      active: false,
+      province: '',
+      location: '',
+      sex: '',
+      createdAt: '',
+      UserId: 0
+    }
+  },
+  favPets: [],
+  petsImage: '',
+  publications: []
 };
-
 interface tipoFiltro {
   nombre: string;
   valor: string;
@@ -88,11 +120,41 @@ const PetsSlice = createSlice({
       state.buscado.condicion = false;
       state.buscado.petsBuscados = [];
       state.pets = [...state.allPets];
+    },
+    setPetDetalle: (state, action: PayloadAction<{ User: User; Pet: Pet }>) => {
+      state.petDetalle = action.payload;
+    },
+
+    setAllFavorties: (state, action: PayloadAction<Pet[]>) => {
+      state.favPets = action.payload;
+    },
+    deleteFavorite: (state, action: PayloadAction<number>) => {
+      state.favPets = state.favPets.filter((pet) => pet.id !== action.payload);
+    },
+    setReset: (state) => {
+      state.filtros = initialState.filtros;
+    },
+    setImagePet: (state, action: PayloadAction<string>) => {
+      state.petsImage = action.payload;
+    },
+    setPublications: (state, action: PayloadAction<Pet[]>) => {
+      state.publications = action.payload;
     }
   }
 });
 
-export const { setAllPets, setFiltros, setPets, setBuscado, setHome } =
-  PetsSlice.actions;
+export const {
+  setAllPets,
+  setFiltros,
+  setPets,
+  setBuscado,
+  setHome,
+  setPetDetalle,
+  setAllFavorties,
+  deleteFavorite,
+  setReset,
+  setImagePet,
+  setPublications
+} = PetsSlice.actions;
 
 export default PetsSlice.reducer;

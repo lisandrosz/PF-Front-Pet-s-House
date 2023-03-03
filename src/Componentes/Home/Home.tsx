@@ -1,98 +1,71 @@
 import React, { useEffect } from 'react';
-import { useCustomDispatch } from 'hooks/redux';
 import CardsContainer from 'Componentes/CardsContainer';
 import Filtrado from 'Componentes/Filtrado';
-import { setAllPets } from 'redux/slices/mascotas';
 import './Home.css';
-
-const petsArray = [
-  {
-    id: 1,
-    name: 'fido',
-    image:
-      'https://i.pinimg.com/originals/37/2c/db/372cdbb7af08ad27524ef53c53e1ba8d.jpg',
-    age: 2,
-    description: 'muy tranquilo fido. Es un perro muy grande pero re cariñoso',
-    size: 'grande',
-    animal: 'perro',
-    healthBook: true,
-    provincia: 'Buenos Aires',
-    localidad: 'San Fernando',
-    zona: '',
-    active: true
-  },
-  {
-    id: 2,
-    name: 'bugs bunny',
-    image:
-      'https://i.pinimg.com/originals/37/2c/db/372cdbb7af08ad27524ef53c53e1ba8d.jpg',
-    age: 11,
-    description: 're divertido',
-    size: 'chico',
-    animal: 'conejo',
-    healthBook: false,
-    provincia: 'Cordoba',
-    localidad: 'Villa Warcalde',
-    zona: '',
-    active: true
-  },
-  {
-    id: 3,
-    name: 'manuelita',
-    image:
-      'https://i.pinimg.com/originals/37/2c/db/372cdbb7af08ad27524ef53c53e1ba8d.jpg',
-    age: 20,
-    description: 'como come!! lenta la pobre pero se la aguanta',
-    size: 'chico',
-    animal: 'conejo',
-    healthBook: false,
-    provincia: 'Mendoza',
-    localidad: 'La Cieneguita',
-    zona: '',
-    active: true
-  },
-  {
-    id: 4,
-    name: 'pepito',
-    image:
-      'https://i.pinimg.com/originals/37/2c/db/372cdbb7af08ad27524ef53c53e1ba8d.jpg',
-    age: 8,
-    description: 'el mejor amigo del solitario',
-    size: 'chico',
-    animal: 'loro',
-    healthBook: false,
-    provincia: 'San Luis',
-    localidad: 'Cerro de la Cruz',
-    zona: '',
-    active: true
-  },
-  {
-    id: 4,
-    name: 'Zamba',
-    image:
-      'https://i.pinimg.com/originals/37/2c/db/372cdbb7af08ad27524ef53c53e1ba8d.jpg',
-    age: 8,
-    description: 'perra pitbul re buenita',
-    size: 'mediano',
-    animal: 'perro',
-    healthBook: true,
-    provincia: 'Buenos Aires',
-    localidad: 'Vicente Lopez',
-    zona: '',
-    active: true
-  }
-];
+import { traerPets } from 'helpers';
+import { useAuth0 } from '@auth0/auth0-react';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { type Pet } from 'redux/slices/mascotas';
 
 const Home: React.FC = () => {
-  const dispatch = useCustomDispatch();
-
-  useEffect(() => {
-    dispatch(setAllPets(petsArray));
+  const { isAuthenticated, user, logout } = useAuth0();
+  const navigate = useNavigate();
+  const { loginWithRedirect } = useAuth0();
+  const idUser = Number(localStorage.getItem('id'));
+  useEffect((): void => {
+    traerPets();
   });
+  useEffect((): void => {
+    if (Boolean(isAuthenticated) && user != null) {
+      const { name, email, image } = user;
+      auth0Logica(name, image, email);
+    }
+  });
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  const login = () => {
+    Swal.fire({
+      title: 'Tienes cuenta en PetsHouse?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Login',
+      denyButtonText: `Ingresa con gmail`
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate('/loginAPI');
+      } else if (result.isDenied) {
+        loginWithRedirect();
+      }
+    });
+  };
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  async function auth0Logica(
+    name: string | undefined,
+    image: any,
+    email: string | undefined
+  ) {
+    try {
+      await axios
+        .post<Pet[]>(`/users/userAuth0`, { name, image, email })
+        .then((res: { data: any }) => {
+          localStorage.setItem('id', res.data.id);
+          localStorage.setItem('name', res.data.name);
+          localStorage.setItem('image', res.data.image);
+          localStorage.setItem('rol', res.data.rol);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  const logoutApp = () => {
+    localStorage.clear();
+    logout({ logoutParams: { returnTo: window.location.origin } });
+  };
 
   return (
     <div>
-      Home
       <div className="container">
         <div className="filtros">
           <hr />
@@ -103,6 +76,11 @@ const Home: React.FC = () => {
           <CardsContainer />
         </div>
       </div>
+      {idUser > 0 ? (
+        <button onClick={logoutApp}>Logout</button>
+      ) : (
+        <button onClick={login}>Login</button>
+      )}
     </div>
   );
 };
