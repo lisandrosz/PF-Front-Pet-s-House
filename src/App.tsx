@@ -16,6 +16,7 @@ import Detalle from 'Componentes/Detalle';
 import Success from 'Componentes/Success';
 import Failure from 'Componentes/Failure';
 import './App.css';
+import UserDetail from 'Componentes/UserDetail';
 
 const App: React.FC = () => {
   const location = useLocation().pathname;
@@ -35,6 +36,7 @@ const App: React.FC = () => {
         <Route path="/detalle" element={<Detalle />} />
         <Route path="/success" element={<Success />} />
         <Route path="/failure" element={<Failure />} />
+        <Route path="/usuario" element={<UserDetail />} />
       </Routes>
     </Provider>
   );

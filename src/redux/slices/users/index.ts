@@ -11,14 +11,24 @@ export interface User {
   rol: string;
 }
 
-interface UsersState {
+export interface UsersState {
   allUsers: User[];
   users: User[];
+  userDetail: User;
 }
 
 const initialState: UsersState = {
   allUsers: [],
-  users: []
+  users: [],
+  userDetail: {
+    id: -1,
+    name: '',
+    image: '',
+    email: '',
+    loggedIn: false,
+    password: '',
+    rol: ''
+  }
 };
 
 const UsersSlice = createSlice({
@@ -31,10 +41,17 @@ const UsersSlice = createSlice({
     },
     setUsers: (state, action: PayloadAction<User[]>) => {
       state.users = action.payload;
+    },
+    setUserDetail: (state, action: PayloadAction<User>) => {
+      state.userDetail = action.payload;
+    },
+    putUserDetail: (state, action: PayloadAction<User>) => {
+      state.userDetail = action.payload;
     }
   }
 });
 
-export const { setAllUsers, setUsers } = UsersSlice.actions;
+export const { setAllUsers, setUsers, setUserDetail, putUserDetail } =
+  UsersSlice.actions;
 
 export default UsersSlice.reducer;

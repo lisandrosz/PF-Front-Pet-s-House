@@ -14,6 +14,7 @@ import type { formUser } from 'Componentes/Registrar';
 import type { formPet } from 'Componentes/PublicarMascota';
 import axios from 'axios';
 import type { User } from 'redux/slices/users';
+import { setUserDetail, putUserDetail } from 'redux/slices/users';
 
 export const filtrado = (name: string, value: string): void => {
   let estado = store.getState().pets.allPets;
@@ -249,6 +250,29 @@ export const deletePetFavorite = async (
       .then((res) => {
         console.log(res.data);
       });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserDetail = async (email: string): Promise<any> => {
+  try {
+    await axios(`/users/${email}`).then((res) => {
+      store.dispatch(setUserDetail(res.data));
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const changeUserDetail = async (
+  email: string,
+  user: any
+): Promise<any> => {
+  try {
+    await axios.put(`/users/${email}`, user).then((res) => {
+      store.dispatch(putUserDetail(res.data));
+    });
   } catch (error) {
     console.log(error);
   }
