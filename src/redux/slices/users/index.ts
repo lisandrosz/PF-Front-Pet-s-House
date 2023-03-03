@@ -14,11 +14,13 @@ export interface User {
 interface UsersState {
   allUsers: User[];
   users: User[];
+  userImage: string;
 }
 
 const initialState: UsersState = {
   allUsers: [],
-  users: []
+  users: [],
+  userImage: ''
 };
 
 const UsersSlice = createSlice({
@@ -31,10 +33,13 @@ const UsersSlice = createSlice({
     },
     setUsers: (state, action: PayloadAction<User[]>) => {
       state.users = action.payload;
+    },
+    setImageUser: (state, action: PayloadAction<string>) => {
+      state.userImage = action.payload;
     }
   }
 });
 
-export const { setAllUsers, setUsers } = UsersSlice.actions;
+export const { setAllUsers, setUsers, setImageUser } = UsersSlice.actions;
 
 export default UsersSlice.reducer;

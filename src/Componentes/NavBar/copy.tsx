@@ -17,7 +17,7 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import Logo from 'Assets/image/LOGO.svg';
+import Logo from '../../Assets/image/LOGO.jpg';
 import './styleNavbar.css';
 
 const Search = styled('div')(({ theme }) => ({
@@ -173,7 +173,7 @@ export default function NavBar(): any {
             <MenuIcon />
           </IconButton> */}
           <Box sx={{ padding: '10px 0px' }}>
-            <img className="loguito" src={Logo} alt="logo" />
+            <img className="radius" src={Logo} alt="logo" />
           </Box>
           <Search>
             <SearchIconWrapper>
@@ -186,7 +186,7 @@ export default function NavBar(): any {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <Button sx={{ color: '#fff' }} component={Link} to="/home">
+            <Button sx={{ color: '#fff' }} component={Link} to="/">
               Home
             </Button>
             <Button sx={{ color: '#fff' }} component={Link} to="/donacion">

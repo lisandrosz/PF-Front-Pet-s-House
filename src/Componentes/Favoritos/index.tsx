@@ -4,8 +4,8 @@ import Card from 'Componentes/Card';
 import { getAllFavorites } from 'helpers';
 
 const Favoritos: React.FC = () => {
-  // const idUser = Number(localStorage.getItem('id'));
-  const idUser = 1;
+  const idUser = Number(localStorage.getItem('id'));
+
   useEffect((): void => {
     getAllFavorites(idUser);
   });
