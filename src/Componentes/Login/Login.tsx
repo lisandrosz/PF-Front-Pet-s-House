@@ -43,7 +43,7 @@ const Login: React.FC = () => {
     e.preventDefault();
     try {
       await axios
-        .get<Pet[]>(`http://localhost:3001/users/login/${email}/${password}`)
+        .get<Pet[]>(`/users/login/${email}/${password}`)
         .then((res: { data: any }) => {
           if (typeof res.data === 'string') {
             Swal.fire({
