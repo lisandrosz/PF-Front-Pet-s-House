@@ -12,13 +12,15 @@ import NavBar from 'Componentes/NavBar/copy';
 import Registrar from 'Componentes/Registrar';
 import Dashboard from 'Componentes/Dashboard';
 import Detalle from 'Componentes/Detalle';
+import LoginAuth0 from 'Componentes/Login/LoginAuth0';
+import Login from 'Componentes/Login/Login';
 import './App.css';
 
 const App: React.FC = () => {
   const location = useLocation().pathname;
   return (
     <Provider store={store}>
-      {location !== '/' && location !== '/registrar' ? <NavBar /> : null}
+      {location !== '/registrar' ? <NavBar /> : null}
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/" element={<Landing />} /> */}
@@ -29,6 +31,8 @@ const App: React.FC = () => {
         <Route path="/registrar" element={<Registrar />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/detalle" element={<Detalle />} />
+        <Route path="/loginAPI" element={<Login />} />
+        <Route path="/loginAuth0" element={<LoginAuth0 />} />
       </Routes>
     </Provider>
   );

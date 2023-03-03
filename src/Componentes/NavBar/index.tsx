@@ -5,7 +5,7 @@ import { setHome } from 'redux/slices/mascotas';
 import { useCustomDispatch } from 'hooks/redux';
 import Button from '@mui/material/Button';
 import './styleNavbar.css';
-// import { Home } from '@mui/icons-material';
+import { Home } from '@mui/icons-material';
 
 const NavBar: React.FC = () => {
   const dispatch = useCustomDispatch();
@@ -15,11 +15,7 @@ const NavBar: React.FC = () => {
 
   return (
     <div className="navbar">
-      <Link
-        to={'/home'}
-        style={{ textDecoration: 'none' }}
-        onClick={handleSubmit}
-      >
+      <Link to={'/'} style={{ textDecoration: 'none' }} onClick={handleSubmit}>
         <Button>Home</Button>
       </Link>
       <Link to={'/donacion'} style={{ textDecoration: 'none' }}>
