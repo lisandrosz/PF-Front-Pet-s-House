@@ -13,11 +13,12 @@ const Home: React.FC = () => {
   const { isAuthenticated, user, logout } = useAuth0();
   const navigate = useNavigate();
   const { loginWithRedirect } = useAuth0();
+  const idUser = Number(localStorage.getItem('id'));
   useEffect((): void => {
     traerPets();
   });
   useEffect((): void => {
-    if (isAuthenticated && user != null) {
+    if (Boolean(isAuthenticated) && user != null) {
       const { name, email, image } = user;
       auth0Logica(name, image, email);
     }
@@ -75,7 +76,7 @@ const Home: React.FC = () => {
           <CardsContainer />
         </div>
       </div>
-      {isAuthenticated ? (
+      {idUser > 0 ? (
         <button onClick={logoutApp}>Logout</button>
       ) : (
         <button onClick={login}>Login</button>
