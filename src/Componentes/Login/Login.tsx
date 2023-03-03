@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { type Pet } from 'redux/slices/mascotas';
 import Swal from 'sweetalert2';
 import axios from 'axios';
@@ -25,20 +25,19 @@ const Login: React.FC = () => {
               confirmButtonText: 'Intentar de nuevo'
             });
           } else {
-            const { id, name, image, rol } = res.data;
+            const { id, name, image, rol, email } = res.data;
             localStorage.setItem('id', id);
             localStorage.setItem('name', name);
             localStorage.setItem('image', image);
             localStorage.setItem('rol', rol);
             localStorage.setItem('email', email);
-            navigate('/home');
+            navigate('/');
           }
         });
     } catch (error) {
       console.log(error);
     }
   }
-
   return (
     <>
       <form
@@ -75,12 +74,11 @@ const Login: React.FC = () => {
           <button type="submit">Ingresar</button>
         </div>
       </form>
-      <p>
-        ¿No tienes una cuenta? <Link to="/registrar">Registrate</Link>
-      </p>
+      <button>olvide mi contraseña</button>
+      <button>crear cuenta</button>
       <button
         onClick={() => {
-          navigate('/home');
+          navigate('/');
         }}
       >
         Home

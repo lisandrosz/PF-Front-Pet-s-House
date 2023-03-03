@@ -186,7 +186,7 @@ export default function NavBar(): any {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <Button sx={{ color: '#fff' }} component={Link} to="/home">
+            <Button sx={{ color: '#fff' }} component={Link} to="/">
               Home
             </Button>
             <Button sx={{ color: '#fff' }} component={Link} to="/donacion">

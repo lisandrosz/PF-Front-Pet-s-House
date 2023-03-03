@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 axios.defaults.baseURL = 'https://back-end-pet-s-house.up.railway.app';
 
@@ -12,9 +13,17 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Auth0Provider
+      domain="dev-81gijsnknx2ntvs1.us.auth0.com"
+      clientId="sYBEcObv3SIReXcOxoqM18RT8S1b89Wn"
+      authorizationParams={{
+        redirect_uri: window.location.origin
+      }}
+    >
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Auth0Provider>
   </React.StrictMode>
 );
 
