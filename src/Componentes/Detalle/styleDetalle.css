@@ -1,0 +1,36 @@
+.detalle {
+    margin: auto;
+  border-radius: 20px;
+  border: 20px;
+  padding: 20px;
+  width: 400px;
+  height: 450px;
+  box-shadow: 0 2px 20px #dddddd;
+  margin-top: 100px;
+}
+
+.imagenDetalle {
+    align-items: center;
+  /* height: 200px;
+  width: 200px; */
+  border-radius: 20px;
+  margin-top: 25px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+
+}
+
+.tituloCarta {
+    color: #7d8bcc;
+    font-family: 'Nunito', sans-serif;
+  text-align: center;
+  margin: auto auto;
+  font-size: 25px;
+  /* text-shadow: 0px 0px 9px #68A7AD(194, 140, 223); */
+}
+
+.contenedor_imagen {
+    object-fit: scale-down;
+    height: 100px;
+    width: 100px;
+}
