@@ -115,7 +115,7 @@ const Login: React.FC = () => {
         </p>
         <ButtonTodos
           onClick={() => {
-            navigate('/home');
+            navigate('/');
           }}
         >
           Home
