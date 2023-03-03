@@ -8,7 +8,7 @@ const Publicaciones: React.FC = () => {
 
   useEffect((): void => {
     getUserPublications(idUser);
-  });
+  }, [idUser]);
 
   const publications = useCustomSelector((state) => state.pets.publications);
 

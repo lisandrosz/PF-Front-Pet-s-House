@@ -1,23 +1,29 @@
-import React from 'react';
-import { useCustomSelector } from 'hooks/redux';
+import React, { useState } from 'react';
+import PetDash from './petDash';
+import UserDash from './userDash';
 
 const Dashboard: React.FC = () => {
-  // const rol = localStorage.getItem('rol');
-  const rol = 'administrador';
-  const pets = useCustomSelector((state) => state.pets.allPets);
+  const rol = localStorage.getItem('rol');
+  const [toShow, setToShow] = useState('pets');
+
+  function changeHandler(e: React.ChangeEvent<HTMLSelectElement>): void {
+    const value = e.target.value;
+    setToShow(value);
+  }
 
   if (rol === 'administrador') {
     return (
       <div>
-        Estas Logueado y eres Admin
-        {pets.map((pet, index) => {
-          return (
-            <div key={index}>
-              <p>{pet.name}</p>
-            </div>
-          );
-        })}
-        <hr />
+        <select
+          onChange={(e) => {
+            changeHandler(e);
+          }}
+        >
+          <option value="pets">Mascotas</option>
+          <option value="users">Usuarios</option>
+        </select>
+        {toShow === 'pets' && <PetDash></PetDash>}
+        {toShow === 'users' && <UserDash></UserDash>}
       </div>
     );
   } else {

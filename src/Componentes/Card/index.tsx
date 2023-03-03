@@ -38,14 +38,8 @@ const Card: React.FC<Props> = ({
 
   return (
     <div className="card">
-      <Link
-        onClick={goToDetail}
-        to={'/detalle'}
-        // style={{ textDecoration: 'none' }}
-      >
-        {/* Imagen */}
-        <img src={image} alt="img not found" />
-      </Link>
+      {/* Imagen */}
+      <img src={image} alt="img not found" />
       {/* Boton de favoritos */}
       {type === 'fav' && (
         <button className="favorite-btn" onClick={deleteFromFavorite}>
@@ -73,7 +67,9 @@ const Card: React.FC<Props> = ({
             <p>{animal}</p>
           </li>
         </ul>
-        <button className="btn">ADOPTAR</button>
+        <Link onClick={goToDetail} to={'/detalle'}>
+          <button className="btn">ADOPTAR</button>
+        </Link>
       </div>
     </div>
   );
