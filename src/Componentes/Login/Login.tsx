@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { type Pet } from 'redux/slices/mascotas';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { styled } from '@mui/material/styles';
@@ -8,6 +7,7 @@ import Button from '@mui/material/Button';
 import './styleLogin.css';
 import login from '../../Assets/image/imagen4.png';
 import logo from '../../Assets/image/LOGO.jpg';
+import hash from '../Login/hashFunction';
 
 const ButtonTodos = styled(Button)({
   background: '#fff',
@@ -41,9 +41,13 @@ const Login: React.FC = () => {
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> {
     e.preventDefault();
+    const hashPassword = hash(password);
     try {
       await axios
-        .get<Pet[]>(`/users/login/${email}/${password}`)
+        .post('/users/login', {
+          hashPassword,
+          email
+        })
         .then((res: { data: any }) => {
           if (typeof res.data === 'string') {
             Swal.fire({
