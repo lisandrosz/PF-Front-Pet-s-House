@@ -9,12 +9,15 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Home: React.FC = () => {
-  const { isAuthenticated, user, logout } = useAuth0();
+  const { isAuthenticated, user, logout, loginWithRedirect } = useAuth0();
   const navigate = useNavigate();
-  const { loginWithRedirect } = useAuth0();
   const [logged, setLogged] = useState(false);
   useEffect((): void => {
     traerPets();
+  });
+  useEffect((): void => {
+    const id = localStorage.getItem('id');
+    if (id != null) setLogged(true);
   });
   useEffect((): void => {
     if (Boolean(isAuthenticated) && user != null) {
@@ -48,7 +51,6 @@ const Home: React.FC = () => {
       await axios
         .post(`/users/userAuth0`, { name, image, email })
         .then((res: { data: any }) => {
-          setLogged(true);
           localStorage.setItem('id', res.data.id);
           localStorage.setItem('name', res.data.name);
           localStorage.setItem('image', res.data.image);
