@@ -1,4 +1,4 @@
-import { Button, Divider, List, ListItem } from '@mui/material';
+import { Button, List, ListItem } from '@mui/material';
 import React, { useState } from 'react';
 import PetDash from './petDash';
 import UserDash from './userDash';
@@ -19,22 +19,22 @@ const Dashboard: React.FC = () => {
         <div className="sideBar">
           <List>
             <ListItem>
-              <Button fullWidth onClick={toShowHandler} value="users">
+              <Button onClick={toShowHandler} value="users">
                 Usuarios
               </Button>
             </ListItem>
             <ListItem>
-              <Button
-                className="dashButton"
-                onClick={toShowHandler}
-                value="pets"
-              >
+              <Button onClick={toShowHandler} value="pets">
                 Mascotas
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Button onClick={toShowHandler} value="donations">
+                Donaciones
               </Button>
             </ListItem>
           </List>
         </div>
-        <Divider orientation="vertical"></Divider>
         <div className="showPanel">
           {toShow === 'pets' && <PetDash></PetDash>}
           {toShow === 'users' && <UserDash></UserDash>}

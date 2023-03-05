@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 import { Auth0Provider } from '@auth0/auth0-react';
+import MuiThemeProvider from 'theme';
 
 axios.defaults.baseURL = 'https://back-end-pet-s-house.up.railway.app';
 
@@ -21,7 +22,9 @@ root.render(
       }}
     >
       <BrowserRouter>
-        <App />
+        <MuiThemeProvider>
+          <App />
+        </MuiThemeProvider>
       </BrowserRouter>
     </Auth0Provider>
   </React.StrictMode>

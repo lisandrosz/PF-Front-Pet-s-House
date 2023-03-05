@@ -4,6 +4,7 @@
     height: 100%;
     width: 100%;
     position: absolute;
+    background-color:  #F6F7FE;
 }
 
 .sideBar{
@@ -12,6 +13,10 @@
     width: 150px;
     min-width: 150px;
     align-items: center;
+    background-color: white;
+    border-right-style: solid;
+    border-color: rgb(240, 240, 240);
+    border-width: 1px;
 }
 
 .showContainer{
@@ -21,4 +26,7 @@
 
 .tableContainer{
     margin: 10px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    background-color: white;
 }
