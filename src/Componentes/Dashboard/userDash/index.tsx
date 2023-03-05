@@ -1,3 +1,12 @@
+import {
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow
+} from '@mui/material';
 import { getUsers } from 'helpers';
 import { useCustomSelector } from 'hooks/redux';
 import React, { useEffect } from 'react';
@@ -8,20 +17,37 @@ const UserDash: React.FC = () => {
   }, []);
   const users = useCustomSelector((state) => state.users.users);
   return (
-    <div>
-      <h1>Listado de Mascotas Publicadas</h1>
-      {users.map((user, index) => {
-        return (
-          <div key={index}>
-            <h3>{user.name}</h3>
-            <p>Rol: {user.rol}</p>
-            <p>email: {user.email}</p>
-            <p>ID: {user.id}</p>
-            <hr />
-          </div>
-        );
-      })}
-    </div>
+    <Box>
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell align="center" colSpan={5}>
+                <h2>Listado de Usuarios</h2>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Nombre</TableCell>
+              <TableCell align="center">Rol</TableCell>
+              <TableCell align="center">Email</TableCell>
+              <TableCell align="center">ID</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {users.map((user, index) => {
+              return (
+                <TableRow key={index}>
+                  <TableCell>{user.name}</TableCell>
+                  <TableCell align="center">{user.rol}</TableCell>
+                  <TableCell align="center">{user.email}</TableCell>
+                  <TableCell align="center">{user.id}</TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
   );
 };
 

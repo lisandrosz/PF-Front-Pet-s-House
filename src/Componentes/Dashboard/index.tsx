@@ -1,29 +1,44 @@
+import { Button, Divider, List, ListItem } from '@mui/material';
 import React, { useState } from 'react';
 import PetDash from './petDash';
 import UserDash from './userDash';
+import './dashboard.css';
 
 const Dashboard: React.FC = () => {
   const rol = localStorage.getItem('rol');
   const [toShow, setToShow] = useState('pets');
 
-  function changeHandler(e: React.ChangeEvent<HTMLSelectElement>): void {
-    const value = e.target.value;
-    setToShow(value);
+  function toShowHandler(e: React.MouseEvent<HTMLButtonElement>): void {
+    const button: HTMLButtonElement = e.currentTarget;
+    setToShow(button.value);
   }
 
   if (rol === 'administrador') {
     return (
-      <div>
-        <select
-          onChange={(e) => {
-            changeHandler(e);
-          }}
-        >
-          <option value="pets">Mascotas</option>
-          <option value="users">Usuarios</option>
-        </select>
-        {toShow === 'pets' && <PetDash></PetDash>}
-        {toShow === 'users' && <UserDash></UserDash>}
+      <div className="dashContainer">
+        <div className="sideBar">
+          <List>
+            <ListItem>
+              <Button fullWidth onClick={toShowHandler} value="users">
+                Usuarios
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Button
+                className="dashButton"
+                onClick={toShowHandler}
+                value="pets"
+              >
+                Mascotas
+              </Button>
+            </ListItem>
+          </List>
+        </div>
+        <Divider orientation="vertical"></Divider>
+        <div className="showPanel">
+          {toShow === 'pets' && <PetDash></PetDash>}
+          {toShow === 'users' && <UserDash></UserDash>}
+        </div>
       </div>
     );
   } else {
