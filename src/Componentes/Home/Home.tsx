@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import CardsContainer from 'Componentes/CardsContainer';
 import Filtrado from 'Componentes/Filtrado';
 import './Home.css';
@@ -7,20 +7,19 @@ import { useAuth0 } from '@auth0/auth0-react';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { getLogged } from '../../helpers';
+import { useCustomSelector } from 'hooks/redux';
 
 const Home: React.FC = () => {
   const { isAuthenticated, user, logout, loginWithRedirect } = useAuth0();
+  const logged = useCustomSelector((state) => state.users.logged);
   const navigate = useNavigate();
-  const [logged, setLogged] = useState(false);
   useEffect((): void => {
     traerPets();
   });
   useEffect((): void => {
-    const id = localStorage.getItem('id');
-    if (id != null) setLogged(true);
-  });
-  useEffect((): void => {
     if (Boolean(isAuthenticated) && user != null) {
+      getLogged(true);
       const { name, email, image } = user;
       auth0Logica(name, image, email);
     }
@@ -62,7 +61,7 @@ const Home: React.FC = () => {
   }
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const logoutApp = () => {
-    setLogged(false);
+    getLogged(false);
     localStorage.clear();
     logout({ logoutParams: { returnTo: window.location.origin } });
   };

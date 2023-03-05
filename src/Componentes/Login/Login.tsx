@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import './styleLogin.css';
 import login from '../../Assets/image/imagen4.png';
 import logo from '../../Assets/image/LOGO.jpg';
+import { getLogged } from '../../helpers';
 // import hash from '../Login/hashFunction';
 
 const ButtonTodos = styled(Button)({
@@ -44,7 +45,7 @@ const Login: React.FC = () => {
     // const hashPassword = hash(password);
     try {
       await axios
-        .post('http://localhost:3001/users/login', {
+        .post('/users/login', {
           email,
           password
         })
@@ -57,6 +58,7 @@ const Login: React.FC = () => {
               confirmButtonText: 'Intentar de nuevo'
             });
           } else {
+            getLogged(true);
             const { id, name, image, rol, email } = res.data;
             localStorage.setItem('id', id);
             localStorage.setItem('name', name);
