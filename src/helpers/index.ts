@@ -127,7 +127,6 @@ export const traerPets = async (): Promise<any> => {
 export const crearUser = (payload: formUser) => async () => {
   try {
     const response = await axios.post('/users', payload);
-    console.log(response);
     return response;
   } catch (error) {
     console.log(error);
