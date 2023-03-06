@@ -3,6 +3,7 @@ import { useCustomDispatch } from 'hooks/redux';
 import { useNavigate } from 'react-router-dom';
 import { crearUser } from 'helpers';
 import SelectImage from './Cloudinary/selectImageUser';
+import './styleRegistrar.css';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import validateUser from '../Registrar/validacionUsuario';
@@ -63,13 +64,18 @@ const Registrar: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Crea tu usuario</h1>
-      <h3>Por favor, completa tus datos</h3>
+    <div className="form">
+      <div>
+        <h1>Crea tu usuario</h1>
+        <h3>Por favor, completa tus datos</h3>
+      </div>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name">Nombre completo</label>
+          <label className="contra" htmlFor="name">
+            Nombre completo
+          </label>
           <input
+            className="input"
             type="text"
             name="name"
             placeholder="Nombre y Apellido"
@@ -88,8 +94,11 @@ const Registrar: React.FC = () => {
           <SelectImage />
         </div>
         <div>
-          <label htmlFor="email">Correo electronico</label>
+          <label className="contra" htmlFor="email">
+            Correo electronico
+          </label>
           <input
+            className="input"
             type="text"
             name="email"
             placeholder="tucorreo@mail.com"
@@ -106,8 +115,11 @@ const Registrar: React.FC = () => {
         </div>
 
         <div>
-          <label htmlFor="password">Contraseña</label>
+          <label className="contra" htmlFor="password">
+            Contraseña
+          </label>
           <input
+            className="input"
             type="password"
             name="password"
             placeholder="contraseña"
@@ -125,8 +137,11 @@ const Registrar: React.FC = () => {
           </p>
         </div>
         <div>
-          <label htmlFor="password">Contraseña</label>
+          <label className="contra" htmlFor="password">
+            Contraseña
+          </label>
           <input
+            className="input"
             type="password"
             name="password2"
             placeholder="Repita contraseña"
@@ -143,12 +158,16 @@ const Registrar: React.FC = () => {
             {error.password2}
           </p>
         </div>
-        <input
-          className="botonSubmit"
-          type="submit"
-          value="Create"
-          disabled={Object.keys(error).length !== 0}
-        />
+        <div className="botoncito">
+          <ButtonTodos type="submit">
+            <input
+              className="botonSubmit"
+              type="submit"
+              value="Create"
+              disabled={Object.keys(error).length !== 0}
+            />
+          </ButtonTodos>
+        </div>
       </form>
       <ButtonTodos
         onClick={() => {

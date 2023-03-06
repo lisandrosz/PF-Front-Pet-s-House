@@ -1,0 +1,50 @@
+/* a:active,a:visited,a:link{ color: var(#efa02a)} */
+.form{
+    display: flex;
+    justify-content: center;
+    font-weight: bolder;
+    font-size: medium;
+    text-justify: left;
+    width: 600px;
+    margin-left: 40px;
+  }
+p.danger {
+    color: red;
+    font-size: 13px;
+  }
+
+.botoncito{
+    margin-left: 120px;
+    }
+    
+    .input{
+        margin: 10px;
+        border-radius: 7px;
+        padding: 5px;
+    }
+    
+    .cuenta{
+        margin-left: 53px;
+    }
+    
+    .contra{
+        color: #6b74b5;
+    }
+    
+    .logo{
+        width: 10%;
+        position: absolute;
+        top: 10%;
+        left: 12%;
+    }
+    
+    .img{
+        width: 60%;
+        margin-left: 17%;
+        
+    }
+    
+    .content{
+        display: flex;
+        flex-direction: column;
+    }
