@@ -13,7 +13,12 @@ import type { Pet } from 'redux/slices/mascotas';
 import type { formUser } from 'Componentes/Registrar';
 import type { formPet } from 'Componentes/PublicarMascota';
 import axios from 'axios';
-import { setUsers, setLogged, type User } from 'redux/slices/users';
+import {
+  setUsers,
+  setLogged,
+  setUserDetail,
+  type User
+} from 'redux/slices/users';
 
 export const filtrado = (name: string, value: string): void => {
   let estado = store.getState().pets.allPets;
@@ -267,4 +272,22 @@ export const getUsers = async (): Promise<any> => {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const getLogged = (log: boolean) => {
   store.dispatch(setLogged(log));
+};
+
+export const getUserDetail = async (email: string): Promise<any> => {
+  try {
+    await axios(`/users/${email}`).then((res) => {
+      store.dispatch(setUserDetail(res.data));
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const changeUserDetail = async (user: any): Promise<any> => {
+  try {
+    await axios.put('/users', user);
+  } catch (error) {
+    console.log(error);
+  }
 };
