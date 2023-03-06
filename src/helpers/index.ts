@@ -286,7 +286,8 @@ export const getUserDetail = async (email: string): Promise<any> => {
 
 export const changeUserDetail = async (user: any): Promise<any> => {
   try {
-    await axios.put('/users', user);
+    const response = await axios.put('/users', user);
+    console.log(response);
   } catch (error) {
     console.log(error);
   }

@@ -54,11 +54,20 @@ const UsersSlice = createSlice({
     },
     setUserDetail: (state, action: PayloadAction<User>) => {
       state.userDetail = action.payload;
+    },
+    putUserDetail: (state, action: PayloadAction<User>) => {
+      state.userDetail = action.payload;
     }
   }
 });
 
-export const { setAllUsers, setUsers, setImageUser, setLogged, setUserDetail } =
-  UsersSlice.actions;
+export const {
+  setAllUsers,
+  setUsers,
+  setImageUser,
+  setLogged,
+  setUserDetail,
+  putUserDetail
+} = UsersSlice.actions;
 
 export default UsersSlice.reducer;

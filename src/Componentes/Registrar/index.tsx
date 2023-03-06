@@ -65,7 +65,7 @@ const Registrar: React.FC = () => {
         password: '',
         image: ''
       });
-      navigate('/home');
+      navigate('/');
     } else {
       Swal.fire({
         title: '¡Error!',

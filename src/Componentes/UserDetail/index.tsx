@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 
 const UserDetail: React.FC = () => {
   const navigate = useNavigate();
-  // const dispatch = useCustomDispatch();
+  const user = useCustomSelector((s) => s.users.userDetail);
   useEffect((): void => {
     const id = localStorage.getItem('id');
     if (id === null) navigate('/');
@@ -16,26 +16,26 @@ const UserDetail: React.FC = () => {
     } else {
       getUserDetail(email);
     }
-  }, [navigate]);
+  }, [navigate, user]);
 
   // ESTADOS LOCALES Y GLOBALES
 
-  const id = localStorage.getItem('id');
+  const id = Number(localStorage.getItem('id'));
   const { name, email, image, password } = useCustomSelector(
     (s) => s.users.userDetail
   );
   const [nameUser, setNameUser] = useState({
-    id,
+    idUser: id,
     name: ''
   });
 
   const [emailUser, setEmailUser] = useState({
-    id,
+    idUser: id,
     email: ''
   });
 
   const [passwordUser, setPasswordUser] = useState({
-    id,
+    idUser: id,
     password: ''
   });
 
@@ -84,22 +84,65 @@ const UserDetail: React.FC = () => {
     console.log({ ...passwordUser, password: value });
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+  function handleSubmit(
+    e: React.FormEvent<HTMLFormElement>,
+    change: string
+  ): void {
     e.preventDefault();
-    if (nameUser.name !== '') {
-      changeUserDetail(nameUser);
-      setNameUser({
-        name: '',
-        id
-      });
-      setChangeData('default');
-    } else {
-      Swal.fire({
-        title: '¡Error!',
-        text: 'No se pudo completar el registro',
-        icon: 'error',
-        confirmButtonText: 'Intentar de nuevo'
-      });
+    switch (change) {
+      case 'name':
+        if (nameUser.name !== '') {
+          changeUserDetail(nameUser);
+          setNameUser({
+            name: '',
+            idUser: id
+          });
+          setChangeData('default');
+        } else {
+          Swal.fire({
+            title: '¡Error!',
+            text: 'No se pudo completar el registro',
+            icon: 'error',
+            confirmButtonText: 'Intentar de nuevo'
+          });
+        }
+        break;
+      case 'email':
+        if (emailUser.email !== '') {
+          changeUserDetail(emailUser);
+          setEmailUser({
+            email: '',
+            idUser: id
+          });
+          setChangeData('default');
+        } else {
+          Swal.fire({
+            title: '¡Error!',
+            text: 'No se pudo completar el registro',
+            icon: 'error',
+            confirmButtonText: 'Intentar de nuevo'
+          });
+        }
+        break;
+      case 'password':
+        if (passwordUser.password !== '') {
+          changeUserDetail(passwordUser);
+          setPasswordUser({
+            password: '',
+            idUser: id
+          });
+          setChangeData('default');
+        } else {
+          Swal.fire({
+            title: '¡Error!',
+            text: 'No se pudo completar el registro',
+            icon: 'error',
+            confirmButtonText: 'Intentar de nuevo'
+          });
+        }
+        break;
+      default:
+        alert('Oops, algo salio mal');
     }
   }
 
@@ -142,13 +185,14 @@ const UserDetail: React.FC = () => {
       return (
         <form
           onSubmit={(e) => {
-            handleSubmit(e);
+            handleSubmit(e, 'name');
           }}
         >
           <div>
             <label htmlFor="name">Nombre completo</label>
             <input
               name="name"
+              type="text"
               value={nameUser.name}
               onChange={(e) => {
                 handleChangeName(e);
@@ -167,13 +211,14 @@ const UserDetail: React.FC = () => {
       return (
         <form
           onSubmit={(e) => {
-            handleSubmit(e);
+            handleSubmit(e, 'email');
           }}
         >
           <div>
             <label htmlFor="email">Correo Electronico</label>
             <input
               name="email"
+              type="text"
               value={emailUser.email}
               onChange={(e) => {
                 handleChangeEmail(e);
@@ -193,13 +238,14 @@ const UserDetail: React.FC = () => {
       return (
         <form
           onSubmit={(e) => {
-            handleSubmit(e);
+            handleSubmit(e, 'password');
           }}
         >
           <div>
             <label htmlFor="password">Contraseña</label>
             <input
               name="password"
+              type="text"
               value={passwordUser.password}
               onChange={(e) => {
                 handleChangePassword(e);
@@ -218,6 +264,7 @@ const UserDetail: React.FC = () => {
       return (
         <div>
           <div>
+            <img src={image} alt="imagen de usuario" />
             <button
               onClick={() => {
                 handleClick('name');
@@ -225,7 +272,6 @@ const UserDetail: React.FC = () => {
             >
               Cambiar imagen
             </button>
-            <img src={image} alt="imagen de usuario" />
           </div>
           <div>
             <div>
