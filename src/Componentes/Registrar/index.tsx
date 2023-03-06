@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { crearUser } from 'helpers';
 import Swal from 'sweetalert2';
 import SelectImage from './Cloudinary/selectImageUser';
+import hash from '../Login/hashFunction';
 
 const Registrar: React.FC = () => {
   const dispatch = useCustomDispatch();
@@ -32,7 +33,6 @@ const Registrar: React.FC = () => {
     const property = e.target.name;
     const value = e.target.value;
     validate({ ...user, [property]: value });
-    console.log(user);
     setUser({
       ...user,
       [property]: value,
@@ -52,6 +52,7 @@ const Registrar: React.FC = () => {
       user.password !== '' &&
       user.image !== ''
     ) {
+      user.password = hash(user.password);
       dispatch(crearUser(user));
       Swal.fire({
         title: '¡Usuario creado con exito!',

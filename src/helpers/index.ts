@@ -14,7 +14,8 @@ import type { formUser } from 'Componentes/Registrar';
 import type { formPet } from 'Componentes/PublicarMascota';
 import axios from 'axios';
 import type { Option } from 'Componentes/Select';
-import { setUsers, type User } from 'redux/slices/users';
+import { setUsers, setLogged, type User } from 'redux/slices/users';
+
 
 export const filtrado = (name: string, value: string): void => {
   let estado = store.getState().pets.allPets;
@@ -287,4 +288,9 @@ export const getUsers = async (): Promise<any> => {
   } catch (error) {
     console.log(error);
   }
+};
+
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export const getLogged = (log: boolean) => {
+  store.dispatch(setLogged(log));
 };

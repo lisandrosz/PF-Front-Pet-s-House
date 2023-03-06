@@ -8,12 +8,13 @@ import Donacion from 'Componentes/Donacion';
 import Favoritos from 'Componentes/Favoritos';
 import Publicaciones from 'Componentes/Publicaciones';
 import PublicarMascota from 'Componentes/PublicarMascota';
-import NavBar from 'Componentes/NavBar/copy';
+import NavBar from 'Componentes/NavBar';
 import Registrar from 'Componentes/Registrar';
 import Dashboard from 'Componentes/Dashboard';
 import Detalle from 'Componentes/Detalle';
 import LoginAuth0 from 'Componentes/Login/LoginAuth0';
 import Login from 'Componentes/Login/Login';
+import CambioContraseña from 'Componentes/Login/CambioContraseña';
 import Success from 'Componentes/Success';
 import Failure from 'Componentes/Failure';
 import './App.css';
@@ -35,6 +36,7 @@ const App: React.FC = () => {
         <Route path="/detalle" element={<Detalle />} />
         <Route path="/loginAPI" element={<Login />} />
         <Route path="/loginAuth0" element={<LoginAuth0 />} />
+        <Route path="/cambiarContraseña" element={<CambioContraseña />} />
         <Route path="/success" element={<Success />} />
         <Route path="/failure" element={<Failure />} />
       </Routes>
