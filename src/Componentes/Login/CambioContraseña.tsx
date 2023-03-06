@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import './styleLogin.css';
 import login from '../../Assets/image/imagen4.png';
 import logo from '../../Assets/image/LOGO.jpg';
-import { getLogged } from '../../helpers';
+import Swal from 'sweetalert2';
 // import hash from '../Login/hashFunction';
 
 const ButtonTodos = styled(Button)({
@@ -33,43 +32,45 @@ const Container = styled('div')({
   marginBottom: '8%'
 });
 
-const Login: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const CambioContraseña: React.FC = () => {
+  const [passwordActual, setPasswordActual] = useState('');
+  const [passwordNueva, setPasswordNueva] = useState('');
+  const [repitaContraseña, setRepitaContraseña] = useState('');
   const navigate = useNavigate();
-  // console.log(hash('12343'));
+
   async function handleSubmit(
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> {
     e.preventDefault();
-    // const hashPassword = hash(password);
-    try {
-      await axios
-        .post('/users/login', {
-          email,
-          password
-        })
-        .then((res: { data: any }) => {
-          if (typeof res.data === 'string') {
-            Swal.fire({
-              title: '¡Error!',
-              text: res.data,
-              icon: 'error',
-              confirmButtonText: 'Intentar de nuevo'
+    const email = localStorage.getItem('email');
+    const idusuario = localStorage.getItem('id');
+    // const hashPassword = hash(passwordActual);
+    if (passwordNueva === repitaContraseña) {
+      try {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        await axios.get(`/users/${email}`).then(async (res: { data: any }) => {
+          if (res.data === passwordActual) {
+            await axios.put('/users', {
+              idUser: idusuario,
+              password: passwordNueva
             });
           } else {
-            getLogged(true);
-            const { id, name, image, rol, email } = res.data;
-            localStorage.setItem('id', id);
-            localStorage.setItem('name', name);
-            localStorage.setItem('image', image);
-            localStorage.setItem('rol', rol);
-            localStorage.setItem('email', email);
-            navigate('/');
+            Swal.fire({
+              icon: 'error',
+              title: 'Contraseña invalida',
+              text: 'Tu contraseña no es la correcta'
+            });
           }
         });
-    } catch (error) {
-      console.log(error);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error al repetir la contraseña'
+      });
     }
   }
 
@@ -83,45 +84,53 @@ const Login: React.FC = () => {
         >
           <div>
             <label className="contra" htmlFor="email">
-              Correo electronico
+              Contraseña actual
             </label>
             <input
               className="input"
               type="text"
-              name="email"
-              placeholder="yourmail@email.com"
+              name="passwordActual"
+              placeholder="password"
               autoComplete="off"
               onChange={({ target }) => {
-                setEmail(target.value);
+                setPasswordActual(target.value);
               }}
               required
-              value={email}
+              value={passwordActual}
             />
             <br />
             <label className="contra" htmlFor="password">
-              Contraseña
+              Nueva contraseña
             </label>
             <input
               className="input"
               type="password"
-              name="password"
+              name="passwordNueva"
               onChange={({ target }) => {
-                setPassword(target.value);
+                setPasswordNueva(target.value);
               }}
               required
-              value={password}
+              value={passwordNueva}
+            />
+            <br />
+            <label className="contra" htmlFor="password">
+              Repita contraseña
+            </label>
+            <input
+              className="input"
+              type="password"
+              name="repitaContraseña"
+              onChange={({ target }) => {
+                setRepitaContraseña(target.value);
+              }}
+              required
+              value={repitaContraseña}
             />
           </div>
           <div className="botoncito">
-            <ButtonTodos type="submit">Ingresar</ButtonTodos>
+            <ButtonTodos type="submit">Cambiar contraseña</ButtonTodos>
           </div>
         </form>
-        <p className="cuenta">
-          <Link to="/registrar">Registrate</Link>
-        </p>
-        <p className="cuenta">
-          <Link to="/cambiarContraseña">Cambiar contraseña</Link>
-        </p>
         <ButtonTodos
           onClick={() => {
             navigate('/');
@@ -136,4 +145,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default CambioContraseña;
