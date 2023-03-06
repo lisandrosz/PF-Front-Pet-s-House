@@ -128,7 +128,7 @@ const Registrar: React.FC = () => {
           <label htmlFor="password">Contraseña</label>
           <input
             type="password"
-            name="repitaPassword"
+            name="password2"
             placeholder="Repita contraseña"
             value={user.password2}
             onChange={handleChange}
