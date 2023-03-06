@@ -40,7 +40,7 @@ const App: React.FC = () => {
         <Route path="/cambiarContraseña" element={<CambioContraseña />} />
         <Route path="/success" element={<Success />} />
         <Route path="/failure" element={<Failure />} />
-        <Route path="/usuario" element={<UserDetail />} />
+        <Route path="/miPerfil" element={<UserDetail />} />
       </Routes>
     </Provider>
   );
