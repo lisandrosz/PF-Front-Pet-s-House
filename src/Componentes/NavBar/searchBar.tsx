@@ -63,17 +63,6 @@ const SearchBar: React.FC = () => {
         <SearchIcon sx={{ color: 'white' }}></SearchIcon>
       </Button>
     </Search>
-    // <div>
-    //   <input
-    //     type="text"
-    //     value={name}
-    //     placeholder="Buscar..."
-    //     onChange={handleChange}
-    //   />
-    //   <button type="submit" onClick={handleSubmit}>
-    //     Buscar
-    //   </button>
-    // </div>
   );
 };
 
