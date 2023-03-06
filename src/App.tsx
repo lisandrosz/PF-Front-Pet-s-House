@@ -17,6 +17,7 @@ import Login from 'Componentes/Login/Login';
 import CambioContraseña from 'Componentes/Login/CambioContraseña';
 import Success from 'Componentes/Success';
 import Failure from 'Componentes/Failure';
+import UserDetail from 'Componentes/UserDetail';
 import './App.css';
 
 const App: React.FC = () => {
@@ -39,6 +40,7 @@ const App: React.FC = () => {
         <Route path="/cambiarContraseña" element={<CambioContraseña />} />
         <Route path="/success" element={<Success />} />
         <Route path="/failure" element={<Failure />} />
+        <Route path="/usuario" element={<UserDetail />} />
       </Routes>
     </Provider>
   );
