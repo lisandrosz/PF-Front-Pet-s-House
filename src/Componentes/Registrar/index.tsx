@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useCustomDispatch } from 'hooks/redux';
 import { useNavigate } from 'react-router-dom';
 import { crearUser } from 'helpers';
-import SelectImage from './Cloudinary/selectImageUser';
 import './styleRegistrar.css';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import validateUser from '../Registrar/validacionUsuario';
+import { getLogged } from '../../helpers';
 // import hash from '../Login/hashFunction';
 
 const ButtonTodos = styled(Button)({
@@ -23,20 +23,15 @@ const Registrar: React.FC = () => {
     name: '',
     email: '',
     password: '',
-    password2: '',
-    image: ''
+    password2: ''
   });
 
   const [error, setError] = useState({
     name: '',
     email: '',
     password: '',
-    password2: '',
-    image: ''
+    password2: ''
   });
-
-  // const imagen = useCustomSelector((s) => s.users.userImage);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setUser((prevState) => ({
       ...prevState,
@@ -54,12 +49,13 @@ const Registrar: React.FC = () => {
       user.name.length === 0 ||
       user.email.length === 0 ||
       user.password.length === 0 ||
-      user.password2.length === 0 ||
-      user.image.length === 0
+      user.password2.length === 0
     ) {
       <p className="danger">Falta completar campos</p>;
     } else {
+      getLogged(true);
       dispatch(crearUser(user));
+      navigate('/miPerfil');
     }
   };
 
@@ -90,9 +86,9 @@ const Registrar: React.FC = () => {
             {error.name}
           </p>
         </div>
-        <div>
+        {/* <div>
           <SelectImage />
-        </div>
+        </div> */}
         <div>
           <label className="contra" htmlFor="email">
             Correo electronico
@@ -113,7 +109,6 @@ const Registrar: React.FC = () => {
             {error.email}
           </p>
         </div>
-
         <div>
           <label className="contra" htmlFor="password">
             Contraseña
@@ -164,7 +159,7 @@ const Registrar: React.FC = () => {
               className="botonSubmit"
               type="submit"
               value="Create"
-              disabled={Object.keys(error).length !== 0}
+              disabled={Object.values(error).join('').length !== 0}
             />
           </ButtonTodos>
         </div>
@@ -184,7 +179,7 @@ export default Registrar;
 
 export interface formUser {
   name: string;
-  image: string;
   email: string;
   password: string;
+  password2: string;
 }

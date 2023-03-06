@@ -127,6 +127,12 @@ export const traerPets = async (): Promise<any> => {
 export const crearUser = (payload: formUser) => async () => {
   try {
     const response = await axios.post('/users', payload);
+    const { id, name, image, rol, email } = response.data;
+    localStorage.setItem('id', id);
+    localStorage.setItem('name', name);
+    localStorage.setItem('image', image);
+    localStorage.setItem('rol', rol);
+    localStorage.setItem('email', email);
     return response;
   } catch (error) {
     console.log(error);
