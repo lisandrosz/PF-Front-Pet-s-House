@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactSelect from 'react-select';
 import type { SingleValue } from 'react-select';
 import { filtrado, traerProvincias, traerLocalidades } from 'helpers';
@@ -8,16 +8,25 @@ export interface Option {
   value: string;
   label: string;
 }
-let provOption: Option[];
-traerProvincias().then((res) => {
-  provOption = res;
-});
 
 interface props {
   value: SingleValue<Option>;
 }
 
 const SelectComponent: React.FC<props> = () => {
+  const [provincias, setProvincias] = useState([
+    {
+      value: 'Todas las provincias',
+      label: 'Todas las provincias'
+    }
+  ]);
+
+  useEffect(() => {
+    traerProvincias().then((res) => {
+      setProvincias(res);
+    });
+  }, []);
+
   const { provincia, localidad } = useCustomSelector(
     (state) => state.pets.filtros
   );
@@ -30,7 +39,8 @@ const SelectComponent: React.FC<props> = () => {
     if (option !== null) {
       filtrado('provincia', option.label);
       traerLocalidades(option.value).then((res) => {
-        // locOption = res;
+        console.log(res);
+
         setLocalidades(res);
       });
     }
@@ -45,7 +55,7 @@ const SelectComponent: React.FC<props> = () => {
   return (
     <>
       <ReactSelect
-        options={provOption}
+        options={provincias}
         onChange={provHandler}
         value={{
           value: provincia,
