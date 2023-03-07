@@ -14,8 +14,12 @@ import type { formUser } from 'Componentes/Registrar';
 import type { formPet } from 'Componentes/PublicarMascota';
 import axios from 'axios';
 import type { Option } from 'Componentes/Select';
-import { setUsers, setLogged, type User } from 'redux/slices/users';
-
+import {
+  setUsers,
+  setLogged,
+  setUserDetail,
+  type User
+} from 'redux/slices/users';
 
 export const filtrado = (name: string, value: string): void => {
   let estado = store.getState().pets.allPets;
@@ -129,7 +133,12 @@ export const traerPets = async (): Promise<any> => {
 export const crearUser = (payload: formUser) => async () => {
   try {
     const response = await axios.post('/users', payload);
-    console.log(response);
+    const { id, name, image, rol, email } = response.data;
+    localStorage.setItem('id', id);
+    localStorage.setItem('name', name);
+    localStorage.setItem('image', image);
+    localStorage.setItem('rol', rol);
+    localStorage.setItem('email', email);
     return response;
   } catch (error) {
     console.log(error);
@@ -293,4 +302,23 @@ export const getUsers = async (): Promise<any> => {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const getLogged = (log: boolean) => {
   store.dispatch(setLogged(log));
+};
+
+export const getUserDetail = async (email: string): Promise<any> => {
+  try {
+    await axios(`/users/${email}`).then((res) => {
+      store.dispatch(setUserDetail(res.data));
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const changeUserDetail = async (user: any): Promise<any> => {
+  try {
+    const response = await axios.put('/users', user);
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
 };

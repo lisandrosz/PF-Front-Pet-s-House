@@ -16,13 +16,23 @@ interface UsersState {
   users: User[];
   userImage: string;
   logged: boolean;
+  userDetail: User;
 }
 
 const initialState: UsersState = {
   allUsers: [],
   users: [],
   userImage: '',
-  logged: false
+  logged: false,
+  userDetail: {
+    id: -1,
+    name: '',
+    email: '',
+    password: '',
+    image: '',
+    loggedIn: false,
+    rol: ''
+  }
 };
 
 const UsersSlice = createSlice({
@@ -41,11 +51,23 @@ const UsersSlice = createSlice({
     },
     setLogged: (state, action: PayloadAction<boolean>) => {
       state.logged = action.payload;
+    },
+    setUserDetail: (state, action: PayloadAction<User>) => {
+      state.userDetail = action.payload;
+    },
+    putUserDetail: (state, action: PayloadAction<User>) => {
+      state.userDetail = action.payload;
     }
   }
 });
 
-export const { setAllUsers, setUsers, setImageUser, setLogged } =
-  UsersSlice.actions;
+export const {
+  setAllUsers,
+  setUsers,
+  setImageUser,
+  setLogged,
+  setUserDetail,
+  putUserDetail
+} = UsersSlice.actions;
 
 export default UsersSlice.reducer;

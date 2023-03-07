@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
-import { useCustomDispatch, useCustomSelector } from 'hooks/redux';
+import { useCustomDispatch } from 'hooks/redux';
 import { useNavigate } from 'react-router-dom';
 import { crearUser } from 'helpers';
-import Swal from 'sweetalert2';
-import SelectImage from './Cloudinary/selectImageUser';
-import hash from '../Login/hashFunction';
+import './styleRegistrar.css';
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import validateUser from '../Registrar/validacionUsuario';
+import { getLogged } from '../../helpers';
+// import hash from '../Login/hashFunction';
 
+const ButtonTodos = styled(Button)({
+  background: '#fff',
+  [`&.MuiButton-text`]: {
+    color: '#b03537'
+  }
+});
 const Registrar: React.FC = () => {
   const dispatch = useCustomDispatch();
   const navigate = useNavigate();
@@ -14,196 +23,154 @@ const Registrar: React.FC = () => {
     name: '',
     email: '',
     password: '',
-    image: ''
+    password2: ''
   });
 
-  const [errors, setErrors] = useState({
-    empty: true,
+  const [error, setError] = useState({
     name: '',
-    image: '',
     email: '',
     password: '',
-    repeatPswrd: ''
+    password2: ''
   });
-
-  const imagen = useCustomSelector((s) => s.users.userImage);
-  // const [sndPassword, setSndPassword] = useState('');
-
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>): void {
-    const property = e.target.name;
-    const value = e.target.value;
-    validate({ ...user, [property]: value });
-    setUser({
-      ...user,
-      [property]: value,
-      image: imagen
-    });
-  }
-  // function handleChangeSndPassword(
-  //   e: React.ChangeEvent<HTMLInputElement>
-  // ): void {
-  //   setSndPassword(e.target.value);
-  // }
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setUser((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value
+    }));
+  };
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  const handleOnBlur = () => {
+    const objError = validateUser(user);
+    setError(objError);
+  };
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (
-      user.name !== '' &&
-      user.email !== '' &&
-      user.password !== '' &&
-      user.image !== ''
+      user.name.length === 0 ||
+      user.email.length === 0 ||
+      user.password.length === 0 ||
+      user.password2.length === 0
     ) {
-      user.password = hash(user.password);
-      dispatch(crearUser(user));
-      Swal.fire({
-        title: '¡Usuario creado con exito!',
-        icon: 'success',
-        confirmButtonText: 'Ir a pagina principal'
-      });
-      setUser({
-        name: '',
-        email: '',
-        password: '',
-        image: ''
-      });
-      navigate('/home');
+      <p className="danger">Falta completar campos</p>;
     } else {
-      Swal.fire({
-        title: '¡Error!',
-        text: 'No se pudo completar el registro',
-        icon: 'error',
-        confirmButtonText: 'Intentar de nuevo'
-      });
+      getLogged(true);
+      dispatch(crearUser(user));
+      navigate('/miPerfil');
     }
-  }
-
-  function validate(user: formUser): void {
-    if (user.name !== '') {
-      if (/^([\w]{2,})+\s+([\w\s]{2,})+$/i.test(user.name)) {
-        setErrors({ ...errors, name: '' });
-      } else {
-        setErrors({
-          ...errors,
-          name: 'El nombre debe contar al menos con 2 caracteres y un espacio'
-        });
-      }
-    }
-    if (user.email !== '') {
-      if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(user.email)) {
-        setErrors({ ...errors, email: '' });
-      } else {
-        setErrors({ ...errors, email: 'Por favor, inserte un email valido' });
-      }
-    }
-    if (user.password !== '') {
-      if (
-        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/.test(user.password)
-      ) {
-        setErrors({ ...errors, password: '' });
-      } else {
-        setErrors({
-          ...errors,
-          password:
-            'La contraseña debe tener al menos 8 caracteres, una minuscula, una mayuscula y un numero'
-        });
-      }
-      // if (sndPassword !== '') {
-      //   if (sndPassword === user.password) {
-      //     setErrors({ ...errors, repeatPswrd: '' });
-      //   } else {
-      //     setErrors({ ...errors, repeatPswrd: 'Las contraseñas no coinciden' });
-      //   }
-      // }
-      if (user.image !== '') {
-        if (/([a-z\-_0-9/:.]*\.(jpg|jpeg|png))/i.test(user.image)) {
-          setErrors({ ...errors, image: '' });
-        } else {
-          setErrors({
-            ...errors,
-            image: 'La imagen debe tener formato .jpg o .png'
-          });
-        }
-      }
-    }
-  }
+  };
 
   return (
-    <div>
-      <h1>Crea tu usuario</h1>
-      <h3>Por favor, completa tus datos</h3>
-      <form
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
-      >
+    <div className="form">
+      <div>
+        <h1>Crea tu usuario</h1>
+        <h3>Por favor, completa tus datos</h3>
+      </div>
+      <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="name">Nombre completo</label>
+          <label className="contra" htmlFor="name">
+            Nombre completo
+          </label>
           <input
+            className="input"
+            type="text"
             name="name"
             placeholder="Nombre y Apellido"
             value={user.name}
-            onChange={(e) => {
-              handleChange(e);
-            }}
+            onChange={handleChange}
+            onBlur={handleOnBlur}
           />
+          <p
+            style={{ visibility: error.name !== null ? 'visible' : 'hidden' }}
+            className="danger"
+          >
+            {error.name}
+          </p>
         </div>
-        {errors.name !== '' && <p>{errors.name}</p>}
-        <div>
+        {/* <div>
           <SelectImage />
-        </div>
+        </div> */}
         <div>
-          <label htmlFor="email">Correo electronico</label>
+          <label className="contra" htmlFor="email">
+            Correo electronico
+          </label>
           <input
+            className="input"
+            type="text"
             name="email"
             placeholder="tucorreo@mail.com"
             value={user.email}
-            onChange={(e) => {
-              handleChange(e);
-            }}
+            onChange={handleChange}
+            onBlur={handleOnBlur}
           />
+          <p
+            style={{ visibility: error.email !== null ? 'visible' : 'hidden' }}
+            className="danger"
+          >
+            {error.email}
+          </p>
         </div>
-        {errors.email !== '' && <p>{errors.email}</p>}
-
         <div>
-          <label htmlFor="password">Contraseña</label>
-          <input
-            type="password"
-            name="password"
-            placeholder="**********"
-            value={user.password}
-            onChange={(e) => {
-              handleChange(e);
-            }}
-          />
-        </div>
-        {errors.password !== '' ? <p>{errors.password}</p> : null}
-        {/* <div>
-          <label htmlFor="passwordRepit">
-            Introduzca contraseña nuevamente
+          <label className="contra" htmlFor="password">
+            Contraseña
           </label>
           <input
+            className="input"
             type="password"
-            name="passwordRepit"
-            placeholder="**********"
-            value={sndPassword}
-            onChange={(e) => {
-              handleChangeSndPassword(e);
-            }}
+            name="password"
+            placeholder="contraseña"
+            value={user.password}
+            onChange={handleChange}
+            onBlur={handleOnBlur}
           />
+          <p
+            style={{
+              visibility: error.password !== null ? 'visible' : 'hidden'
+            }}
+            className="danger"
+          >
+            {error.password}
+          </p>
         </div>
-        {errors.repeatPswrd !== '' && <p>{errors.repeatPswrd}</p>} */}
-
-        {errors.image !== '' ? <p>{errors.image}</p> : null}
-
-        {errors.name !== '' ||
-        errors.email !== '' ||
-        errors.password !== '' ||
-        // errors.repeatPswrd !== '' ||
-        errors.image !== '' ? (
-          <h3>Completa todos los campos</h3>
-        ) : (
-          <button type="submit">Registrarse</button>
-        )}
+        <div>
+          <label className="contra" htmlFor="password">
+            Contraseña
+          </label>
+          <input
+            className="input"
+            type="password"
+            name="password2"
+            placeholder="Repita contraseña"
+            value={user.password2}
+            onChange={handleChange}
+            onBlur={handleOnBlur}
+          />
+          <p
+            style={{
+              visibility: error.password2 !== null ? 'visible' : 'hidden'
+            }}
+            className="danger"
+          >
+            {error.password2}
+          </p>
+        </div>
+        <div className="botoncito">
+          <ButtonTodos type="submit">
+            <input
+              className="botonSubmit"
+              type="submit"
+              value="Create"
+              disabled={Object.values(error).join('').length !== 0}
+            />
+          </ButtonTodos>
+        </div>
       </form>
+      <ButtonTodos
+        onClick={() => {
+          navigate('/');
+        }}
+      >
+        Home
+      </ButtonTodos>
     </div>
   );
 };
@@ -212,7 +179,7 @@ export default Registrar;
 
 export interface formUser {
   name: string;
-  image: string;
   email: string;
   password: string;
+  password2: string;
 }
