@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 import { Auth0Provider } from '@auth0/auth0-react';
 
-axios.defaults.baseURL = 'back-end-pet-s-house.up.railway.app'';
+axios.defaults.baseURL = 'back-end-pet-s-house.up.railway.app';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
