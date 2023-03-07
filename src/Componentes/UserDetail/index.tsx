@@ -6,15 +6,15 @@ import Publicaciones from 'Componentes/Publicaciones';
 
 const UserDetail: React.FC = () => {
   const navigate = useNavigate();
-  const email = localStorage.getItem('email');
   const name = localStorage.getItem('name');
   const image = localStorage.getItem('image');
   useEffect((): void => {
+    const email = localStorage.getItem('email');
     if (email === null) {
       alert('Debes estar logueado con tu mail!');
       navigate('/');
     }
-  }, [email, navigate]);
+  }, [navigate]);
   // const [nameUser, setNameUser] = useState({
   //   idUser: id,
   //   name: ''
