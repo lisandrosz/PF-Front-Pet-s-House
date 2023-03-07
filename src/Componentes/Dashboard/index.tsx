@@ -6,7 +6,7 @@ import './dashboard.css';
 
 const Dashboard: React.FC = () => {
   const rol = localStorage.getItem('rol');
-  const [toShow, setToShow] = useState('pets');
+  const [toShow, setToShow] = useState('users');
 
   function toShowHandler(e: React.MouseEvent<HTMLButtonElement>): void {
     const button: HTMLButtonElement = e.currentTarget;
