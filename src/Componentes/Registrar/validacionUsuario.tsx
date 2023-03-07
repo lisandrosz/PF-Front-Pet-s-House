@@ -4,8 +4,7 @@ function validateUser(user: any) {
     name: '',
     email: '',
     password: '',
-    password2: '',
-    image: ''
+    password2: ''
   };
   if (user.name !== '') {
     if (!/^([\w]{2,})+\s+([\w\s]{2,})+$/i.test(user.name))
@@ -20,10 +19,6 @@ function validateUser(user: any) {
     if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/.test(user.password))
       error.password =
         'La contraseña debe tener al menos 8 caracteres, una minuscula, una mayuscula y un numero';
-  }
-  if (user.image !== '') {
-    if (!/([a-z\-_0-9/:.]*\.(jpg|jpeg|png))/i.test(user.image))
-      error.image = 'La imagen debe tener formato .jpg o .png';
   }
   if (user.password !== user.password2) {
     error.password2 = 'Las contraseñas no corresponden';
