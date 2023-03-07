@@ -45,6 +45,7 @@ const UserDetail: React.FC = () => {
             Cambiar contraseña
           </button>
           <button className="botonCambio">Cambiar imagen</button>
+          <button className="botonCambio">Eliminar Cuenta</button>
           <button
             className="botonCambio"
             onClick={() => {

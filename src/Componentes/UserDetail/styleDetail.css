@@ -29,6 +29,7 @@
     background-color: #929fdb;
     border: none;
 }
+
 .contenedorImagenes{
     display: flex;
     flex-wrap: wrap;
@@ -55,6 +56,10 @@ margin-top: 150px;
     background-color: white;
     border: none;
 }
+.botonCambio:hover{
+    transform: scale(1.02);
+    color: black;    
+  }
 .contenedorImagenes{
     display: flex;
     flex-wrap: wrap;
