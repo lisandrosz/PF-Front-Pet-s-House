@@ -1,0 +1,7 @@
+.contenedorCartas1{
+    display: inline-flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    width: 50%;
+}

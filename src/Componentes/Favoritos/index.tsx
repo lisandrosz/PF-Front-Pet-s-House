@@ -8,13 +8,13 @@ const Favoritos: React.FC = () => {
 
   useEffect((): void => {
     getAllFavorites(idUser);
-  });
+  }, []);
 
   const favorites = useCustomSelector((state) => state.pets.favPets);
 
   if (idUser > 0) {
     return (
-      <div>
+      <div className="contenedorCartas1">
         {favorites.map((pet, index) => {
           return (
             <Card

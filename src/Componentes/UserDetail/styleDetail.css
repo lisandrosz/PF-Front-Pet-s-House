@@ -1,0 +1,63 @@
+/* .contenedorDetalle{
+#142353
+} */
+/* BLOQUE USUARIO */
+.imagen{
+    display: flex;
+    background-color: #929fdb;
+    width: 100%;
+    text-align: center;
+    height: 150px;
+    align-items: center;
+    margin-top: 150px;
+    margin-bottom: 150px;
+}
+.imagenUsuario{
+    margin-left: 50px;
+    border-radius: 100%;
+    width: 400px;
+    display: flex;
+    position: relative
+}
+.botonCambioNombre{
+    display: block !important;
+    font-weight: 400;
+    margin-left: 100px;
+    color: white;
+    font-size: 6rem;
+    margin-top: 20px;
+    background-color: #929fdb;
+    border: none;
+}
+.contenedorImagenes{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+/* BLOQUE RELLENO */
+
+
+.botones{
+margin-left: 100px;
+margin-top: 150px;
+}
+.botonCambio{
+    display: block !important;
+    font-weight: 400;
+    margin-left: 150px;
+    margin: 0 auto 0 0;
+    color: #7d8bcc;
+    font-size: 2rem;
+    line-height: 1.1;
+    margin-top: 20px;
+    background-color: white;
+    border: none;
+}
+.contenedorImagenes{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    height: 500px;
+}
