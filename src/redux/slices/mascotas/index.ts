@@ -43,6 +43,7 @@ interface PetsState {
   favPets: Pet[];
   petsImage: string;
   publications: Pet[];
+  page: number;
 }
 const initialState: PetsState = {
   allPets: [],
@@ -51,8 +52,8 @@ const initialState: PetsState = {
     tamaño: 'todos',
     especie: 'todos',
     edad: 'defecto',
-    provincia: 'Provincias',
-    localidad: 'Localidades',
+    provincia: 'Todas las provincias',
+    localidad: 'Todas las localidades',
     date: 'defecto',
     sexo: 'todos'
   },
@@ -88,8 +89,9 @@ const initialState: PetsState = {
     }
   },
   favPets: [],
-  petsImage: '',
-  publications: []
+  publications: [],
+  page: 1,
+  petsImage: ''
 };
 interface tipoFiltro {
   nombre: string;
@@ -107,6 +109,13 @@ const PetsSlice = createSlice({
     setFiltros: (state, action: PayloadAction<tipoFiltro>) => {
       const { nombre, valor } = action.payload;
       state.filtros[nombre as keyof Filtros] = valor;
+
+      if (nombre === 'provincia') {
+        state.filtros.localidad = 'Todas las localidades';
+      }
+      if (state.page !== 1) {
+        state.page = 1;
+      }
     },
     setPets: (state, action: PayloadAction<Pet[]>) => {
       state.pets = action.payload;
@@ -133,12 +142,18 @@ const PetsSlice = createSlice({
     },
     setReset: (state) => {
       state.filtros = initialState.filtros;
+      if (state.page !== 1) {
+        state.page = 1;
+      }
     },
     setImagePet: (state, action: PayloadAction<string>) => {
       state.petsImage = action.payload;
     },
     setPublications: (state, action: PayloadAction<Pet[]>) => {
       state.publications = action.payload;
+    },
+    setPage: (state, action: PayloadAction<number>) => {
+      state.page = action.payload;
     }
   }
 });
@@ -153,8 +168,9 @@ export const {
   setAllFavorties,
   deleteFavorite,
   setReset,
-  setImagePet,
-  setPublications
+  setPublications,
+  setPage,
+  setImagePet
 } = PetsSlice.actions;
 
 export default PetsSlice.reducer;

@@ -1,11 +1,13 @@
 import React from 'react';
 import Card from 'Componentes/Card';
 import './styleContainer.css';
-import { useCustomSelector } from 'hooks/redux';
+import type { Pet } from 'redux/slices/mascotas';
 
-const CardsContainer: React.FC = () => {
-  const pets = useCustomSelector((state) => state.pets.pets);
+interface Props {
+  pets: Pet[];
+}
 
+const CardsContainer: React.FC<Props> = ({ pets }) => {
   return (
     <div className="cardsContainer">
       {pets.map((pet, index) => {
