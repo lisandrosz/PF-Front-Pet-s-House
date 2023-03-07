@@ -78,6 +78,7 @@ const Home: React.FC = () => {
           <CardsContainer />
         </div>
       </div>
+      <button onClick={logoutApp}>Logout</button>
       {logged ? (
         <button onClick={logoutApp}>Logout</button>
       ) : (
