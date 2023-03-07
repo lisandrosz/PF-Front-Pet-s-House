@@ -24,7 +24,9 @@ const App: React.FC = () => {
   const location = useLocation().pathname;
   return (
     <Provider store={store}>
-      {location !== '/registrar' ? <NavBar /> : null}
+      {location !== '/registrar' && location !== '/miPerfil' ? (
+        <NavBar />
+      ) : null}
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/" element={<Landing />} /> */}
