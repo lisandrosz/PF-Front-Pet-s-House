@@ -14,7 +14,7 @@ const UserDetail: React.FC = () => {
       alert('Debes estar logueado con tu mail!');
       navigate('/');
     }
-  }, [email, navigate]);
+  }, [navigate]);
   // const [nameUser, setNameUser] = useState({
   //   idUser: id,
   //   name: ''
