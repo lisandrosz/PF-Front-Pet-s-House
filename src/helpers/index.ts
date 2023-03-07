@@ -268,3 +268,15 @@ export const getUsers = async (): Promise<any> => {
 export const getLogged = (log: boolean) => {
   store.dispatch(setLogged(log));
 };
+
+export const contactarse = async (id: number): Promise<void> => {
+  try {
+    const infoPublicador = store.getState().pets.petDetalle.User;
+    await axios.post<any>('/contacto', {
+      UserId: id,
+      infoPublicador
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
