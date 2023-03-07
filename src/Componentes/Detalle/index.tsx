@@ -1,6 +1,15 @@
 import { useCustomSelector } from 'hooks/redux';
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './styleDetalle.css';
+
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { contactarse } from 'helpers';
+
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -17,7 +26,36 @@ const ButtonAca = styled(Button)({
 });
 
 const Detalle: React.FC = (): any => {
+  const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
   const pet = useCustomSelector((state) => state.pets.petDetalle);
+  const navigate = useNavigate();
+
+  const handleClickOpen = (): void => {
+    setOpen(true);
+  };
+  const handleClose = (): void => {
+    setOpen(false);
+  };
+
+  const handleClickOpen2 = (): void => {
+    setOpen2(true);
+  };
+  const handleClose2 = (): void => {
+    setOpen2(false);
+  };
+
+  const inicio = (): void => {
+    setOpen2(false);
+    navigate('/');
+  };
+
+  const contacto = (): void => {
+    const id = Number(localStorage.getItem('id'));
+    contactarse(id);
+    handleClickOpen2();
+    setOpen(false);
+  };
 
   // {
   /* <div className="detalle">
@@ -125,10 +163,49 @@ alt="pet"
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <ButtonAca size="small" color="primary">
+          <ButtonAca size="small" color="primary" onClick={handleClickOpen}>
             Contactarse
           </ButtonAca>
         </CardActions>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {'Esta seguro/a de que desea adoptar esta mascota?'}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Si es asi, le enviaremos un email con toda la informacion
+              necesaria para que pueda contactarse con la persona a cargo de la
+              misma.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={contacto}>Contactar</Button>
+            <Button onClick={handleClose}>Cancelar</Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog
+          open={open2}
+          onClose={handleClose2}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {'Muchas gracias por iniciar el proceso de adopcion!'}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              A la brevedad nos contactaremos contigo por email.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={inicio}>Volver al inicio</Button>
+          </DialogActions>
+        </Dialog>
       </Card>
     </>
   );
