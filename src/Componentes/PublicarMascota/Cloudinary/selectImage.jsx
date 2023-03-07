@@ -3,6 +3,15 @@ import axios from 'axios';
 import { useCustomDispatch } from 'hooks/redux';
 // import { setImagenMascota } from 'helpers';
 import { setImagePet } from 'redux/slices/mascotas';
+import { Button } from '@mui/material';
+import { styled } from '@mui/material/styles';
+
+const ButtonTodos = styled(Button)({
+  background: '#fff',
+  [`&.MuiButton-text`]: {
+    color: '#7d8bcc'
+  }
+});
 
 const SelectImage = () => {
   const [image, setImage] = useState('');
@@ -31,13 +40,13 @@ const SelectImage = () => {
           setImage(e.target.files[0]);
         }}
       />
-      <button
+      <ButtonTodos
         onClick={(e) => {
           uploadImage(e);
         }}
       >
         Subir Imagen
-      </button>
+      </ButtonTodos>
     </div>
   );
 };
