@@ -2,6 +2,7 @@ import React from 'react';
 import './styleCard.css';
 import { Link } from 'react-router-dom';
 import { setPetDetail, addPetFavorite, deletePetFavorite } from 'helpers';
+import { useCustomSelector } from 'hooks/redux';
 
 interface Props {
   id: number;
@@ -23,7 +24,8 @@ const Card: React.FC<Props> = ({
   type
 }) => {
   const idUser = Number(localStorage.getItem('id'));
-
+  const petsFavoritos = useCustomSelector((state) => state.pets.favPets);
+  console.log(petsFavoritos);
   function goToDetail(): void {
     setPetDetail(id);
   }
@@ -42,7 +44,7 @@ const Card: React.FC<Props> = ({
       <img src={image} alt="img not found" />
       {/* Boton de favoritos */}
       {type === 'fav' && (
-        <button className="favorite-btn" onClick={deleteFromFavorite}>
+        <button className="favorite-btn-delet" onClick={deleteFromFavorite}>
           ♥️
         </button>
       )}

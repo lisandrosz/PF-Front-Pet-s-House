@@ -32,6 +32,25 @@
     background-color: var(--pink-light-2);
     color: var(--white);
 }
+.favorite-btn-delet{
+    background-color: var(--pink-light-2);
+    color: var(--white);
+    padding: 0 8px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.6em;
+    position: absolute;
+    box-shadow: 0 5px 19px #333;
+    cursor: pointer;
+    right: 0;
+    margin: 10px ;
+    z-index: 200;
+    transition: .15s;
+}
+.favorite-btn-delet:hover{
+    background-color: var(--white);
+    color: var(--pink-light-2);
+}
 
 .card .btn{
     width: 100%;
