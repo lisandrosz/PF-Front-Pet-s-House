@@ -13,6 +13,7 @@ import type { Pet } from 'redux/slices/mascotas';
 import type { formUser } from 'Componentes/Registrar';
 import type { formPet } from 'Componentes/PublicarMascota';
 import axios from 'axios';
+import type { Option } from 'Componentes/Select';
 import {
   setUsers,
   setLogged,
@@ -29,7 +30,7 @@ export const filtrado = (name: string, value: string): void => {
     estado = [...store.getState().pets.buscado.petsBuscados];
   }
   store.dispatch(setFiltros({ nombre: name, valor: value }));
-  const { tamaño, especie, provincia, edad, localidad, sexo, date } =
+  const { tamaño, especie, edad, sexo, date, provincia, localidad } =
     store.getState().pets.filtros;
   let filtrados: Pet[] = [...estado];
 
@@ -61,16 +62,17 @@ export const filtrado = (name: string, value: string): void => {
   }
 
   // Filtrado por provincia
-  if (provincia === 'Provincias') {
+  if (provincia === 'Todas las provincias') {
     // nada
   } else {
     filtrados = filtrados.filter((pet) => {
       return pet.province === provincia;
     });
+    console.log(provincia);
   }
 
   // Filtrado por localidad
-  if (localidad === 'Localidades') {
+  if (localidad === 'Todas las localidades') {
     // nada
   } else {
     filtrados = filtrados.filter((pet) => {
@@ -103,7 +105,6 @@ export const filtrado = (name: string, value: string): void => {
         Number(new Date(b.createdAt.split('T')[0]))
     );
   }
-
   store.dispatch(setPets(filtrados));
 };
 export const createPet = (payload: formPet) => async () => {
@@ -261,6 +262,38 @@ export const deletePetFavorite = async (
       });
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const traerProvincias = async (): Promise<Option[]> => {
+  try {
+    const provOption = [{ value: 'Provincias', label: 'Todas las provincias' }];
+    const { data }: any = await axios.get('/provincias');
+    data.map((prov: { id: any; name: any }) =>
+      provOption.push({ value: prov.id, label: prov.name })
+    );
+    return provOption;
+  } catch (error) {
+    return [{ value: 'hola', label: 'hola' }];
+  }
+};
+
+export const traerLocalidades = async (id: string): Promise<Option[]> => {
+  if (id !== 'Provincias') {
+    console.log(id);
+
+    const locOption = [
+      { value: 'Todas las localidades', label: 'Todas las localidades' }
+    ];
+    const { data }: any = await axios.get(`/provincias?localidad=${id}`);
+    data.map((loc: { id: any; name: any }) =>
+      locOption.push({ value: loc.name, label: loc.name })
+    );
+    console.log(locOption);
+
+    return locOption;
+  } else {
+    return [{ value: 'Todas las localidades', label: 'Todas las localidades' }];
   }
 };
 
