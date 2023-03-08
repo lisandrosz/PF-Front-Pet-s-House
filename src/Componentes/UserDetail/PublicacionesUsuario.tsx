@@ -23,7 +23,13 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { type Pet } from 'redux/slices/mascotas';
 import './dashboardUser.css';
+// import { styled } from '@mui/material/styles';
 
+// const imagenTabla = styled('img')({
+// width: '100px',
+// height:'70px',
+// borderRadius: 15%
+// });
 const PetDash: React.FC = () => {
   useEffect((): void => {
     const idUser = Number(localStorage.getItem('id'));
@@ -170,9 +176,9 @@ const PetDash: React.FC = () => {
             {pets.map((pet, index) => {
               return (
                 <TableRow key={index}>
-                  <TableCell>
-                    <img src={pet.image} alt="No tiene imagen" />
-                  </TableCell>
+                  {/* <TableCell>
+                    <imagenTabla src={pet.image} alt="No tiene imagen" />
+                  </TableCell> */}
                   <TableCell>{pet.name}</TableCell>
                   <TableCell align="center">
                     {pet.active && <>Si</>}
