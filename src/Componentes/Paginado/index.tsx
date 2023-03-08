@@ -25,17 +25,19 @@ const Paginado: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className="home">
       <CardsContainer pets={pets.currentData()} />
-      <Pagination
-        count={count}
-        size="large"
-        page={page}
-        variant="outlined"
-        shape="rounded"
-        color="primary"
-        onChange={handleChange}
-      />
+      <div className="pag">
+        <Pagination
+          count={count}
+          size="large"
+          page={page}
+          variant="outlined"
+          shape="rounded"
+          color="primary"
+          onChange={handleChange}
+        />
+      </div>
     </div>
   );
 };

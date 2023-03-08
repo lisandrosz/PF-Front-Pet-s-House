@@ -316,7 +316,7 @@ export const getLogged = (log: boolean) => {
 export const contactarse = async (id: number): Promise<void> => {
   try {
     const infoPublicador = store.getState().pets.petDetalle.User;
-    axios.post('/contacto', {
+    await axios.post('/contacto', {
       UserId: id,
       infoPublicador
     });

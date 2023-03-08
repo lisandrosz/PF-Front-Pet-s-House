@@ -66,7 +66,14 @@ export default function NavBar(): any {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Link to="/misPublicaciones">Mis publicaciones</Link>
+      </MenuItem>
+
+      <MenuItem onClick={handleMenuClose}>
+        <Link to="/miPerfil">Mi perfil</Link>
+      </MenuItem>
+
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
       {rol === 'administrador' && (
         <Link to={'/dashboard'}>
@@ -207,9 +214,6 @@ export default function NavBar(): any {
             <Button sx={{ color: '#fff' }} component={Link} to="/publicar">
               Publicar
             </Button>
-            <Button sx={{ color: '#fff' }} component={Link} to="/miPerfil">
-              Mi Perfil
-            </Button>
             {logged ? (
               <Button sx={{ color: '#fff' }} onClick={logoutApp}>
                 Logout
@@ -220,13 +224,6 @@ export default function NavBar(): any {
               </Button>
             )}
 
-            <Button
-              sx={{ color: '#fff' }}
-              component={Link}
-              to="/misPublicaciones"
-            >
-              Mis Publicaciones
-            </Button>
             <IconButton
               size="large"
               color="inherit"

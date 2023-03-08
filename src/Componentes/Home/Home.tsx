@@ -48,8 +48,7 @@ const Home: React.FC = () => {
           <hr />
           <Filtrado />
         </div>
-        <div className="cartas">
-          <hr />
+        <div className="cont">
           <Paginado />
         </div>
       </div>
