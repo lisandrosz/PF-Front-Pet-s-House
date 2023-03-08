@@ -68,18 +68,18 @@ const UserDetail: React.FC = () => {
   }
   if (name !== null) {
     return (
-      <div className="dashContainer">
-        <div className="sideBar">
+      <div className="dashContainer1">
+        <div className="sideBar1">
           <List>
             <ListItem>
               <div>
                 <img
-                  className="imagenUsuario"
+                  className="imagenUsuario1"
                   src={image?.toString()}
                   alt="imagen de usuario"
                 />
               </div>
-              <div className="nameUsuario">
+              <div className="nameUsuario1">
                 <h1>{name}</h1>
               </div>
             </ListItem>
@@ -140,7 +140,7 @@ const UserDetail: React.FC = () => {
         <div className="linea1"></div>
         <div className="linea2"></div>
 
-        <div className="showPanel">
+        <div className="showPanel1">
           {toShow === 'publicaciones' && <PublicacionesUsuario />}
           {toShow === 'favoritos' && <FavoritosUsuario />}
         </div>
