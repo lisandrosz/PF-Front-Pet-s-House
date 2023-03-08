@@ -104,20 +104,6 @@ const PetDash: React.FC = () => {
           label="Edad"
         />
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Activo</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={String(petInfo.active)}
-            label="Estado"
-            onChange={selectHandler}
-            name="active"
-          >
-            <MenuItem value="true">Si</MenuItem>
-            <MenuItem value="false">No</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">
             Libreta Sanitaria
           </InputLabel>
@@ -152,9 +138,8 @@ const PetDash: React.FC = () => {
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell>Nombre</TableCell>
-              <TableCell align="center">Imagen</TableCell>
-              <TableCell align="center">Activo</TableCell>
+              <TableCell>Imagen</TableCell>
+              <TableCell align="center">Nombre</TableCell>
               <TableCell align="center">Provincia</TableCell>
               <TableCell align="center">Fecha de Publicaion</TableCell>
               <TableCell align="left">
@@ -178,12 +163,10 @@ const PetDash: React.FC = () => {
                     />
                   </TableCell>
                   <TableCell>{pet.name}</TableCell>
-                  <TableCell align="center">
-                    {pet.active && <>Si</>}
-                    {!pet.active && <>No</>}
-                  </TableCell>
                   <TableCell align="center">{pet.province}</TableCell>
-                  <TableCell align="center">{pet.createdAt}</TableCell>
+                  <TableCell align="center">
+                    {pet.createdAt.slice(5, 10)}
+                  </TableCell>
                   <TableCell align="center">
                     <Button
                       size="small"
@@ -194,16 +177,6 @@ const PetDash: React.FC = () => {
                       Editar
                     </Button>
                   </TableCell>
-                  {/* <TableCell>
-                    <Button
-                      size="small"
-                      value={pet.id}
-                      color="error"
-                      variant="outlined"
-                    >
-                      Eliminar
-                    </Button>
-                  </TableCell> */}
                 </TableRow>
               );
             })}

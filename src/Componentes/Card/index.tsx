@@ -38,19 +38,19 @@ const Card: React.FC<Props> = ({
 
   return (
     <div className="card">
-      {/* Imagen */}
-      <img src={image} alt="img not found" />
-      {/* Boton de favoritos */}
-      {type === 'fav' && (
-        <button className="favorite-btn" onClick={deleteFromFavorite}>
-          ♥️
-        </button>
-      )}
-      {type === 'nofav' && (
-        <button className="favorite-btn" onClick={addToFavorite}>
-          ♡
-        </button>
-      )}
+      <div className="cardimg">
+        <img src={image} alt="img not found" />
+        {type === 'fav' && (
+          <button className="favorite-btn" onClick={deleteFromFavorite}>
+            ♥️
+          </button>
+        )}
+        {type === 'nofav' && (
+          <button className="favorite-btn" onClick={addToFavorite}>
+            ♡
+          </button>
+        )}
+      </div>
       <div className="card-text">
         <h4>{name}</h4>
         <ul>

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './dashboardUser.css';
 import PublicacionesUsuario from './PublicacionesUsuario';
-import FavoritosUsuario from './FavoritosUsuario';
 import { Button, List, ListItem } from '@mui/material';
 import InputBase from '@mui/material/InputBase';
 import { styled } from '@mui/material/styles';
@@ -92,15 +91,6 @@ const UserDetail: React.FC = () => {
               <Button
                 sx={{ color: '#a6b2ed' }}
                 onClick={toShowHandler}
-                value="favoritos"
-              >
-                Favoritos
-              </Button>
-            </ListItem>
-            <ListItem>
-              <Button
-                sx={{ color: '#a6b2ed' }}
-                onClick={toShowHandler}
                 value="publicaciones"
               >
                 Publicaciones
@@ -142,7 +132,6 @@ const UserDetail: React.FC = () => {
 
         <div className="showPanel1">
           {toShow === 'publicaciones' && <PublicacionesUsuario />}
-          {toShow === 'favoritos' && <FavoritosUsuario />}
         </div>
       </div>
     );
