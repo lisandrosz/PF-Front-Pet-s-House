@@ -15,6 +15,7 @@ const Favoritos: React.FC = () => {
   if (idUser > 0) {
     return (
       <div className="contenedorCartas1">
+        {favorites.length === 0 && <p>No tienes favoritos</p>}
         {favorites.map((pet, index) => {
           return (
             <Card
