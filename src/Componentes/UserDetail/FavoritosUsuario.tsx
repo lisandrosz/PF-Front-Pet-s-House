@@ -171,9 +171,11 @@ const FavoritosUsuario: React.FC = () => {
             {favoritos.map((pet, index) => {
               return (
                 <TableRow key={index}>
-                  {/* <TableCell>
-                    <img src={pet.image} alt="No tiene imagen" />
-                  </TableCell> */}
+                  <img
+                    className="imgTabla"
+                    src={pet.image}
+                    alt="No tiene imagen"
+                  />
                   <TableCell>{pet.name}</TableCell>
                   <TableCell align="center">
                     {pet.active && <>Si</>}
