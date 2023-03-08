@@ -57,57 +57,6 @@ const Detalle: React.FC = (): any => {
     setOpen(false);
   };
 
-  // {
-  /* <div className="detalle">
-<h1 className="tituloCarta">{pet.Pet.name}</h1>
-<div className="contenedor_imagen">
-<img
-height={'100px'}
-width={'100px'}
-className="imagenDetalle"
-src={pet.Pet.image}
-alt="pet"
-/>
-<p>Tamaño: {pet.Pet.size}</p>
-<p>Tipo de Animal: {pet.Pet.animal}</p>
-<p>Edad: {pet.Pet.age}</p>
-<p>Ubicacion: {pet.Pet.location}</p>
-{pet.User !== null && <h5>Publicante : {pet.User.name}</h5>}
-<button>Contactarse</button>
-</div>
-</div> */
-  // }
-
-  // {
-  /* <div>Card siguiendo estilo de la Home:</div>
-
-      <div className="card">
-        {/* Imagen */
-  // }
-  // <img src={pet.Pet.image} alt="img not found" />
-  // {
-  /* Boton de favoritos */
-  // }
-  // <button className="favorite-btn">♥️</button>
-  // <div className="card-text">
-  //   <h4>{pet.Pet.name}</h4>
-  //   <ul>
-  //     <li>
-  //       <b>Edad: </b>
-  //       <p>{pet.Pet.age}</p>
-  //     </li>
-  //     <li>
-  //       <b>Tamaño: </b>
-  //       <p>{pet.Pet.size}</p>
-  //     </li>
-  //     <li>
-  //       <b>Publicante:</b>
-  //       <p>{pet.User.name}</p>
-  //     </li>
-  //   </ul>
-  //   <button className="btn">Contactarse</button>
-  // </div>
-  // </div> */}
   return (
     <>
       {/* <div>CARD DE MATERIAL</div> */}
@@ -157,8 +106,7 @@ alt="pet"
               variant="body2"
               color="text.secondary"
             >
-              Mi nombre es buggs bunny, soy un amor, me encanta dormir en las
-              sillas y comer lechuguita.
+              {pet.Pet.description}
             </Typography>
           </CardContent>
         </CardActionArea>

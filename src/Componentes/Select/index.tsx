@@ -3,6 +3,7 @@ import ReactSelect from 'react-select';
 import type { SingleValue } from 'react-select';
 import { filtrado, traerProvincias, traerLocalidades } from 'helpers';
 import { useCustomSelector } from 'hooks/redux';
+import './styleSelect.css';
 
 export interface Option {
   value: string;
@@ -54,22 +55,26 @@ const SelectComponent: React.FC<props> = () => {
 
   return (
     <>
-      <ReactSelect
-        options={provincias}
-        onChange={provHandler}
-        value={{
-          value: provincia,
-          label: provincia
-        }}
-      />
-      <ReactSelect
-        options={localidades}
-        onChange={depHandler}
-        value={{
-          value: localidad,
-          label: localidad
-        }}
-      />
+      <div className="arriba">
+        <ReactSelect
+          options={provincias}
+          onChange={provHandler}
+          value={{
+            value: provincia,
+            label: provincia
+          }}
+        />
+      </div>
+      <div>
+        <ReactSelect
+          options={localidades}
+          onChange={depHandler}
+          value={{
+            value: localidad,
+            label: localidad
+          }}
+        />
+      </div>
     </>
   );
 };
