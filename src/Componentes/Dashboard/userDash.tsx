@@ -117,7 +117,7 @@ const UserDash: React.FC = () => {
       <Button color="error" onClick={onClose}>
         Cerrar Ventana
       </Button>
-      <Button onClick={submitEdit}>Enviar</Button>
+      <Button onClick={submitEdit}>Guardar</Button>
     </Box>
   );
 
@@ -147,7 +147,7 @@ const UserDash: React.FC = () => {
                   <TableCell align="center">{user.rol}</TableCell>
                   <TableCell align="center">{user.email}</TableCell>
                   <TableCell align="center">{user.id}</TableCell>
-                  <TableCell>
+                  <TableCell align="center">
                     <Button
                       size="small"
                       value={user.id}
@@ -157,11 +157,6 @@ const UserDash: React.FC = () => {
                       Editar
                     </Button>
                   </TableCell>
-                  {/* <TableCell>
-                    <Button size="small" color="error" variant="outlined">
-                      Eliminar
-                    </Button>
-                  </TableCell> */}
                 </TableRow>
               );
             })}

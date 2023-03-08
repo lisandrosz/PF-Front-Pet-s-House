@@ -28,3 +28,9 @@
     flex-wrap: wrap;
     gap: 2em;
 }
+
+.showPanel{
+    width: 90%;
+    margin: 10px;
+    margin-right: 10px;
+}

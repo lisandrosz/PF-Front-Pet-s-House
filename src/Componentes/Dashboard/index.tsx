@@ -2,6 +2,7 @@ import { Button, List, ListItem } from '@mui/material';
 import React, { useState } from 'react';
 import PetDash from './petDash';
 import UserDash from './userDash';
+import DonationDash from './donationDash';
 import './dashboard.css';
 
 const Dashboard: React.FC = () => {
@@ -36,8 +37,9 @@ const Dashboard: React.FC = () => {
           </List>
         </div>
         <div className="showPanel">
-          {toShow === 'pets' && <PetDash></PetDash>}
-          {toShow === 'users' && <UserDash></UserDash>}
+          {toShow === 'pets' && <PetDash />}
+          {toShow === 'users' && <UserDash />}
+          {toShow === 'donations' && <DonationDash />}
         </div>
       </div>
     );
