@@ -39,22 +39,10 @@ const UserDetail: React.FC = () => {
     name: ''
   });
 
-  const [changeData, setChangeData] = useState('default');
+  const [changeData, setChangeData] = useState(false);
 
-  function handleClick(change: string): void {
-    switch (change) {
-      case 'name':
-        setChangeData('name');
-        break;
-      case 'password':
-        setChangeData('password');
-        break;
-      case 'image':
-        setChangeData('image');
-        break;
-      default:
-        setChangeData('default');
-    }
+  function handleClick(): void {
+    setChangeData(true);
   }
 
   function handleChangeName(e: React.ChangeEvent<HTMLInputElement>): void {
@@ -84,7 +72,7 @@ const UserDetail: React.FC = () => {
             icon: 'success',
             confirmButtonText: 'Entendido'
           });
-          setChangeData('default');
+          setChangeData(false);
         } else {
           Swal.fire({
             title: '¡Error!',
@@ -105,7 +93,6 @@ const UserDetail: React.FC = () => {
     setImageUser({ ...imageUser, image: imageURL });
     if (imageURL !== '') {
       changeUserDetail(imageUser);
-      window.location.reload();
     } else {
       alert('Debes seleccionar al menos una  imagen');
     }
@@ -131,16 +118,18 @@ const UserDetail: React.FC = () => {
         <img src={image} alt="imagen de usuario" />
         <span>Cambiar imagen</span>
         <SelectImage />;
-        <button onClick={handleSubmitImage}>Confirmar cambios</button>
+        {imageURL !== '' ? (
+          <button onClick={handleSubmitImage}>Confirmar cambios</button>
+        ) : null}
       </div>
       <div>
-        {changeData === 'default' ? (
+        {!changeData ? (
           <div>
             <label htmlFor="name">Nombre Completo</label>
             <input name="name" value={name} readOnly />
             <button
               onClick={() => {
-                handleClick('name');
+                handleClick();
               }}
             >
               Editar
@@ -164,6 +153,13 @@ const UserDetail: React.FC = () => {
               />
             </div>
             {errors.name !== '' && <p>{errors.name}</p>}
+            <button
+              onClick={() => {
+                setChangeData(false);
+              }}
+            >
+              Descartar
+            </button>
             {errors.name !== '' ? (
               <button disabled>Confirmar Cambios</button>
             ) : (
@@ -174,13 +170,7 @@ const UserDetail: React.FC = () => {
         <div>
           <label htmlFor="password">Contraseña</label>
           <input type="password" name="password" value={password} readOnly />
-          <button
-            onClick={() => {
-              handleClick('password');
-            }}
-          >
-            Editar
-          </button>
+          <button>Editar</button>
         </div>
       </div>
     </div>

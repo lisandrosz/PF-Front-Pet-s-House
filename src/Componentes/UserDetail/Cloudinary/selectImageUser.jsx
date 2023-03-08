@@ -14,7 +14,7 @@ const SelectImage = () => {
     await axios
       .post('https://api.cloudinary.com/v1_1/dhragsmmq/image/upload', formData)
       .then((response) => {
-        console.log(response.data);
+        console.log(response.data.url);
         dispatch(setImageUser(response.data.url));
       });
   }
