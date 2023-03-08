@@ -93,6 +93,12 @@ const UserDetail: React.FC = () => {
     setImageUser({ ...imageUser, image: imageURL });
     if (imageURL !== '') {
       changeUserDetail(imageUser);
+      Swal.fire({
+        title: 'Imagen actualizada correctamente',
+        text: 'Refrezca la pagina para ver los cambios',
+        icon: 'success',
+        confirmButtonText: 'Entendido'
+      });
     } else {
       alert('Debes seleccionar al menos una  imagen');
     }
