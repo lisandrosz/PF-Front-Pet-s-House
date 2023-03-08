@@ -1,0 +1,8 @@
+.conteiner{
+    display: flex;
+    align-content: stretch;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
