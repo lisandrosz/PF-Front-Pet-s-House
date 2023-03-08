@@ -25,9 +25,10 @@ import { type Pet } from 'redux/slices/mascotas';
 import './dashboard.css';
 
 const PetDash: React.FC = () => {
+  const [open, setOpen] = useState(false);
   useEffect((): void => {
     traerPets();
-  }, []);
+  }, [open]);
   const pets = useCustomSelector((state) => state.pets.allPets);
   const [petInfo, setPetInfo] = useState<Pet>({
     id: -1,
@@ -45,7 +46,6 @@ const PetDash: React.FC = () => {
     createdAt: '',
     UserId: 0
   });
-  const [open, setOpen] = useState(false);
 
   function editHandler(e: React.MouseEvent<HTMLButtonElement>): void {
     const button: HTMLButtonElement = e.currentTarget;
@@ -76,8 +76,8 @@ const PetDash: React.FC = () => {
   async function submitEdit(): Promise<any> {
     try {
       const toSend = { ...petInfo, ...{ idPet: petInfo.id } };
-      console.log('pet info: ', toSend);
       await axios.put('/pets', toSend);
+      onClose();
     } catch (error) {
       console.log(error);
     }
@@ -135,7 +135,7 @@ const PetDash: React.FC = () => {
       <Button color="error" onClick={onClose}>
         Cerrar Ventana
       </Button>
-      <Button onClick={submitEdit}>Enviar</Button>
+      <Button onClick={submitEdit}>Guardar</Button>
     </Box>
   );
 
@@ -155,7 +155,7 @@ const PetDash: React.FC = () => {
               <TableCell align="center">Provincia</TableCell>
               <TableCell align="center">Usuario</TableCell>
               <TableCell align="center">Fecha de Publicaion</TableCell>
-              <TableCell align="left">
+              <TableCell align="center">
                 <Link to={'/publicar'}>
                   <Button color="primary" size="small" variant="contained">
                     Añadir Mascota
@@ -186,16 +186,6 @@ const PetDash: React.FC = () => {
                       Editar
                     </Button>
                   </TableCell>
-                  {/* <TableCell>
-                    <Button
-                      size="small"
-                      value={pet.id}
-                      color="error"
-                      variant="outlined"
-                    >
-                      Eliminar
-                    </Button>
-                  </TableCell> */}
                 </TableRow>
               );
             })}

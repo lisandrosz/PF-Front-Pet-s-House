@@ -8,7 +8,7 @@ const Favoritos: React.FC = () => {
 
   useEffect((): void => {
     getAllFavorites(idUser);
-  }, []);
+  });
 
   const favorites = useCustomSelector((state) => state.pets.favPets);
 
