@@ -3,7 +3,7 @@ import { useCustomDispatch, useCustomSelector } from 'hooks/redux';
 import { useNavigate } from 'react-router-dom';
 import { crearUser } from 'helpers';
 import Swal from 'sweetalert2';
-import SelectImage from './Cloudinary/selectImageUser';
+import SelectImage from '../UserDetail/Cloudinary/selectImageUser';
 import hash from '../Login/hashFunction';
 
 const Registrar: React.FC = () => {

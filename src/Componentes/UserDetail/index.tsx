@@ -3,10 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { useCustomSelector } from 'hooks/redux';
 import { getUserDetail, changeUserDetail } from 'helpers';
 import Swal from 'sweetalert2';
+import SelectImage from 'Componentes/UserDetail/Cloudinary/selectImageUser';
 
 const UserDetail: React.FC = () => {
   const navigate = useNavigate();
-  const user = useCustomSelector((s) => s.users.userDetail);
+  const { name, email, image, password } = useCustomSelector(
+    (s) => s.users.userDetail
+  );
+  const imageURL = useCustomSelector((state) => state.users.userImage);
   useEffect((): void => {
     const id = localStorage.getItem('id');
     if (id === null) navigate('/');
@@ -16,33 +20,23 @@ const UserDetail: React.FC = () => {
     } else {
       getUserDetail(email);
     }
-  }, [navigate, user]);
+  }, [navigate, name, email, image, imageURL]);
 
   // ESTADOS LOCALES Y GLOBALES
 
   const id = Number(localStorage.getItem('id'));
-  const { name, email, image, password } = useCustomSelector(
-    (s) => s.users.userDetail
-  );
   const [nameUser, setNameUser] = useState({
     idUser: id,
     name: ''
   });
 
-  const [emailUser, setEmailUser] = useState({
+  const [imageUser, setImageUser] = useState({
     idUser: id,
-    email: ''
-  });
-
-  const [passwordUser, setPasswordUser] = useState({
-    idUser: id,
-    password: ''
+    image: ''
   });
 
   const [errors, setErrors] = useState({
-    name: '',
-    email: '',
-    password: ''
+    name: ''
   });
 
   const [changeData, setChangeData] = useState('default');
@@ -52,11 +46,11 @@ const UserDetail: React.FC = () => {
       case 'name':
         setChangeData('name');
         break;
-      case 'email':
-        setChangeData('email');
-        break;
       case 'password':
         setChangeData('password');
+        break;
+      case 'image':
+        setChangeData('image');
         break;
       default:
         setChangeData('default');
@@ -66,22 +60,9 @@ const UserDetail: React.FC = () => {
   function handleChangeName(e: React.ChangeEvent<HTMLInputElement>): void {
     const value = e.target.value;
     // validate({ ...infoUser, [property]: value });
+    validate({ ...nameUser, name: value });
     setNameUser({ ...nameUser, name: value });
     console.log({ ...nameUser, name: value });
-  }
-
-  function handleChangeEmail(e: React.ChangeEvent<HTMLInputElement>): void {
-    const value = e.target.value;
-    // validate({ ...infoUser, [property]: value });
-    setEmailUser({ ...emailUser, email: value });
-    console.log({ ...emailUser, email: value });
-  }
-
-  function handleChangePassword(e: React.ChangeEvent<HTMLInputElement>): void {
-    const value = e.target.value;
-    // validate({ ...infoUser, [property]: value });
-    setPasswordUser({ ...passwordUser, password: value });
-    console.log({ ...passwordUser, password: value });
   }
 
   function handleSubmit(
@@ -97,45 +78,17 @@ const UserDetail: React.FC = () => {
             name: '',
             idUser: id
           });
-          setChangeData('default');
-        } else {
           Swal.fire({
-            title: '¡Error!',
-            text: 'No se pudo completar el registro',
-            icon: 'error',
-            confirmButtonText: 'Intentar de nuevo'
-          });
-        }
-        break;
-      case 'email':
-        if (emailUser.email !== '') {
-          changeUserDetail(emailUser);
-          setEmailUser({
-            email: '',
-            idUser: id
+            title: 'Nombre actualizado correctamente',
+            text: 'Refrezca la pagina para ver los cambios',
+            icon: 'success',
+            confirmButtonText: 'Entendido'
           });
           setChangeData('default');
         } else {
           Swal.fire({
             title: '¡Error!',
-            text: 'No se pudo completar el registro',
-            icon: 'error',
-            confirmButtonText: 'Intentar de nuevo'
-          });
-        }
-        break;
-      case 'password':
-        if (passwordUser.password !== '') {
-          changeUserDetail(passwordUser);
-          setPasswordUser({
-            password: '',
-            idUser: id
-          });
-          setChangeData('default');
-        } else {
-          Swal.fire({
-            title: '¡Error!',
-            text: 'No se pudo completar el registro',
+            text: 'El nombre puede estar vacio',
             icon: 'error',
             confirmButtonText: 'Intentar de nuevo'
           });
@@ -143,6 +96,18 @@ const UserDetail: React.FC = () => {
         break;
       default:
         alert('Oops, algo salio mal');
+    }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  function handleSubmitImage(e: any) {
+    e.preventDefault();
+    setImageUser({ ...imageUser, image: imageURL });
+    if (imageURL !== '') {
+      changeUserDetail(imageUser);
+      window.location.reload();
+    } else {
+      alert('Debes seleccionar al menos una  imagen');
     }
   }
 
@@ -156,26 +121,6 @@ const UserDetail: React.FC = () => {
         setErrors({
           ...errors,
           name: 'El nombre debe contar al menos con 2 caracteres y un espacio'
-        });
-      }
-    }
-    if (user.email !== '') {
-      if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(user.email)) {
-        setErrors({ ...errors, email: '' });
-      } else {
-        setErrors({ ...errors, email: 'Por favor, inserte un email valido' });
-      }
-    }
-    if (user.password !== '') {
-      if (
-        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/.test(user.password)
-      ) {
-        setErrors({ ...errors, password: '' });
-      } else {
-        setErrors({
-          ...errors,
-          password:
-            'La contraseña debe tener al menos 8 caracteres, una minuscula, una mayuscula y un numero'
         });
       }
     }
@@ -207,71 +152,14 @@ const UserDetail: React.FC = () => {
           )}
         </form>
       );
-    case 'email':
-      return (
-        <form
-          onSubmit={(e) => {
-            handleSubmit(e, 'email');
-          }}
-        >
-          <div>
-            <label htmlFor="email">Correo Electronico</label>
-            <input
-              name="email"
-              type="text"
-              value={emailUser.email}
-              onChange={(e) => {
-                handleChangeEmail(e);
-              }}
-            />
-          </div>
-          {errors.email !== '' && <p>{errors.email}</p>}
-          {errors.email !== '' ? (
-            <button disabled>Confirmar Cambios</button>
-          ) : (
-            <button type="submit">Confirmar Cambios</button>
-          )}
-        </form>
-      );
-
-    case 'password':
-      return (
-        <form
-          onSubmit={(e) => {
-            handleSubmit(e, 'password');
-          }}
-        >
-          <div>
-            <label htmlFor="password">Contraseña</label>
-            <input
-              name="password"
-              type="text"
-              value={passwordUser.password}
-              onChange={(e) => {
-                handleChangePassword(e);
-              }}
-            />
-          </div>
-          {errors.password !== '' && <p>{errors.password}</p>}
-          {errors.password !== '' ? (
-            <button disabled>Confirmar Cambios</button>
-          ) : (
-            <button type="submit">Confirmar Cambios</button>
-          )}
-        </form>
-      );
     default:
       return (
         <div>
           <div>
             <img src={image} alt="imagen de usuario" />
-            <button
-              onClick={() => {
-                handleClick('name');
-              }}
-            >
-              Cambiar imagen
-            </button>
+            <span>Cambiar imagen</span>
+            <SelectImage />;
+            <button onClick={handleSubmitImage}>Confirmar cambios</button>
           </div>
           <div>
             <div>
@@ -286,19 +174,13 @@ const UserDetail: React.FC = () => {
               </button>
             </div>
             <div>
-              <label htmlFor="email">Correo electronico</label>
-              <input name="email" value={email} readOnly />
-              <button
-                onClick={() => {
-                  handleClick('email');
-                }}
-              >
-                Editar
-              </button>
-            </div>
-            <div>
               <label htmlFor="password">Contraseña</label>
-              <input name="password" value={password} readOnly />
+              <input
+                type="password"
+                name="password"
+                value={password}
+                readOnly
+              />
               <button
                 onClick={() => {
                   handleClick('password');

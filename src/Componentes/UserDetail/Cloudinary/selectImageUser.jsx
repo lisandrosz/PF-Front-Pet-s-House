@@ -7,26 +7,23 @@ import { setImageUser } from 'redux/slices/users';
 const SelectImage = () => {
   const [image, setImage] = useState('');
   const dispatch = useCustomDispatch();
-  async function uploadImage(e) {
-    e.preventDefault();
+  async function uploadImage() {
     const formData = new FormData();
     formData.append('file', image);
     formData.append('upload_preset', 'PF-PetsHouse-ImagenesUsuarios');
     await axios
       .post('https://api.cloudinary.com/v1_1/dhragsmmq/image/upload', formData)
       .then((response) => {
-        console.log(response);
-        console.log(response.data.secure_url);
-        dispatch(setImageUser(response.data.secure_url));
+        console.log(response.data);
+        dispatch(setImageUser(response.data.url));
       });
   }
   return (
     <div>
-      <label htmlFor="image">Imagen</label>
       <input
         type="file"
         name="image"
-        // value={image}
+        accept="image/png, image/jpg, image/jpeg"
         onChange={(e) => {
           setImage(e.target.files[0]);
         }}
