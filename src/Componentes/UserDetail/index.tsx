@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './styleDetail.css';
-import Favoritos from 'Componentes/Favoritos';
-import Publicaciones from 'Componentes/Publicaciones';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import './dashboardUser.css';
+import PublicacionesUsuario from './PublicacionesUsuario';
+import FavoritosUsuario from './FavoritosUsuario';
+import { Button, List, ListItem } from '@mui/material';
 
 const UserDetail: React.FC = () => {
   const navigate = useNavigate();
@@ -15,59 +16,95 @@ const UserDetail: React.FC = () => {
       navigate('/');
     }
   }, [navigate]);
-  // const [nameUser, setNameUser] = useState({
-  //   idUser: id,
-  //   name: ''
-  // });
 
-  // const [emailUser, setEmailUser] = useState({
-  //   idUser: id,
-  //   email: ''
-  // });
-  return (
-    <div className="contenedorDetalle">
-      <div className="contenedorUsuario">
-        <div className="imagen">
-          <img
-            className="imagenUsuario"
-            src={image?.toString()}
-            alt="imagen de usuario"
-          />
-          <button className="botonCambioNombre">{name}</button>
-        </div>
-        <div className="botones">
-          <button
-            className="botonCambio"
-            onClick={() => {
-              navigate('/cambiarContraseña');
-            }}
-          >
-            Cambiar contraseña
-          </button>
-          <button className="botonCambio">Cambiar imagen</button>
-          <button className="botonCambio">Eliminar Cuenta</button>
-          <button
-            className="botonCambio"
-            onClick={() => {
-              navigate('/');
-            }}
-          >
-            Home
-          </button>
-        </div>
+  const [toShow, setToShow] = useState('publicaciones');
 
-        <div className="contenedorRelleno">
-          <h1>Favoritos</h1>
-          <div className="contenedorImagenes">
-            <Favoritos />
-          </div>
-          <h1>Publicaciones</h1>
-          <div className="contenedorImagenes">
-            <Publicaciones />
-          </div>
+  function toShowHandler(e: React.MouseEvent<HTMLButtonElement>): void {
+    const button: HTMLButtonElement = e.currentTarget;
+    setToShow(button.value);
+  }
+  if (name !== null) {
+    return (
+      <div className="dashContainer">
+        <div className="sideBar">
+          <List>
+            <ListItem>
+              <div>
+                <img
+                  className="imagenUsuario"
+                  src={image?.toString()}
+                  alt="imagen de usuario"
+                />
+              </div>
+              <div className="nameUsuario">
+                <h1>{name}</h1>
+              </div>
+            </ListItem>
+            <ListItem>
+              <Button sx={{ color: '#a6b2ed' }} component={Link} to="/">
+                Home
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Button
+                sx={{ color: '#a6b2ed' }}
+                onClick={toShowHandler}
+                value="favoritos"
+              >
+                Favoritos
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Button
+                sx={{ color: '#a6b2ed' }}
+                onClick={toShowHandler}
+                value="publicaciones"
+              >
+                Publicaciones
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Button
+                sx={{ color: '#a6b2ed' }}
+                component={Link}
+                to="/cambiarContraseña"
+              >
+                Cambiar nombre
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Button
+                sx={{ color: '#a6b2ed' }}
+                component={Link}
+                to="/cambiarContraseña"
+              >
+                Cambiar contraseña
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Button sx={{ color: '#a6b2ed' }} component={Link} to="/">
+                Eliminar cuenta
+              </Button>
+            </ListItem>
+          </List>
+        </div>
+        <div className="linea1"></div>
+        <div className="linea2"></div>
+
+        <div className="showPanel">
+          {toShow === 'publicaciones' && <PublicacionesUsuario />}
+          {toShow === 'favoritos' && <FavoritosUsuario />}
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div>
+        Esta funcion solo esta disponible para el admin
+        <hr />
+      </div>
+    );
+  }
 };
+
 export default UserDetail;
