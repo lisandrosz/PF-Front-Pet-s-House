@@ -125,73 +125,65 @@ const UserDetail: React.FC = () => {
       }
     }
   }
-  switch (changeData) {
-    case 'name':
-      return (
-        <form
-          onSubmit={(e) => {
-            handleSubmit(e, 'name');
-          }}
-        >
+  return (
+    <div>
+      <div>
+        <img src={image} alt="imagen de usuario" />
+        <span>Cambiar imagen</span>
+        <SelectImage />;
+        <button onClick={handleSubmitImage}>Confirmar cambios</button>
+      </div>
+      <div>
+        {changeData === 'default' ? (
           <div>
-            <label htmlFor="name">Nombre completo</label>
-            <input
-              name="name"
-              type="text"
-              value={nameUser.name}
-              onChange={(e) => {
-                handleChangeName(e);
+            <label htmlFor="name">Nombre Completo</label>
+            <input name="name" value={name} readOnly />
+            <button
+              onClick={() => {
+                handleClick('name');
               }}
-            />
+            >
+              Editar
+            </button>
           </div>
-          {errors.name !== '' && <p>{errors.name}</p>}
-          {errors.name !== '' ? (
-            <button disabled>Confirmar Cambios</button>
-          ) : (
-            <button type="submit">Confirmar Cambios</button>
-          )}
-        </form>
-      );
-    default:
-      return (
-        <div>
-          <div>
-            <img src={image} alt="imagen de usuario" />
-            <span>Cambiar imagen</span>
-            <SelectImage />;
-            <button onClick={handleSubmitImage}>Confirmar cambios</button>
-          </div>
-          <div>
+        ) : (
+          <form
+            onSubmit={(e) => {
+              handleSubmit(e, 'name');
+            }}
+          >
             <div>
-              <label htmlFor="name">Nombre Completo</label>
-              <input name="name" value={name} readOnly />
-              <button
-                onClick={() => {
-                  handleClick('name');
-                }}
-              >
-                Editar
-              </button>
-            </div>
-            <div>
-              <label htmlFor="password">Contraseña</label>
+              <label htmlFor="name">Nombre completo</label>
               <input
-                type="password"
-                name="password"
-                value={password}
-                readOnly
-              />
-              <button
-                onClick={() => {
-                  handleClick('password');
+                name="name"
+                type="text"
+                value={nameUser.name}
+                onChange={(e) => {
+                  handleChangeName(e);
                 }}
-              >
-                Editar
-              </button>
+              />
             </div>
-          </div>
+            {errors.name !== '' && <p>{errors.name}</p>}
+            {errors.name !== '' ? (
+              <button disabled>Confirmar Cambios</button>
+            ) : (
+              <button type="submit">Confirmar Cambios</button>
+            )}
+          </form>
+        )}
+        <div>
+          <label htmlFor="password">Contraseña</label>
+          <input type="password" name="password" value={password} readOnly />
+          <button
+            onClick={() => {
+              handleClick('password');
+            }}
+          >
+            Editar
+          </button>
         </div>
-      );
-  }
+      </div>
+    </div>
+  );
 };
 export default UserDetail;
