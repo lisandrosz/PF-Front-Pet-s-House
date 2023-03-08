@@ -8,6 +8,7 @@ import { styled } from '@mui/material/styles';
 
 const ButtonTodos = styled(Button)({
   background: '#fff',
+  marginLeft: '35%',
   [`&.MuiButton-text`]: {
     color: '#7d8bcc'
   }
