@@ -31,7 +31,8 @@ margin-left: 120px;
     
 }
 
-.content{
+.formulariocontenedor{
     display: flex;
     flex-direction: column;
+    justify-content: center
 }
