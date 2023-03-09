@@ -55,7 +55,7 @@ const Registrar: React.FC = () => {
     } else {
       getLogged(true);
       dispatch(crearUser(user));
-      navigate('/miPerfil');
+      navigate('/');
     }
   };
 

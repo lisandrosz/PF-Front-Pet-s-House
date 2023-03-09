@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './dashboardUser.css';
 import PublicacionesUsuario from './PublicacionesUsuario';
-import FavoritosUsuario from './FavoritosUsuario';
 import { Button, List, ListItem } from '@mui/material';
 import InputBase from '@mui/material/InputBase';
 import { styled } from '@mui/material/styles';
-import { changeUserDetail } from 'helpers';
+import { changeUserDetail, deleteUsuario } from 'helpers';
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
@@ -66,6 +65,13 @@ const UserDetail: React.FC = () => {
   function cambiarNombre() {
     setInputNombre(!inputNombreEstado);
   }
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  function eliminarCuenta() {
+    if (id !== null) {
+      deleteUsuario(Number(id));
+      navigate('/');
+    }
+  }
   if (name !== null) {
     return (
       <div className="dashContainer1">
@@ -86,15 +92,6 @@ const UserDetail: React.FC = () => {
             <ListItem>
               <Button sx={{ color: '#a6b2ed' }} component={Link} to="/">
                 Home
-              </Button>
-            </ListItem>
-            <ListItem>
-              <Button
-                sx={{ color: '#a6b2ed' }}
-                onClick={toShowHandler}
-                value="favoritos"
-              >
-                Favoritos
               </Button>
             </ListItem>
             <ListItem>
@@ -131,7 +128,7 @@ const UserDetail: React.FC = () => {
               </Button>
             </ListItem>
             <ListItem>
-              <Button sx={{ color: '#a6b2ed' }} component={Link} to="/">
+              <Button sx={{ color: '#a6b2ed' }} onClick={eliminarCuenta}>
                 Eliminar cuenta
               </Button>
             </ListItem>
@@ -142,7 +139,6 @@ const UserDetail: React.FC = () => {
 
         <div className="showPanel1">
           {toShow === 'publicaciones' && <PublicacionesUsuario />}
-          {toShow === 'favoritos' && <FavoritosUsuario />}
         </div>
       </div>
     );
