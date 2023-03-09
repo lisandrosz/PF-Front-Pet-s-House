@@ -24,13 +24,13 @@ import { Link } from 'react-router-dom';
 import { type Pet } from 'redux/slices/mascotas';
 import './dashboardUser.css';
 
-const PetDash: React.FC = () => {
+const PublicacionesUsuario: React.FC = () => {
   useEffect((): void => {
     const idUser = Number(localStorage.getItem('id'));
     traerPets();
     getUserPublications(idUser);
   }, []);
-  const pets = useCustomSelector((state) => state.pets.allPets);
+  const pets = useCustomSelector((state) => state.pets.publications);
   const [petInfo, setPetInfo] = useState<Pet>({
     id: -1,
     name: '',
@@ -188,4 +188,4 @@ const PetDash: React.FC = () => {
   );
 };
 
-export default PetDash;
+export default PublicacionesUsuario;

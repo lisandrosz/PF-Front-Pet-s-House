@@ -225,7 +225,7 @@ const PublicarMascota: React.FC = () => {
         location: '',
         idUser: 0
       });
-      navigate('/home');
+      navigate('/');
     } else {
       Swal.fire({
         title: '¡Error!',
