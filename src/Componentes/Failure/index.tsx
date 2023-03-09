@@ -1,12 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import './styleFailure.css';
 
 const Failure: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handler = (): void => {
+    navigate('/');
+  };
+
   return (
-    <>
-      <h2>Algo fallo!</h2>
-      <Link to={'/donacion'}>Haz click aqui para volver a intentarlo!</Link>
-    </>
+    <div>
+      <h1 className="h25">¡Lo sentimos, ocurrio un problema!</h1>
+      <p className="p5">
+        Por favor, inténtalo de nuevo más tarde o contáctanos para obtener
+        ayuda.
+      </p>
+      <button onClick={handler} className="btn">
+        Regresar al inicio
+      </button>
+    </div>
   );
 };
 

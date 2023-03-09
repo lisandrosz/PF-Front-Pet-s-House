@@ -20,6 +20,8 @@ import Failure from 'Componentes/Failure';
 import UserDetail from 'Componentes/UserDetail';
 import './App.css';
 import Reviews from 'Componentes/Reviews/Reviews';
+import Contacto from 'Componentes/Contacto';
+import Terms from 'Componentes/Terms';
 
 const App: React.FC = () => {
   const location = useLocation().pathname;
@@ -34,7 +36,17 @@ const App: React.FC = () => {
         <Route path="/donacion" element={<Donacion />} />
         <Route path="/favoritos" element={<Favoritos />} />
         <Route path="/misPublicaciones" element={<Publicaciones />} />
-        <Route path="/publicar" element={<PublicarMascota />} />
+        <Route
+          path="/publicar"
+          element={
+            <PublicarMascota
+              value={{
+                value: '',
+                label: ''
+              }}
+            />
+          }
+        />
         <Route path="/registrar" element={<Registrar />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/detalle" element={<Detalle />} />
@@ -45,6 +57,8 @@ const App: React.FC = () => {
         <Route path="/failure" element={<Failure />} />
         <Route path="/miPerfil" element={<UserDetail />} />
         <Route path="/reviews" element={<Reviews />} />
+        <Route path="/contacto" element={<Contacto />} />
+        <Route path="/terms" element={<Terms />} />
       </Routes>
     </Provider>
   );
