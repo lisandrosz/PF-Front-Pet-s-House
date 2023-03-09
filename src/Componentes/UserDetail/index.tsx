@@ -5,7 +5,7 @@ import PublicacionesUsuario from './PublicacionesUsuario';
 import { Button, List, ListItem } from '@mui/material';
 import InputBase from '@mui/material/InputBase';
 import { styled } from '@mui/material/styles';
-import { changeUserDetail, deleteUsuario } from 'helpers';
+import { changeUserDetail, deleteUsuario, getLogged } from 'helpers';
 import Swal from 'sweetalert2';
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -75,8 +75,23 @@ const UserDetail: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   function eliminarCuenta() {
     if (id !== null) {
-      deleteUsuario(Number(id));
-      navigate('/');
+      Swal.fire({
+        title: 'Quieres darte de baja?',
+        text: 'Se eliminara tu cuenta',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          getLogged(false);
+          localStorage.clear();
+          deleteUsuario(Number(id));
+          Swal.fire('Borrado!', 'Tu cuenta fue dada de baja', 'success');
+          navigate('/');
+        }
+      });
     }
   }
   if (name !== null) {
