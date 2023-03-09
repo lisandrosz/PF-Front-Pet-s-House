@@ -121,7 +121,7 @@ const Reviews: React.FC = () => {
                 {rev.User.name}
               </Typography>
               <Typography>{rev.comentario}</Typography>
-              <Rating readOnly value={3}></Rating>
+              <Rating readOnly value={rev.estrellas}></Rating>
             </Card>
           );
         })}
