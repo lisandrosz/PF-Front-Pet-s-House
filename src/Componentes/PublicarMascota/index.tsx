@@ -2,12 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { useCustomDispatch, useCustomSelector } from 'hooks/redux';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { createPet } from 'helpers';
 import SelectImage from './Cloudinary/selectImage';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import imagencita from '../../Assets/image/imagen1.png';
 import './stylePublicar.css';
+import ReactSelect from 'react-select';
+import type { SingleValue } from 'react-select';
+import { traerProvincias, traerLocalidades, createPet } from 'helpers';
+import '../Select/styleSelect.css';
+
+const Arriba = styled('div')({
+  zIndex: 1000
+});
+
+const Abajo = styled('div')({
+  zIndex: 600
+});
 
 const Container = styled('div')({
   background: '#fff',
@@ -72,7 +83,16 @@ const Inputi = styled('input')({
   marginBottom: '10px'
 });
 
-const PublicarMascota: React.FC = () => {
+export interface Option {
+  value: string;
+  label: string;
+}
+
+interface props {
+  value: SingleValue<Option>;
+}
+
+const PublicarMascota: React.FC<props> = () => {
   const navigate = useNavigate();
   useEffect((): void => {
     const id = localStorage.getItem('id');
@@ -162,49 +182,39 @@ const PublicarMascota: React.FC = () => {
     setPet({ ...pet, animal: value });
   }
 
-  function handleSelectProvincia(
-    e: React.ChangeEvent<HTMLSelectElement>
-  ): void {
-    const property = e.target.name;
-    const value = e.target.value;
-    validate({ ...pet, [property]: value });
-    setPet({ ...pet, province: value });
-  }
+  // function handleSelectProvincia(
+  //   e: React.ChangeEvent<HTMLSelectElement>
+  // ): void {
+  //   const property = e.target.name;
+  //   const value = e.target.value;
+  //   validate({ ...pet, [property]: value });
+  //   setPet({ ...pet, province: value });
+  // }
 
   function handleSelectSex(e: React.ChangeEvent<HTMLSelectElement>): void {
     setPet({ ...pet, sex: e.target.value });
     console.log(pet);
   }
 
-  function handleSelectLocalidad(
-    e: React.ChangeEvent<HTMLSelectElement>
-  ): void {
-    const property = e.target.name;
-    const value = e.target.value;
-    validate({ ...pet, [property]: value });
-    setPet({ ...pet, location: value });
-    console.log(pet);
-  }
+  // function handleSelectLocalidad(
+  //   e: React.ChangeEvent<HTMLSelectElement>
+  // ): void {
+  //   const property = e.target.name;
+  //   const value = e.target.value;
+  //   validate({ ...pet, [property]: value });
+  //   setPet({ ...pet, location: value });
+  //   console.log(pet);
+  // }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
-    // const response = axios.post(
-    //   `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-    //   {
-    //     file: pet.image,
-    //     api_key: cloudKey
-    //   }
-    // );
-    // console.log(response);
     if (
       pet.name !== '' &&
       pet.size !== '' &&
       pet.description !== '' &&
       pet.image !== '' &&
       pet.animal !== '' &&
-      pet.province !== '' &&
-      pet.sex !== '' &&
-      pet.location !== ''
+      pet.sex !== ''
     ) {
       dispatch(createPet(pet));
       Swal.fire({
@@ -247,16 +257,6 @@ const PublicarMascota: React.FC = () => {
         });
       }
     }
-    // if (pet.image !== '') {
-    //   if (/([a-z\-_0-9/:.]*\.(jpg|jpeg|png))/i.test(pet.image)) {
-    //     setErrors({ ...errors, image: '' });
-    //   } else {
-    //     setErrors({
-    //       ...errors,
-    //       image: 'La imagen debe tener formato .jpg o .png'
-    //     });
-    //   }
-    // }
     if (pet.age !== undefined) {
       if (!Number.isNaN(pet.age)) {
         if (pet.age >= 0 && pet.age < 100) {
@@ -281,9 +281,41 @@ const PublicarMascota: React.FC = () => {
     console.log(errors);
   }
 
-  // useEffect({
+  /// //////////////////////////Aca va la logica del select de provincia y localidad
 
-  // })
+  const [provincias, setProvincias] = useState([
+    {
+      value: 'Todas las provincias',
+      label: 'Todas las provincias'
+    }
+  ]);
+
+  const [localidades, setLocalidades] = useState([
+    { value: 'Todas las localidades', label: 'Todas las localidades' }
+  ]);
+
+  useEffect(() => {
+    traerProvincias().then((res) => {
+      setProvincias(res);
+    });
+  }, []);
+
+  const provHandler = (option: Option | null): void => {
+    if (option !== null) {
+      setPet({ ...pet, province: option.label });
+      traerLocalidades(option.value).then((res) => {
+        setLocalidades(res);
+      });
+    }
+  };
+
+  const depHandler = (option: Option | null): void => {
+    if (option !== null) {
+      setPet({ ...pet, location: option.label });
+    }
+  };
+
+  ///
 
   return (
     <div className="modif">
@@ -401,34 +433,29 @@ const PublicarMascota: React.FC = () => {
             </ContainerInputs>
 
             <h4>Provincia:</h4>
-            <ContainerInputs>
-              <Selectito
-                onChange={(e) => {
-                  handleSelectProvincia(e);
+
+            <Arriba>
+              <ReactSelect
+                options={provincias}
+                onChange={provHandler}
+                value={{
+                  value: pet.province,
+                  label: pet.province
                 }}
-              >
-                <option value="">Selecciona...</option>
-                <option value="Buenos Aires">Buenos Aires</option>
-                <option value="Cordoba">Cordoba</option>
-                <option value="Mendoza">Mendoza</option>
-                <option value="San Luis">San Luis</option>
-              </Selectito>
-            </ContainerInputs>
+              />
+            </Arriba>
 
             <h4>Localidad:</h4>
-            <ContainerInputs>
-              <Selectito
-                onChange={(e) => {
-                  handleSelectLocalidad(e);
+            <Abajo>
+              <ReactSelect
+                options={localidades}
+                onChange={depHandler}
+                value={{
+                  value: pet.location,
+                  label: pet.location
                 }}
-              >
-                <option value="">Selecciona...</option>
-                <option value="Localidad 1">Localidad 1</option>
-                <option value="Localidad 2">Localidad 2</option>
-                <option value="Localidad 3">Localidad 3</option>
-                <option value="Localidad 4">Localidad 4</option>
-              </Selectito>
-            </ContainerInputs>
+              />
+            </Abajo>
 
             {errors.name !== '' ||
             errors.description !== '' ||

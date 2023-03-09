@@ -34,7 +34,17 @@ const App: React.FC = () => {
         <Route path="/donacion" element={<Donacion />} />
         <Route path="/favoritos" element={<Favoritos />} />
         <Route path="/misPublicaciones" element={<Publicaciones />} />
-        <Route path="/publicar" element={<PublicarMascota />} />
+        <Route
+          path="/publicar"
+          element={
+            <PublicarMascota
+              value={{
+                value: '',
+                label: ''
+              }}
+            />
+          }
+        />
         <Route path="/registrar" element={<Registrar />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/detalle" element={<Detalle />} />
