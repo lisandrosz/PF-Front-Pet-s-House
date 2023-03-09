@@ -130,7 +130,6 @@ const PublicarMascota: React.FC<props> = () => {
     const property = e.target.name;
     const value = e.target.value;
     validate({ ...pet, [property]: value });
-    console.log(pet);
     setPet({
       ...pet,
       [property]: value
@@ -140,7 +139,6 @@ const PublicarMascota: React.FC<props> = () => {
   function handleChangeNumber(e: React.ChangeEvent<HTMLInputElement>): void {
     const value = e.target.value;
     validate({ ...pet, age: +Number(value) });
-    console.log(pet);
     setPet({
       ...pet,
       age: +Number(value)
@@ -161,7 +159,6 @@ const PublicarMascota: React.FC<props> = () => {
     const value = e.target.value;
     validate({ ...pet, [property]: value });
     setPet({ ...pet, size: value, image: imagen });
-    console.log(pet);
   }
 
   function handleSelectBook(e: React.ChangeEvent<HTMLSelectElement>): void {
@@ -171,8 +168,6 @@ const PublicarMascota: React.FC<props> = () => {
     } else {
       setPet({ ...pet, healthBook: true });
     }
-
-    console.log(pet);
   }
 
   function handleSelectAnimal(e: React.ChangeEvent<HTMLSelectElement>): void {
@@ -193,18 +188,7 @@ const PublicarMascota: React.FC<props> = () => {
 
   function handleSelectSex(e: React.ChangeEvent<HTMLSelectElement>): void {
     setPet({ ...pet, sex: e.target.value });
-    console.log(pet);
   }
-
-  // function handleSelectLocalidad(
-  //   e: React.ChangeEvent<HTMLSelectElement>
-  // ): void {
-  //   const property = e.target.name;
-  //   const value = e.target.value;
-  //   validate({ ...pet, [property]: value });
-  //   setPet({ ...pet, location: value });
-  //   console.log(pet);
-  // }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();

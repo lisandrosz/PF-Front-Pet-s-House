@@ -40,8 +40,6 @@ const SelectComponent: React.FC<props> = () => {
     if (option !== null) {
       filtrado('provincia', option.label);
       traerLocalidades(option.value).then((res) => {
-        console.log(res);
-
         setLocalidades(res);
       });
     }
