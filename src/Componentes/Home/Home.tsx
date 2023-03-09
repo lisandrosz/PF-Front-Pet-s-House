@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import Filtrado from 'Componentes/Filtrado';
 import Paginado from 'Componentes/Paginado';
-import { Link } from 'react-router-dom';
 
 import './Home.css';
 import { traerPets } from 'helpers';
@@ -57,18 +56,6 @@ const Home: React.FC = () => {
       <div>
         <div className="footer-container">
           <p className="p8">Todos los derechos reservados © 2023 Pets House</p>
-          <ul className="ul7">
-            <li className="li0">
-              <Link to={'/terms'} className="sinDeco">
-                Términos y Condiciones
-              </Link>
-            </li>
-            <li className="li0">
-              <Link to={'/contacto'} className="sinDeco">
-                Contacto
-              </Link>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
