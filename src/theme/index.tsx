@@ -6,7 +6,8 @@ interface Props {
 }
 
 enum themePalette {
-  lightPurple = '#a6b2ed'
+  lightPurple = '#a6b2ed',
+  orangeColor = '#efa02a'
 }
 
 const theme = createTheme({
@@ -14,6 +15,10 @@ const theme = createTheme({
     mode: 'light',
     primary: {
       main: themePalette.lightPurple,
+      contrastText: '#fff'
+    },
+    secondary: {
+      main: themePalette.orangeColor,
       contrastText: '#fff'
     }
   }

@@ -39,7 +39,7 @@ const Card: React.FC<Props> = ({
   return (
     <div className="card">
       {/* Imagen */}
-      <img src={image} alt="img not found" />
+      <img className="card-img" src={image} alt="img not found" />
       {/* Boton de favoritos */}
       {type === 'fav' && (
         <button className="favorite-btn" onClick={deleteFromFavorite}>
