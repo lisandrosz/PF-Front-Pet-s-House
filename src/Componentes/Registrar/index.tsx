@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useCustomDispatch, useCustomSelector } from 'hooks/redux';
 import { useNavigate } from 'react-router-dom';
-import { crearUser, traerPets } from 'helpers';
+import { crearUser } from 'helpers';
 import './styleRegistrar.css';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
@@ -30,7 +30,6 @@ const CreateButton = styled(Button)({
 const Registrar: React.FC = () => {
   useEffect((): any => {
     getUsers();
-    return traerPets();
   }, []);
   const dispatch = useCustomDispatch();
   const navigate = useNavigate();
