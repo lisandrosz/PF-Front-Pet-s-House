@@ -40,16 +40,17 @@ const CambioContraseña: React.FC = () => {
   const email = localStorage.getItem('email');
   const idusuario = localStorage.getItem('id');
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
     // const hashPassword = hash(passwordActual);
     if (passwordNueva === repitaContraseña) {
       try {
-        console.log(email, idusuario);
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        axios.get(`/users/${email}`).then((res: { data: any }) => {
+        await axios.get(`/users/${email}`).then(async (res: { data: any }) => {
           if (res.data.password === passwordActual) {
-            axios.put('/users', {
+            await axios.put('/users', {
               idUser: idusuario,
               password: passwordNueva
             });
@@ -75,7 +76,7 @@ const CambioContraseña: React.FC = () => {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'Error al repetir la contraseña'
+        text: 'Error al ingresar los datos'
       });
     }
   };
@@ -83,14 +84,18 @@ const CambioContraseña: React.FC = () => {
   return (
     <div className="content">
       <Container>
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={(e) => {
+            handleSubmit(e);
+          }}
+        >
           <div>
             <label className="contra" htmlFor="email">
               Contraseña actual
             </label>
             <input
               className="input"
-              type="text"
+              type="password"
               name="passwordActual"
               placeholder="password"
               autoComplete="off"
