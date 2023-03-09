@@ -7,7 +7,7 @@
   height: 450px;
   box-shadow: 0 2px 20px #dddddd;
   margin-top: 100px;
-  }
+}
   
   .imagenDetalle {
   align-items: center;
@@ -132,15 +132,72 @@
     color: #7d8bcc;
   }
 
-  .over{
-    overflow: hidden;
-    margin-left:35%;
-    margin-top: 5%;
-    margin-bottom: 5%;
-  }
+.over{
+  overflow: hidden;
+  margin-left:35%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
 
   /* .modificando{
     margin-left: 50%;
     margin-top: 5%;
     margin-bottom: 5%;
   } */
+
+.detailContainer{
+  display: flex;
+  flex-direction: row;
+  background-color: #a6b2ed;
+  padding-inline: 100px;
+  padding-block: 50px;
+  margin-top: 25px;
+  margin-inline: 50px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.divImagenDetail{
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+  justify-content: center;
+  width: 700px;
+  height: 500px;
+}
+
+#detailImg{
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+}
+
+.textDetailContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding-inline: 50px;
+  padding-block: 30px;
+  max-width: 40%;
+  min-width: 40%;
+  background-color: #a6b2ed;
+  border-radius: 20px;
+  color: white;
+}
+
+.textDetailContainer h3{
+  text-transform: capitalize;
+}
+
+.textDetailContainer Button{
+  margin-top: auto;
+}
+
+#descriptionText{
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
