@@ -21,6 +21,7 @@ import {
   type User
 } from 'redux/slices/users';
 import { type Donation } from 'Componentes/Dashboard/donationDash';
+import { type revs } from 'Componentes/Reviews/Reviews';
 
 export const filtrado = (name: string, value: string): void => {
   let estado = store.getState().pets.allPets;
@@ -353,6 +354,15 @@ export const changeUserDetail = async (user: any): Promise<any> => {
 export const getDonations = async (): Promise<Donation[]> => {
   try {
     const { data } = await axios.get('/donaciones');
+    return data;
+  } catch (error) {
+    return [];
+  }
+};
+
+export const getReviews = async (): Promise<revs[]> => {
+  try {
+    const { data } = await axios.get('/reviews');
     return data;
   } catch (error) {
     return [];
