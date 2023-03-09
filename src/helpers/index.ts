@@ -265,7 +265,13 @@ export const deletePetFavorite = async (
     console.log(error);
   }
 };
-
+export const deleteUsuario = async (idUser: number): Promise<any> => {
+  try {
+    await axios.put(`/users`, { idUser, active: false });
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const traerProvincias = async (): Promise<Option[]> => {
   try {
     const provOption = [{ value: 'Provincias', label: 'Todas las provincias' }];
