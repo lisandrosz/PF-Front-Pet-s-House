@@ -6,6 +6,7 @@ import { Button, List, ListItem } from '@mui/material';
 import InputBase from '@mui/material/InputBase';
 import { styled } from '@mui/material/styles';
 import { changeUserDetail, deleteUsuario } from 'helpers';
+import Swal from 'sweetalert2';
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
@@ -60,6 +61,12 @@ const UserDetail: React.FC = () => {
     setInputNombre(false);
     localStorage.setItem('name', nombre);
     setName(nombre);
+    Swal.fire({
+      icon: 'success',
+      title: 'Cambio de nombre exitoso',
+      showConfirmButton: false,
+      timer: 1500
+    });
   };
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   function cambiarNombre() {

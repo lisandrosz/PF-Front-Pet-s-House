@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { useCustomDispatch } from 'hooks/redux';
+import React, { useState, useEffect } from 'react';
+import { useCustomDispatch, useCustomSelector } from 'hooks/redux';
 import { useNavigate } from 'react-router-dom';
 import { crearUser } from 'helpers';
 import './styleRegistrar.css';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import validateUser from '../Registrar/validacionUsuario';
-import { getLogged } from '../../helpers';
+import { getLogged, getUsers } from '../../helpers';
+import Swal from 'sweetalert2';
 import registrar from '../../Assets/image/imagen2.png';
 // import hash from '../Login/hashFunction';
 
@@ -27,9 +28,13 @@ const CreateButton = styled(Button)({
 });
 
 const Registrar: React.FC = () => {
+  useEffect((): void => {
+    getUsers();
+  }, []);
   const dispatch = useCustomDispatch();
   const navigate = useNavigate();
-
+  const allUsers = useCustomSelector((state) => state.users.users);
+  const allEmails = allUsers.map((e) => e.email);
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -56,7 +61,14 @@ const Registrar: React.FC = () => {
   };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    if (
+    if (allEmails.includes(user.email)) {
+      Swal.fire({
+        title: '¡Error!',
+        text: 'Usuario existente',
+        icon: 'error',
+        confirmButtonText: 'Intentar de nuevo'
+      });
+    } else if (
       user.name.length === 0 ||
       user.email.length === 0 ||
       user.password.length === 0 ||
@@ -66,6 +78,12 @@ const Registrar: React.FC = () => {
     } else {
       getLogged(true);
       dispatch(crearUser(user));
+      Swal.fire({
+        icon: 'success',
+        title: 'Usuario creado exitosamente',
+        showConfirmButton: false,
+        timer: 1500
+      });
       navigate('/');
     }
   };
