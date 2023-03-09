@@ -1,45 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import type { ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { generarLink } from 'helpers';
 import { styled } from '@mui/material/styles';
 import dona from '../../Assets/image/imagen6.png';
 import Button from '@mui/material/Button';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 import './styleDonacion.css';
 
-const ElInput = styled('input')({
-  marginTop: '15px'
-});
-
 const Bottonlog = styled(Button)({
-  marginLeft: '80px',
-  marginTop: '15px',
-  // width: '70px',
-  // height: '50px',
   fontSize: '20px'
 });
 
 const HacheTres = styled('h3')({
-  marginTop: '20px'
+  fontSize: '25px',
+  marginTop: '20px',
+  color: '#7d8bcc'
 });
 
 const LaPe = styled('p')({
   marginTop: '10px'
 });
 
-// const DandoMargen = styled('h1')({
-//   marginTop: '15px'
-// });
-
 const ContainerDiv = styled('div')({
   display: 'flex',
   flexDirection: 'row',
-  justifyContent: 'center'
+  justifyContent: 'space-between',
+  alignItems: 'center'
+});
+
+const DivSelect = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  marginLeft: '100px'
 });
 
 const Imagencita = styled('img')({
   width: '60%',
-  marginTop: '10%'
+  marginTop: '10%',
+  marginRight: '100px'
 });
 const Donacion: React.FC = () => {
   const [precio, setPrecio] = useState('');
@@ -51,9 +54,9 @@ const Donacion: React.FC = () => {
     if (id === null) navigate('/');
   }, [navigate]);
 
-  const changeHandler = ({ target }: ChangeEvent<HTMLInputElement>): void => {
-    const { value } = target;
-    setPrecio(value);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setPrecio((event.target as HTMLInputElement).value);
+    console.log(precio);
   };
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -86,91 +89,84 @@ const Donacion: React.FC = () => {
         </LaPe>
       </div>
       <ContainerDiv>
-        <div>
+        <DivSelect>
           <HacheTres>Elige el monto de tu donacion (ARS):</HacheTres>
+
           <form onSubmit={submitHandler}>
-            <ElInput
-              type="radio"
-              name="donation"
-              id="100"
-              value={100}
-              onChange={changeHandler}
-            />
-            <label htmlFor="100">$100</label> <br />
-            <input
-              type="radio"
-              name="donation"
-              id="200"
-              value={200}
-              onChange={changeHandler}
-            />
-            <label htmlFor="200">$200</label> <br />
-            <input
-              type="radio"
-              name="donation"
-              id="350"
-              value={350}
-              onChange={changeHandler}
-            />
-            <label htmlFor="350">$350</label> <br />
-            <input
-              type="radio"
-              name="donation"
-              id="500"
-              value={500}
-              onChange={changeHandler}
-            />
-            <label htmlFor="500">$500</label> <br />
-            <input
-              type="radio"
-              name="donation"
-              id="750"
-              value={750}
-              onChange={changeHandler}
-            />
-            <label htmlFor="750">$750</label> <br />
-            <input
-              type="radio"
-              name="donation"
-              id="1000"
-              value={1000}
-              onChange={changeHandler}
-            />
-            <label htmlFor="1000">$1000</label> <br />
-            <input
-              type="radio"
-              name="donation"
-              id="1500"
-              value={1500}
-              onChange={changeHandler}
-            />
-            <label htmlFor="1500">$1500</label> <br />
-            <input
-              type="radio"
-              name="donation"
-              id="2000"
-              value={2000}
-              onChange={changeHandler}
-            />
-            <label htmlFor="2000">$2000</label> <br />
-            <label htmlFor="otro">Otro: </label>
-            <input
-              type="text"
-              name="donation"
-              id="otro"
-              onChange={changeHandler}
-            />
+            <FormControl>
+              <FormLabel id="demo-controlled-radio-buttons-group"></FormLabel>
+              <br />
+              <RadioGroup
+                aria-labelledby="demo-controlled-radio-buttons-group"
+                name="controlled-radio-buttons-group"
+                value={precio}
+                onChange={handleChange}
+                row
+              >
+                <FormControlLabel
+                  value="100"
+                  control={<Radio />}
+                  label="$ 100"
+                  labelPlacement="top"
+                />
+                <FormControlLabel
+                  value="200"
+                  control={<Radio />}
+                  label="$ 200"
+                  labelPlacement="top"
+                />
+                <FormControlLabel
+                  value="350"
+                  control={<Radio />}
+                  label="$ 350"
+                  labelPlacement="top"
+                />
+                <FormControlLabel
+                  value="500"
+                  control={<Radio />}
+                  label="$ 500"
+                  labelPlacement="top"
+                />
+                <FormControlLabel
+                  value="750"
+                  control={<Radio />}
+                  label="$ 750"
+                  labelPlacement="top"
+                />
+                <FormControlLabel
+                  value="1000"
+                  control={<Radio />}
+                  label="$ 1000"
+                  labelPlacement="top"
+                />
+                <FormControlLabel
+                  value="1500"
+                  control={<Radio />}
+                  label="$ 1500"
+                  labelPlacement="top"
+                />
+                <FormControlLabel
+                  value="2000"
+                  control={<Radio />}
+                  label="$ 2000"
+                  labelPlacement="top"
+                />
+              </RadioGroup>
+            </FormControl>
+
             <br />
-            <Bottonlog
-              variant="contained"
-              color="secondary"
-              size="large"
-              type="submit"
-            >
-              Pagar
-            </Bottonlog>
+            <div className="boton">
+              <Bottonlog
+                variant="contained"
+                color="secondary"
+                size="large"
+                type="submit"
+              >
+                Pagar
+              </Bottonlog>
+            </div>
           </form>
-        </div>
+        </DivSelect>
         <div>
           <Imagencita src={dona} alt="donacion"></Imagencita>
         </div>
