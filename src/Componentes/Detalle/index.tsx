@@ -102,18 +102,41 @@ const Detalle: React.FC = (): any => {
       {/* <div>CARD DE MATERIAL</div> */}
       <div className="detailContainer">
         <div className="textDetailContainer">
-          <Typography variant="h3">{pet.Pet.name}</Typography>
-          <Typography variant="h5">Animal: {pet.Pet.animal}</Typography>
-          <Typography variant="h5">Edad: {pet.Pet.age}</Typography>
+          <Typography variant="h2">
+            <b>{pet.Pet.name}</b>
+          </Typography>
+          <Typography variant="h5">
+            <b>Animal: </b>
+            {pet.Pet.animal}
+          </Typography>
+          <Typography variant="h5">
+            <b>Edad: </b> {pet.Pet.age} Años
+          </Typography>
+          <Typography variant="h5">
+            <b>Tamaño: </b> {pet.Pet.size}
+          </Typography>
+          <Typography variant="h5">
+            <b>Sexo: </b> {pet.Pet.sex}
+          </Typography>
           <div id="descriptionText">
-            <Typography variant="h5" fontSize={35}>
-              Descripción:
+            <Typography variant="h5">
+              <b>Descripción: </b>
             </Typography>
             <Typography variant="h5" fontSize={20}>
               {pet.Pet.description}
             </Typography>
           </div>
-          <Typography variant="h5">Dueño Actual: {pet.User.name}</Typography>
+          <div id="descriptionText">
+            <Typography variant="h5">
+              <b>Provincia: </b> {pet.Pet.province}
+            </Typography>
+            <Typography variant="h5">
+              <b>Localidad: </b>: {pet.Pet.location}
+            </Typography>
+          </div>
+          <Typography variant="h5">
+            <b>Encargado Actual: </b> {pet.User.name}
+          </Typography>
           <Button
             variant="contained"
             style={{ backgroundColor: '#e05f64' }}
