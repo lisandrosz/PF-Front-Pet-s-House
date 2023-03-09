@@ -1,13 +1,35 @@
 /* a:active,a:visited,a:link{ color: var(#efa02a)} */
 .form{
-    display: flex;
+    margin: auto;
+    box-shadow: 0 2px 20px #dddddd;
+    padding: 50px;
+    border-radius: 20px;
+    align-items: center;
+    width: 35%;
+    /* display: flex; */
+    justify-content: center;
+    /* display: flex;
     justify-content: center;
     font-weight: bolder;
     font-size: medium;
     text-justify: left;
     width: 600px;
-    margin-left: 40px;
+    margin-left: 40px; */
   }
+
+  .registrar{
+    width: 300% ;
+    margin-left: -100%;
+  }
+
+  .datos{
+    margin-top: 5px;
+  }
+
+  .crea-usuario{
+    color: #b03537 ;
+  }
+
 p.danger {
     color: red;
     font-size: 13px;
