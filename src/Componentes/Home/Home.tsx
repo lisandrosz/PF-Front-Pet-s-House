@@ -45,7 +45,6 @@ const Home: React.FC = () => {
     <div>
       <div className="container">
         <div className="filtros">
-          <hr />
           <Filtrado />
         </div>
         <div className="cont">
