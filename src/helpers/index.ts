@@ -112,7 +112,7 @@ export const filtrado = (name: string, value: string): void => {
 export const createPet = (payload: formPet) => async () => {
   try {
     const response = await axios.post('/pets', payload);
-    console.log(response);
+    await traerPets();
     return response;
   } catch (error) {
     console.log(error);
