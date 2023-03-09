@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { saveDonation } from 'helpers';
+import './styleSucess.css';
 
 const Success: React.FC = () => {
   const navigate = useNavigate();
@@ -16,12 +17,20 @@ const Success: React.FC = () => {
       saveDonation(Number(id), date, monto);
   }, [navigate]);
 
+  const handler = (): void => {
+    navigate('/');
+  };
+
   return (
     <>
-      <h2>Gracias por tu donacion!</h2>
-      <Link to={'/home'} style={{ textDecoration: 'none' }}>
-        <p>Haz click aqui para voler a la pagina principal</p>
-      </Link>
+      <h1>¡Gracias por tu donación!</h1>
+      <p>
+        En Pets House valoramos mucho tu apoyo. Gracias a tu donación podremos
+        seguir cuidando de los animales y encontrarles hogares amorosos.
+      </p>
+      <button onClick={handler} className="btn">
+        Regresar al inicio
+      </button>
     </>
   );
 };
