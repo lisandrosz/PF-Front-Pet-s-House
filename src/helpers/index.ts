@@ -232,10 +232,14 @@ export const addPetFavorite = async (
   }
 };
 
+interface FavoritesUser extends User {
+  Pets: Pet[];
+}
+
 export const getAllFavorites = async (id: number): Promise<any> => {
   try {
-    await axios.get<Pet[]>(`/favorites/${id}`).then((res) => {
-      store.dispatch(setAllFavorties(res.data));
+    await axios.get<FavoritesUser>(`/favorites/${id}`).then((res) => {
+      store.dispatch(setAllFavorties(res.data.Pets));
     });
   } catch (error) {
     console.log(error);
