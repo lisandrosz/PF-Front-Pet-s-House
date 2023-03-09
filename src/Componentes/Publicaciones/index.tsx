@@ -13,7 +13,7 @@ const Publicaciones: React.FC = () => {
     getUserPublications(idUser);
     const id = localStorage.getItem('id');
     if (id === null) navigate('/');
-  }, [idUser]);
+  }, [idUser, navigate]);
 
   const publications = useCustomSelector((state) => state.pets.publications);
 
