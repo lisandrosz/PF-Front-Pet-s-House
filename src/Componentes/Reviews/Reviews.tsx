@@ -71,8 +71,6 @@ const Reviews: React.FC = () => {
     setRev({ ...rev, [property]: e.target.value });
   }
 
-  console.log('revs: ', rev);
-
   const modalWindow = (
     <Box p={2}>
       <div>
