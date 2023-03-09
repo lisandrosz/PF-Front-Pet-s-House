@@ -1,16 +1,26 @@
-import React, { type ChangeEvent } from 'react';
+import React, { type ChangeEvent, useEffect } from 'react';
 import { Pagination } from '@mui/material';
 import usePagination from 'hooks/Paginacion';
 import CardsContainer from 'Componentes/CardsContainer';
 import { useCustomSelector, useCustomDispatch } from 'hooks/redux';
 import { setPage } from 'redux/slices/mascotas';
+import { traerPets, getAllFavorites } from 'helpers';
 
 const Paginado: React.FC = () => {
-  const data = useCustomSelector((state) => state.pets.pets);
+  useEffect(() => {
+    const id = Number(localStorage.getItem('id'));
+    traerPets();
+    getAllFavorites(id);
+  }, []);
+
+  const allPets = useCustomSelector((state) => state.pets.pets);
+
   const page = useCustomSelector((state) => state.pets.page);
   const dispatch = useCustomDispatch();
 
-  const porPagina = 3;
+  const data = allPets.filter((pet: any) => pet.active === true);
+
+  const porPagina = 8;
 
   const count = Math.ceil(data.length / porPagina);
   const pets = usePagination(data, porPagina);

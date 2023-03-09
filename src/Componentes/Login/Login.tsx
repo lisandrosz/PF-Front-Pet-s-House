@@ -6,7 +6,6 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import './styleLogin.css';
 import login from '../../Assets/image/imagen4.png';
-import logo from '../../Assets/image/LOGO.jpg';
 import { getLogged } from '../../helpers';
 // import hash from '../Login/hashFunction';
 
@@ -65,6 +64,12 @@ const Login: React.FC = () => {
             localStorage.setItem('image', image);
             localStorage.setItem('rol', rol);
             localStorage.setItem('email', email);
+            Swal.fire({
+              icon: 'success',
+              title: 'Igresaste correctamente',
+              showConfirmButton: false,
+              timer: 1500
+            });
             navigate('/');
           }
         });
@@ -76,6 +81,7 @@ const Login: React.FC = () => {
   return (
     <div className="content">
       <Container>
+        <h2 className="titulo">Iniciar sesion</h2>
         <form
           className="formulariocontenedor"
           onSubmit={(e) => {
@@ -124,7 +130,6 @@ const Login: React.FC = () => {
           Home
         </ButtonTodos>
       </Container>
-      <img className="logo" src={logo} alt="logo"></img>
       <img className="img" src={login} alt="imagenn"></img>
     </div>
   );

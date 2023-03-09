@@ -25,6 +25,7 @@ import { type Pet } from 'redux/slices/mascotas';
 import './dashboardUser.css';
 
 const PublicacionesUsuario: React.FC = () => {
+  const idUser = Number(localStorage.getItem('id'));
   useEffect((): void => {
     const idUser = Number(localStorage.getItem('id'));
     traerPets();
@@ -78,8 +79,9 @@ const PublicacionesUsuario: React.FC = () => {
   async function submitEdit(): Promise<any> {
     try {
       const toSend = { ...petInfo, ...{ idPet: petInfo.id } };
-      console.log('pet info: ', toSend);
       await axios.put('/pets', toSend);
+      getUserPublications(idUser);
+      onClose();
     } catch (error) {
       console.log(error);
     }

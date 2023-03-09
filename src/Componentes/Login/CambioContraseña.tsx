@@ -84,6 +84,7 @@ const CambioContraseña: React.FC = () => {
   return (
     <div className="content">
       <Container>
+        <h2 className="titulo">Cambiar contraseña</h2>
         <form
           onSubmit={(e) => {
             handleSubmit(e);

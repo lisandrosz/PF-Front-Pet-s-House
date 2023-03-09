@@ -3,19 +3,23 @@ import { getUserPublications } from 'helpers';
 import { useCustomSelector } from 'hooks/redux';
 import React, { useEffect } from 'react';
 import './stylePublicaciones.css';
+import { useNavigate } from 'react-router-dom';
 
 const Publicaciones: React.FC = () => {
   const idUser = Number(localStorage.getItem('id'));
+  const navigate = useNavigate();
 
   useEffect((): void => {
     getUserPublications(idUser);
-  }, [idUser]);
+    const id = localStorage.getItem('id');
+    if (id === null) navigate('/');
+  }, [idUser, navigate]);
 
   const publications = useCustomSelector((state) => state.pets.publications);
 
   if (idUser > 0) {
     return (
-      <div className="conteiner">
+      <div className="containerCards">
         {publications.map((pet, index) => {
           return (
             <Card
