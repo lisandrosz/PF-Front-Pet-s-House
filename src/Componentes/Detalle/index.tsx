@@ -131,7 +131,7 @@ const Detalle: React.FC = (): any => {
               <b>Provincia: </b> {pet.Pet.province}
             </Typography>
             <Typography variant="h5">
-              <b>Localidad: </b>: {pet.Pet.location}
+              <b>Localidad: </b> {pet.Pet.location}
             </Typography>
           </div>
           <Typography variant="h5">
