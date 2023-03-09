@@ -65,6 +65,12 @@ const Login: React.FC = () => {
             localStorage.setItem('image', image);
             localStorage.setItem('rol', rol);
             localStorage.setItem('email', email);
+            Swal.fire({
+              icon: 'success',
+              title: 'Igresaste correctamente',
+              showConfirmButton: false,
+              timer: 1500
+            });
             navigate('/');
           }
         });
@@ -76,6 +82,7 @@ const Login: React.FC = () => {
   return (
     <div className="content">
       <Container>
+        <h2 className="titulo">Iniciar sesion</h2>
         <form
           className="formulariocontenedor"
           onSubmit={(e) => {
