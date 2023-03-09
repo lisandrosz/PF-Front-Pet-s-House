@@ -19,7 +19,7 @@ const Publicaciones: React.FC = () => {
 
   if (idUser > 0) {
     return (
-      <div className="conteiner">
+      <div className="containerCards">
         {publications.map((pet, index) => {
           return (
             <Card
