@@ -11,8 +11,6 @@ const Success: React.FC = () => {
     const date = localStorage.getItem('date');
     const monto = localStorage.getItem('monto');
 
-    console.log(id, date, monto);
-
     if (monto !== '' && id !== null && date !== null && monto !== null)
       saveDonation(Number(id), date, monto);
   }, [navigate]);

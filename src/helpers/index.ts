@@ -70,7 +70,6 @@ export const filtrado = (name: string, value: string): void => {
     filtrados = filtrados.filter((pet) => {
       return pet.province === provincia;
     });
-    console.log(provincia);
   }
 
   // Filtrado por localidad
@@ -193,9 +192,7 @@ export const saveDonation = async (
         date,
         precio
       })
-      .then((res) => {
-        console.log(res.data);
-      });
+      .then((res) => {});
   } catch (error) {
     console.log(error);
   }
@@ -224,9 +221,7 @@ export const addPetFavorite = async (
         idPets: idPet,
         idUser
       })
-      .then((res) => {
-        console.log(res.data);
-      });
+      .then((res) => {});
   } catch (error) {
     console.log(error);
   }
@@ -263,9 +258,7 @@ export const deletePetFavorite = async (
   try {
     await axios
       .delete(`/favorites/`, { data: { idPets, idUser } })
-      .then((res) => {
-        console.log(res.data);
-      });
+      .then((res) => {});
   } catch (error) {
     console.log(error);
   }
@@ -292,8 +285,6 @@ export const traerProvincias = async (): Promise<Option[]> => {
 
 export const traerLocalidades = async (id: string): Promise<Option[]> => {
   if (id !== 'Provincias') {
-    console.log(id);
-
     const locOption = [
       { value: 'Todas las localidades', label: 'Todas las localidades' }
     ];
@@ -301,7 +292,6 @@ export const traerLocalidades = async (id: string): Promise<Option[]> => {
     data.map((loc: { id: any; name: any }) =>
       locOption.push({ value: loc.name, label: loc.name })
     );
-    console.log(locOption);
 
     return locOption;
   } else {

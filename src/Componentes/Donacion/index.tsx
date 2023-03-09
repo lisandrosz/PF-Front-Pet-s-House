@@ -56,7 +56,6 @@ const Donacion: React.FC = () => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setPrecio((event.target as HTMLInputElement).value);
-    console.log(precio);
   };
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
