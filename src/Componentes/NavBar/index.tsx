@@ -211,6 +211,9 @@ export default function NavBar(): any {
             <Button sx={{ color: '#fff' }} component={Link} to="/donacion">
               Donacion
             </Button>
+            <Button sx={{ color: '#fff' }} component={Link} to="/reviews">
+              Reseñas
+            </Button>
             <Button sx={{ color: '#fff' }} component={Link} to="/publicar">
               Publicar
             </Button>
