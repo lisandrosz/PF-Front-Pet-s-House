@@ -11,8 +11,8 @@ const Failure: React.FC = () => {
 
   return (
     <div>
-      <h1>¡Lo sentimos, ocurrio un problema!</h1>
-      <p>
+      <h1 className="h25">¡Lo sentimos, ocurrio un problema!</h1>
+      <p className="p5">
         Por favor, inténtalo de nuevo más tarde o contáctanos para obtener
         ayuda.
       </p>

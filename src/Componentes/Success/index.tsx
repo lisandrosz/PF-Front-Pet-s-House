@@ -23,8 +23,8 @@ const Success: React.FC = () => {
 
   return (
     <>
-      <h1>¡Gracias por tu donación!</h1>
-      <p>
+      <h1 className="h15">¡Gracias por tu donación!</h1>
+      <p className="p1">
         En Pets House valoramos mucho tu apoyo. Gracias a tu donación podremos
         seguir cuidando de los animales y encontrarles hogares amorosos.
       </p>
