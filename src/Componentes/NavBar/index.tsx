@@ -3,16 +3,13 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 // import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import Button from '@mui/material/Button';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Logo from '../../Assets/image/LOGO.jpg';
 import SearchBar from './searchBar';
@@ -22,6 +19,8 @@ import { getLogged } from '../../helpers';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { useCustomSelector } from 'hooks/redux';
+import { useState } from 'react';
+import { Dialog, Typography } from '@mui/material';
 
 export default function NavBar(): any {
   const rol = localStorage.getItem('rol');
@@ -49,6 +48,23 @@ export default function NavBar(): any {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  // ================= Logica Ventanas emergentes =================
+  // ==============================================================
+  const location = useLocation().pathname;
+  const [open, setOpen] = useState(false);
+  const idUser = Number(localStorage.getItem('id'));
+
+  function onClose(): void {
+    handleMenuClose();
+    setOpen(false);
+  }
+
+  function onOpen(): void {
+    if (idUser === 0) setOpen(true);
+    handleMenuClose();
+  }
+
+  // ==============================================================
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -66,15 +82,22 @@ export default function NavBar(): any {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>
-        <Link to="/misPublicaciones">Mis publicaciones</Link>
+      <MenuItem
+        onClick={onOpen}
+        component={Link}
+        to={idUser > 0 ? 'misPublicaciones' : location}
+      >
+        Mis publicaciones
       </MenuItem>
 
-      <MenuItem onClick={handleMenuClose}>
-        <Link to="/miPerfil">Mi perfil</Link>
+      <MenuItem
+        onClick={onOpen}
+        component={Link}
+        to={idUser > 0 ? 'miPerfil' : location}
+      >
+        Mi Perfil
       </MenuItem>
 
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
       {rol === 'administrador' && (
         <Link to={'/dashboard'}>
           <MenuItem onClick={handleMenuClose}>Dashboard</MenuItem>
@@ -100,26 +123,6 @@ export default function NavBar(): any {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -159,6 +162,7 @@ export default function NavBar(): any {
         loginWithRedirect();
       }
     });
+    onClose();
   };
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   async function auth0Logica(
@@ -186,6 +190,24 @@ export default function NavBar(): any {
     logout({ logoutParams: { returnTo: window.location.origin } });
   };
 
+  // ======================= Ventana Emergente =======================
+  // =================================================================
+
+  const modalWindow = (
+    <Box p={3} display="flex" flexDirection="column">
+      <Typography variant="h6">
+        Para acceder a este Componente tienes que Loguearte primero
+      </Typography>
+      <Box marginTop={3} gap={2} display="flex" justifyContent="right">
+        <Button color="error" onClick={onClose}>
+          Cerrar
+        </Button>
+        <Button variant="contained" onClick={login}>
+          Loguearse
+        </Button>
+      </Box>
+    </Box>
+  );
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar sx={{ backgroundColor: '#a6b2ed' }} position="static">
@@ -208,13 +230,23 @@ export default function NavBar(): any {
             <Button sx={{ color: '#fff' }} component={Link} to="/">
               Home
             </Button>
-            <Button sx={{ color: '#fff' }} component={Link} to="/donacion">
+            <Button
+              sx={{ color: '#fff' }}
+              component={Link}
+              onClick={onOpen}
+              to={idUser > 0 ? 'donacion' : location}
+            >
               Donacion
             </Button>
             <Button sx={{ color: '#fff' }} component={Link} to="/reviews">
               Reseñas
             </Button>
-            <Button sx={{ color: '#fff' }} component={Link} to="/publicar">
+            <Button
+              sx={{ color: '#fff' }}
+              component={Link}
+              onClick={onOpen}
+              to={idUser > 0 ? 'publicar' : location}
+            >
               Publicar
             </Button>
             {logged ? (
@@ -231,7 +263,8 @@ export default function NavBar(): any {
               size="large"
               color="inherit"
               component={Link}
-              to="/favoritos"
+              onClick={onOpen}
+              to={idUser > 0 ? 'favoritos' : location}
             >
               <FavoriteIcon />
             </IconButton>
@@ -270,6 +303,9 @@ export default function NavBar(): any {
           </Box>
         </Toolbar>
       </AppBar>
+      <Dialog maxWidth="lg" open={open}>
+        {modalWindow}
+      </Dialog>
       {renderMobileMenu}
       {renderMenu}
     </Box>
