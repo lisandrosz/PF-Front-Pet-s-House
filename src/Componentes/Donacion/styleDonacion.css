@@ -1,8 +1,11 @@
 .nuevoDiv{
     margin: 50px;
+    margin-bottom: -55px;
+    margin-top: 20px;
     box-shadow: 0 2px 20px #dddddd;
     padding: 20px;
     border-radius: 20px;
+    background-color: white;
 }
 
 .botonDonar {
