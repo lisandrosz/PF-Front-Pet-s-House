@@ -77,19 +77,17 @@ const Login: React.FC = () => {
     <div className="content">
       <Container>
         <form
+          className="formulariocontenedor"
           onSubmit={(e) => {
             handleSubmit(e);
           }}
         >
           <div>
-            <label className="contra" htmlFor="email">
-              Correo electronico
-            </label>
             <input
               className="input"
               type="text"
               name="email"
-              placeholder="yourmail@email.com"
+              placeholder="Correo electronico"
               autoComplete="off"
               onChange={({ target }) => {
                 setEmail(target.value);
@@ -98,13 +96,11 @@ const Login: React.FC = () => {
               value={email}
             />
             <br />
-            <label className="contra" htmlFor="password">
-              Contraseña
-            </label>
             <input
               className="input"
               type="password"
               name="password"
+              placeholder="Contraseña"
               onChange={({ target }) => {
                 setPassword(target.value);
               }}
@@ -112,9 +108,7 @@ const Login: React.FC = () => {
               value={password}
             />
           </div>
-          <div className="botoncito">
-            <ButtonTodos type="submit">Ingresar</ButtonTodos>
-          </div>
+          <ButtonTodos type="submit">Ingresar</ButtonTodos>
         </form>
         <p className="cuenta">
           <Link to="/registrar">Registrate</Link>

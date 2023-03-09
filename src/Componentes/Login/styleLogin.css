@@ -11,7 +11,7 @@ margin-left: 120px;
 }
 
 .cuenta{
-    margin-left: 53px;
+    margin-left: -6px;
 }
 
 .contra{
@@ -21,7 +21,7 @@ margin-left: 120px;
 .logo{
     width: 10%;
     position: absolute;
-    top: 10%;
+    top: 20%;
     left: 12%;
 }
 
@@ -31,7 +31,8 @@ margin-left: 120px;
     
 }
 
-.content{
+.formulariocontenedor{
     display: flex;
     flex-direction: column;
+    justify-content: center
 }

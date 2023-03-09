@@ -4,6 +4,73 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { createPet } from 'helpers';
 import SelectImage from './Cloudinary/selectImage';
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import imagencita from '../../Assets/image/imagen1.png';
+import './stylePublicar.css';
+
+const Container = styled('div')({
+  background: '#fff',
+  display: 'flex',
+  flexDirection: 'column',
+  height: '100%',
+  width: '400px',
+  alignContent: 'center',
+  alignSelf: 'center',
+  alignItems: 'center',
+  // borderRadius: '10px',
+  boxShadow: '0 5px 10px #dddddd',
+  marginTop: '10%',
+  marginLeft: '55%',
+  marginBottom: '8%',
+  padding: '2%'
+});
+
+const ContainerInputs = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  // justifyContent: 'center'
+  justifyContent: 'space-around'
+});
+
+const Fotito = styled('img')({
+  width: '40%',
+  marginTop: '-55%',
+  position: 'absolute',
+  marginLeft: '5%'
+});
+
+const CorTitle = styled('h1')({
+  color: '#b03537'
+});
+
+const HacheTres = styled('h3')({
+  color: '#e05f64',
+  marginTop: '2%'
+});
+
+const ButtonTodos = styled(Button)({
+  background: '#fff',
+  width: '20%',
+  [`&.MuiButton-text`]: {
+    color: '#7d8bcc',
+    marginLeft: '35%'
+  }
+});
+
+const Selectito = styled('select')({
+  borderRadius: '10px',
+  height: '30px',
+  marginTop: '5px',
+  marginBottom: '10px'
+});
+
+const Inputi = styled('input')({
+  borderRadius: '10px',
+  height: '30px',
+  marginTop: '5px',
+  marginBottom: '10px'
+});
 
 const PublicarMascota: React.FC = () => {
   const navigate = useNavigate();
@@ -158,7 +225,7 @@ const PublicarMascota: React.FC = () => {
         location: '',
         idUser: 0
       });
-      navigate('/home');
+      navigate('/');
     } else {
       Swal.fire({
         title: '¡Error!',
@@ -219,150 +286,162 @@ const PublicarMascota: React.FC = () => {
   // })
 
   return (
-    <div>
-      <h1>Publica tu mascota</h1>
-      <h3>Por favor, completa tus datos</h3>
-      <form
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
-      >
-        <div>
-          <label htmlFor="name">Nombre</label>
-          <input
-            name="name"
-            placeholder="Nombre"
-            value={pet.name}
-            onChange={(e) => {
-              handleChange(e);
-            }}
-          />
-        </div>
-        {errors.name !== '' && <p>{errors.name}</p>}
-
-        <div>
-          <label htmlFor="age">Edad</label>
-          <input
-            name="age"
-            type="number"
-            value={pet.age}
-            onChange={(e) => {
-              handleChangeNumber(e);
-            }}
-          />
-        </div>
-        {errors.age !== '' && <p>{errors.age}</p>}
-
-        <SelectImage />
-
-        <div>
-          <label htmlFor="description">Descripcion</label>
-          <textarea
-            name="description"
-            placeholder="Escribe aqui..."
-            value={pet.description}
-            onChange={(e) => {
-              handleChangeDescription(e);
-            }}
-          />
-        </div>
-        {errors.description !== '' ? <p>{errors.description}</p> : null}
-
-        <h4>Tamaño:</h4>
-        <div>
-          <select
-            onChange={(e) => {
-              handleSelectSize(e);
+    <div className="modif">
+      <Container>
+        <CorTitle className="public">Publica tu mascota</CorTitle>
+        <HacheTres>Por favor, completa tus datos</HacheTres>
+        <form
+          onSubmit={(e) => {
+            handleSubmit(e);
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              // justifyContent: 'center'
+              justifyContent: 'space-around'
             }}
           >
-            <option value="">Selecciona...</option>
-            <option value="grande">Grande </option>
-            <option value="mediano">Mediano </option>
-            <option value="pequeño">Pequeño </option>
-          </select>
-        </div>
+            <ContainerInputs>
+              <label htmlFor="name">Nombre</label>
+              <Inputi
+                name="name"
+                placeholder="Nombre"
+                value={pet.name}
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+              />
+            </ContainerInputs>
+            {errors.name !== '' && <p>{errors.name}</p>}
 
-        <h4>¿Tiene libreta sanitaria actualizada?</h4>
-        <div>
-          <select
-            onChange={(e) => {
-              handleSelectBook(e);
-            }}
-          >
-            <option value="">Selecciona...</option>
-            <option value="true">Si </option>
-            <option value="">No </option>
-          </select>
-        </div>
+            <ContainerInputs>
+              <label htmlFor="age">Edad</label>
+              <Inputi
+                name="age"
+                type="number"
+                value={pet.age}
+                onChange={(e) => {
+                  handleChangeNumber(e);
+                }}
+              />
+            </ContainerInputs>
+            {errors.age !== '' && <p>{errors.age}</p>}
 
-        <h4>Especie:</h4>
-        <div>
-          <select
-            onChange={(e) => {
-              handleSelectAnimal(e);
-            }}
-          >
-            <option value="">Selecciona...</option>
-            <option value="perros">Perro</option>
-            <option value="gatos">Gato</option>
-            <option value="roedores">Roedor</option>
-            <option value="aves">Ave</option>
-            <option value="otros">Otro</option>
-          </select>
-        </div>
+            <SelectImage />
 
-        <h4>Sexo:</h4>
-        <div>
-          <select
-            onChange={(e) => {
-              handleSelectSex(e);
-            }}
-          >
-            <option value="">Selecciona...</option>
-            <option value="masculino">Masculino</option>
-            <option value="femenino">Femenino</option>
-          </select>
-        </div>
+            <ContainerInputs>
+              <label htmlFor="description">Descripcion</label>
+              <textarea
+                name="description"
+                placeholder="Escribe aqui..."
+                value={pet.description}
+                onChange={(e) => {
+                  handleChangeDescription(e);
+                }}
+              />
+            </ContainerInputs>
+            {errors.description !== '' ? <p>{errors.description}</p> : null}
 
-        <h4>Provincia:</h4>
-        <div>
-          <select
-            onChange={(e) => {
-              handleSelectProvincia(e);
-            }}
-          >
-            <option value="">Selecciona...</option>
-            <option value="Buenos Aires">Buenos Aires</option>
-            <option value="Cordoba">Cordoba</option>
-            <option value="Mendoza">Mendoza</option>
-            <option value="San Luis">San Luis</option>
-          </select>
-        </div>
+            <h4>Tamaño:</h4>
+            <ContainerInputs>
+              <Selectito
+                onChange={(e) => {
+                  handleSelectSize(e);
+                }}
+              >
+                <option value="">Selecciona...</option>
+                <option value="grande">Grande </option>
+                <option value="mediano">Mediano </option>
+                <option value="pequeño">Pequeño </option>
+              </Selectito>
+            </ContainerInputs>
 
-        <h4>Localidad:</h4>
-        <div>
-          <select
-            onChange={(e) => {
-              handleSelectLocalidad(e);
-            }}
-          >
-            <option value="">Selecciona...</option>
-            <option value="Localidad 1">Localidad 1</option>
-            <option value="Localidad 2">Localidad 2</option>
-            <option value="Localidad 3">Localidad 3</option>
-            <option value="Localidad 4">Localidad 4</option>
-          </select>
-        </div>
+            <h4>¿Tiene libreta sanitaria actualizada?</h4>
+            <ContainerInputs>
+              <Selectito
+                onChange={(e) => {
+                  handleSelectBook(e);
+                }}
+              >
+                <option value="">Selecciona...</option>
+                <option value="true">Si </option>
+                <option value="">No </option>
+              </Selectito>
+            </ContainerInputs>
 
-        {errors.name !== '' ||
-        errors.description !== '' ||
-        errors.age !== '' ||
-        errors.image !== '' ? (
-          <h3>Completa todos los campos</h3>
-        ) : (
-          <button type="submit">Publicar</button>
-        )}
-      </form>
+            <h4>Especie:</h4>
+            <ContainerInputs>
+              <Selectito
+                onChange={(e) => {
+                  handleSelectAnimal(e);
+                }}
+              >
+                <option value="">Selecciona...</option>
+                <option value="perros">Perro</option>
+                <option value="gatos">Gato</option>
+                <option value="roedores">Roedor</option>
+                <option value="aves">Ave</option>
+                <option value="otros">Otro</option>
+              </Selectito>
+            </ContainerInputs>
+
+            <h4>Sexo:</h4>
+            <ContainerInputs>
+              <Selectito
+                onChange={(e) => {
+                  handleSelectSex(e);
+                }}
+              >
+                <option value="">Selecciona...</option>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+              </Selectito>
+            </ContainerInputs>
+
+            <h4>Provincia:</h4>
+            <ContainerInputs>
+              <Selectito
+                onChange={(e) => {
+                  handleSelectProvincia(e);
+                }}
+              >
+                <option value="">Selecciona...</option>
+                <option value="Buenos Aires">Buenos Aires</option>
+                <option value="Cordoba">Cordoba</option>
+                <option value="Mendoza">Mendoza</option>
+                <option value="San Luis">San Luis</option>
+              </Selectito>
+            </ContainerInputs>
+
+            <h4>Localidad:</h4>
+            <ContainerInputs>
+              <Selectito
+                onChange={(e) => {
+                  handleSelectLocalidad(e);
+                }}
+              >
+                <option value="">Selecciona...</option>
+                <option value="Localidad 1">Localidad 1</option>
+                <option value="Localidad 2">Localidad 2</option>
+                <option value="Localidad 3">Localidad 3</option>
+                <option value="Localidad 4">Localidad 4</option>
+              </Selectito>
+            </ContainerInputs>
+
+            {errors.name !== '' ||
+            errors.description !== '' ||
+            errors.age !== '' ||
+            errors.image !== '' ? (
+              <h3>Completa todos los campos</h3>
+            ) : (
+              <ButtonTodos type="submit">Publicar</ButtonTodos>
+            )}
+          </div>
+        </form>
+      </Container>
+      <Fotito src={imagencita} alt="publ"></Fotito>
     </div>
   );
 };

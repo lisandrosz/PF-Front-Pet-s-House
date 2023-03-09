@@ -8,7 +8,7 @@ import Donacion from 'Componentes/Donacion';
 import Favoritos from 'Componentes/Favoritos';
 import Publicaciones from 'Componentes/Publicaciones';
 import PublicarMascota from 'Componentes/PublicarMascota';
-import NavBar from 'Componentes/NavBar/copy';
+import NavBar from 'Componentes/NavBar';
 import Registrar from 'Componentes/Registrar';
 import Dashboard from 'Componentes/Dashboard';
 import Detalle from 'Componentes/Detalle';
@@ -17,13 +17,17 @@ import Login from 'Componentes/Login/Login';
 import CambioContraseña from 'Componentes/Login/CambioContraseña';
 import Success from 'Componentes/Success';
 import Failure from 'Componentes/Failure';
+import UserDetail from 'Componentes/UserDetail';
 import './App.css';
+import Reviews from 'Componentes/Reviews/Reviews';
 
 const App: React.FC = () => {
   const location = useLocation().pathname;
   return (
     <Provider store={store}>
-      {location !== '/registrar' ? <NavBar /> : null}
+      {location !== '/registrar' && location !== '/miPerfil' ? (
+        <NavBar />
+      ) : null}
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/" element={<Landing />} /> */}
@@ -39,6 +43,8 @@ const App: React.FC = () => {
         <Route path="/cambiarContraseña" element={<CambioContraseña />} />
         <Route path="/success" element={<Success />} />
         <Route path="/failure" element={<Failure />} />
+        <Route path="/miPerfil" element={<UserDetail />} />
+        <Route path="/reviews" element={<Reviews />} />
       </Routes>
     </Provider>
   );

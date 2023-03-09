@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useCustomSelector } from 'hooks/redux';
 import Card from 'Componentes/Card';
 import { getAllFavorites } from 'helpers';
+import { Typography } from '@mui/material';
 
 const Favoritos: React.FC = () => {
   const idUser = Number(localStorage.getItem('id'));
@@ -14,7 +15,12 @@ const Favoritos: React.FC = () => {
 
   if (idUser > 0) {
     return (
-      <div>
+      <div className="contenedorCartas1">
+        {favorites.length === 0 && (
+          <Typography align="center" p={5} variant="h4" color="secondary">
+            No tienes ningun favorito
+          </Typography>
+        )}
         {favorites.map((pet, index) => {
           return (
             <Card

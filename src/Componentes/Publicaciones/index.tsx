@@ -2,6 +2,7 @@ import Card from 'Componentes/Card';
 import { getUserPublications } from 'helpers';
 import { useCustomSelector } from 'hooks/redux';
 import React, { useEffect } from 'react';
+import './stylePublicaciones.css';
 
 const Publicaciones: React.FC = () => {
   const idUser = Number(localStorage.getItem('id'));
@@ -14,7 +15,7 @@ const Publicaciones: React.FC = () => {
 
   if (idUser > 0) {
     return (
-      <div>
+      <div className="conteiner">
         {publications.map((pet, index) => {
           return (
             <Card

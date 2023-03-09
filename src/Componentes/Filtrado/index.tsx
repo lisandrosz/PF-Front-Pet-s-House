@@ -5,15 +5,15 @@ import SelectComponent from 'Componentes/Select';
 import type { ChangeEvent } from 'react';
 import { useCustomSelector } from 'hooks/redux';
 
-const changeHandler = ({ target }: ChangeEvent<HTMLSelectElement>): void => {
-  const { name, value } = target;
-  filtrado(name, value);
-};
-
 const Filtrado: React.FC = () => {
   const { edad, especie, tamaño, sexo, date } = useCustomSelector(
     (state) => state.pets.filtros
   );
+
+  const changeHandler = ({ target }: ChangeEvent<HTMLSelectElement>): void => {
+    const { name, value } = target;
+    filtrado(name, value);
+  };
 
   return (
     <>

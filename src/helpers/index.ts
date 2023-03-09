@@ -13,7 +13,15 @@ import type { Pet } from 'redux/slices/mascotas';
 import type { formUser } from 'Componentes/Registrar';
 import type { formPet } from 'Componentes/PublicarMascota';
 import axios from 'axios';
-import { setUsers, setLogged, type User } from 'redux/slices/users';
+import type { Option } from 'Componentes/Select';
+import {
+  setUsers,
+  setLogged,
+  setUserDetail,
+  type User
+} from 'redux/slices/users';
+import { type Donation } from 'Componentes/Dashboard/donationDash';
+import { type revs } from 'Componentes/Reviews/Reviews';
 
 export const filtrado = (name: string, value: string): void => {
   let estado = store.getState().pets.allPets;
@@ -24,7 +32,7 @@ export const filtrado = (name: string, value: string): void => {
     estado = [...store.getState().pets.buscado.petsBuscados];
   }
   store.dispatch(setFiltros({ nombre: name, valor: value }));
-  const { tamaño, especie, provincia, edad, localidad, sexo, date } =
+  const { tamaño, especie, edad, sexo, date, provincia, localidad } =
     store.getState().pets.filtros;
   let filtrados: Pet[] = [...estado];
 
@@ -56,16 +64,17 @@ export const filtrado = (name: string, value: string): void => {
   }
 
   // Filtrado por provincia
-  if (provincia === 'Provincias') {
+  if (provincia === 'Todas las provincias') {
     // nada
   } else {
     filtrados = filtrados.filter((pet) => {
       return pet.province === provincia;
     });
+    console.log(provincia);
   }
 
   // Filtrado por localidad
-  if (localidad === 'Localidades') {
+  if (localidad === 'Todas las localidades') {
     // nada
   } else {
     filtrados = filtrados.filter((pet) => {
@@ -98,7 +107,6 @@ export const filtrado = (name: string, value: string): void => {
         Number(new Date(b.createdAt.split('T')[0]))
     );
   }
-
   store.dispatch(setPets(filtrados));
 };
 export const createPet = (payload: formPet) => async () => {
@@ -127,7 +135,12 @@ export const traerPets = async (): Promise<any> => {
 export const crearUser = (payload: formUser) => async () => {
   try {
     const response = await axios.post('/users', payload);
-    console.log(response);
+    const { id, name, image, rol, email } = response.data;
+    localStorage.setItem('id', id);
+    localStorage.setItem('name', name);
+    localStorage.setItem('image', image);
+    localStorage.setItem('rol', rol);
+    localStorage.setItem('email', email);
     return response;
   } catch (error) {
     console.log(error);
@@ -253,6 +266,44 @@ export const deletePetFavorite = async (
     console.log(error);
   }
 };
+export const deleteUsuario = async (idUser: number): Promise<any> => {
+  try {
+    await axios.put(`/users`, { idUser, active: false });
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const traerProvincias = async (): Promise<Option[]> => {
+  try {
+    const provOption = [{ value: 'Provincias', label: 'Todas las provincias' }];
+    const { data }: any = await axios.get('/provincias');
+    data.map((prov: { id: any; name: any }) =>
+      provOption.push({ value: prov.id, label: prov.name })
+    );
+    return provOption;
+  } catch (error) {
+    return [{ value: 'hola', label: 'hola' }];
+  }
+};
+
+export const traerLocalidades = async (id: string): Promise<Option[]> => {
+  if (id !== 'Provincias') {
+    console.log(id);
+
+    const locOption = [
+      { value: 'Todas las localidades', label: 'Todas las localidades' }
+    ];
+    const { data }: any = await axios.get(`/provincias?localidad=${id}`);
+    data.map((loc: { id: any; name: any }) =>
+      locOption.push({ value: loc.name, label: loc.name })
+    );
+    console.log(locOption);
+
+    return locOption;
+  } else {
+    return [{ value: 'Todas las localidades', label: 'Todas las localidades' }];
+  }
+};
 
 export const getUsers = async (): Promise<any> => {
   try {
@@ -267,4 +318,53 @@ export const getUsers = async (): Promise<any> => {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const getLogged = (log: boolean) => {
   store.dispatch(setLogged(log));
+};
+
+export const contactarse = async (id: number): Promise<void> => {
+  try {
+    const infoPublicador = store.getState().pets.petDetalle.User;
+    await axios.post('/contacto', {
+      UserId: id,
+      infoPublicador
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserDetail = async (email: string): Promise<any> => {
+  try {
+    await axios(`/users/${email}`).then((res) => {
+      store.dispatch(setUserDetail(res.data));
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const changeUserDetail = async (user: any): Promise<any> => {
+  try {
+    const response = await axios.put('/users', user);
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getDonations = async (): Promise<Donation[]> => {
+  try {
+    const { data } = await axios.get('/donaciones');
+    return data;
+  } catch (error) {
+    return [];
+  }
+};
+
+export const getReviews = async (): Promise<revs[]> => {
+  try {
+    const { data } = await axios.get('/reviews');
+    return data;
+  } catch (error) {
+    return [];
+  }
 };

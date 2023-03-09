@@ -1,0 +1,36 @@
+.dashContainer{
+    display: flex;
+    flex-direction: row;
+    background-color:  #F6F7FE;
+    min-height: 100vh;
+}
+
+.sideBar{
+    display: flex;
+    width: 150px;
+    min-width: 150px;
+    background-color: white;
+    border-right-style: solid;
+    border-color: rgb(240, 240, 240);
+    border-width: 1px;
+}
+
+.tableContainer{
+    margin: 10px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    background-color: white;
+}
+
+.editContainer{
+    display: flex;
+    flex-direction: row;    
+    flex-wrap: wrap;
+    gap: 2em;
+}
+
+.showPanel{
+    width: 90%;
+    margin: 10px;
+    margin-right: 10px;
+}

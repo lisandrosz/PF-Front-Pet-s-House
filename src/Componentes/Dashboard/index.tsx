@@ -1,29 +1,46 @@
+import { Button, List, ListItem } from '@mui/material';
 import React, { useState } from 'react';
 import PetDash from './petDash';
 import UserDash from './userDash';
+import DonationDash from './donationDash';
+import './dashboard.css';
 
 const Dashboard: React.FC = () => {
   const rol = localStorage.getItem('rol');
-  const [toShow, setToShow] = useState('pets');
+  const [toShow, setToShow] = useState('users');
 
-  function changeHandler(e: React.ChangeEvent<HTMLSelectElement>): void {
-    const value = e.target.value;
-    setToShow(value);
+  function toShowHandler(e: React.MouseEvent<HTMLButtonElement>): void {
+    const button: HTMLButtonElement = e.currentTarget;
+    setToShow(button.value);
   }
 
   if (rol === 'administrador') {
     return (
-      <div>
-        <select
-          onChange={(e) => {
-            changeHandler(e);
-          }}
-        >
-          <option value="pets">Mascotas</option>
-          <option value="users">Usuarios</option>
-        </select>
-        {toShow === 'pets' && <PetDash></PetDash>}
-        {toShow === 'users' && <UserDash></UserDash>}
+      <div className="dashContainer">
+        <div className="sideBar">
+          <List>
+            <ListItem>
+              <Button onClick={toShowHandler} value="users">
+                Usuarios
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Button onClick={toShowHandler} value="pets">
+                Mascotas
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Button onClick={toShowHandler} value="donations">
+                Donaciones
+              </Button>
+            </ListItem>
+          </List>
+        </div>
+        <div className="showPanel">
+          {toShow === 'pets' && <PetDash />}
+          {toShow === 'users' && <UserDash />}
+          {toShow === 'donations' && <DonationDash />}
+        </div>
       </div>
     );
   } else {
