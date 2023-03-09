@@ -6,9 +6,11 @@ import { useCustomSelector, useCustomDispatch } from 'hooks/redux';
 import { setPage } from 'redux/slices/mascotas';
 
 const Paginado: React.FC = () => {
-  const data = useCustomSelector((state) => state.pets.pets);
+  const allPets = useCustomSelector((state) => state.pets.pets);
   const page = useCustomSelector((state) => state.pets.page);
   const dispatch = useCustomDispatch();
+
+  const data = allPets.filter((pet: any) => pet.active === true);
 
   const porPagina = 3;
 
