@@ -4,6 +4,7 @@ import Card from 'Componentes/Card';
 import { getAllFavorites } from 'helpers';
 import { Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import './index.css';
 
 const Favoritos: React.FC = () => {
   const idUser = Number(localStorage.getItem('id'));
@@ -18,7 +19,7 @@ const Favoritos: React.FC = () => {
   const favorites = useCustomSelector((state) => state.pets.favPets);
 
   return (
-    <div className="contenedorCartas1">
+    <div className="containerCards">
       {favorites.length === 0 && (
         <Typography align="center" p={5} variant="h4" color="secondary">
           No tienes ningun favorito

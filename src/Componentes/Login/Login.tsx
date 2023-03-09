@@ -6,7 +6,6 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import './styleLogin.css';
 import login from '../../Assets/image/imagen4.png';
-import logo from '../../Assets/image/LOGO.jpg';
 import { getLogged } from '../../helpers';
 // import hash from '../Login/hashFunction';
 
@@ -131,7 +130,6 @@ const Login: React.FC = () => {
           Home
         </ButtonTodos>
       </Container>
-      <img className="logo" src={logo} alt="logo"></img>
       <img className="img" src={login} alt="imagenn"></img>
     </div>
   );
