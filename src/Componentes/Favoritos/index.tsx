@@ -10,13 +10,13 @@ const Favoritos: React.FC = () => {
   const idUser = Number(localStorage.getItem('id'));
   const navigate = useNavigate();
 
+  const favorites = useCustomSelector((state) => state.pets.favPets);
+
   useEffect((): void => {
     const id = localStorage.getItem('id');
     if (id === null) navigate('/');
     getAllFavorites(idUser);
-  });
-
-  const favorites = useCustomSelector((state) => state.pets.favPets);
+  }, [idUser, navigate, favorites]);
 
   return (
     <div className="containerCards">
