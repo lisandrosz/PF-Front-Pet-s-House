@@ -71,6 +71,8 @@ const Reviews: React.FC = () => {
     setRev({ ...rev, [property]: e.target.value });
   }
 
+  console.log('revs: ', rev);
+
   const modalWindow = (
     <Box p={2}>
       <div>
@@ -121,7 +123,7 @@ const Reviews: React.FC = () => {
                 {rev.User.name}
               </Typography>
               <Typography>{rev.comentario}</Typography>
-              <Rating readOnly value={3}></Rating>
+              <Rating readOnly value={rev.estrellas}></Rating>
             </Card>
           );
         })}
