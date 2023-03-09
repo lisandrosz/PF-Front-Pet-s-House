@@ -155,7 +155,7 @@ const Donacion: React.FC = () => {
             </FormControl>
 
             <br />
-            <div className="boton">
+            <div className="botonDonar">
               <Bottonlog
                 variant="contained"
                 color="secondary"
