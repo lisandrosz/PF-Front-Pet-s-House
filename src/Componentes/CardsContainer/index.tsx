@@ -12,9 +12,11 @@ interface Props {
 const CardsContainer: React.FC<Props> = ({ pets }) => {
   const idUser = Number(localStorage.getItem('id'));
 
+  const favo = useCustomSelector((state) => state.pets.favPets);
+
   useEffect((): void => {
     getAllFavorites(idUser);
-  }, []);
+  }, [idUser, favo]);
 
   const favorites = useCustomSelector((state) =>
     state.pets.favPets.map((fav) => fav.id)
